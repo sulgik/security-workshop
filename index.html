@@ -13,6 +13,8 @@
       --lab1lt:  #EDE9FE;
       --lab2:    #0369A1;
       --lab2lt:  #E0F2FE;
+      --lab3:    #DC2626;
+      --lab3lt:  #FEE2E2;
       --gemini:  #1A73E8;
       --jina:    #0891B2;
       --green:   #10B981;
@@ -160,6 +162,7 @@
     }
     .lab1 .lab-card-header { background: linear-gradient(135deg, #4C1D95, var(--lab1)); }
     .lab2 .lab-card-header { background: linear-gradient(135deg, #0C4A6E, var(--lab2)); }
+    .lab3 .lab-card-header { background: linear-gradient(135deg, #7F1D1D, var(--lab3)); }
     .lab-num {
       font-size: 11px;
       font-weight: 700;
@@ -380,10 +383,35 @@
     <span class="pill">LLM07 프롬프트 유출</span>
     <span class="pill">LLM09 환각</span>
     <span class="pill">T01·T06 임베딩 역추출</span>
+    <span class="pill">🔴 Garak 자동 스캔</span>
+    <span class="pill">🛡️ LLM Guard</span>
   </div>
   <div class="gemini-badge">
     <div class="dot"></div>
     Gemini API &nbsp;(gemini-2.5-flash) · 무료 키 사용
+  </div>
+</div>
+
+<!-- ────────────────── SCHEDULE ────────────────── -->
+<div class="section" style="padding-bottom:0">
+  <div class="section-title">🕐 오후 일정 — 실습 전용</div>
+  <div class="section-sub">3일차 오후 시간은 전체 실습으로 구성됩니다.</div>
+  <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:8px">
+    <div style="flex:1; min-width:180px; background:var(--lab1lt); border-left:4px solid var(--lab1); border-radius:8px; padding:14px 16px">
+      <div style="font-size:11px; font-weight:700; color:var(--lab1); text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px">실습 1</div>
+      <div style="font-size:14px; font-weight:700; color:var(--navy)">출력 통제 우회 · 데이터 유출 · 권한 오남용</div>
+      <div style="font-size:12px; color:var(--slate); margin-top:4px">⏱ 60–75분</div>
+    </div>
+    <div style="flex:1; min-width:180px; background:var(--lab2lt); border-left:4px solid var(--lab2); border-radius:8px; padding:14px 16px">
+      <div style="font-size:11px; font-weight:700; color:var(--lab2); text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px">실습 2</div>
+      <div style="font-size:14px; font-weight:700; color:var(--navy)">임베딩 · VectorDB · RAG 보안</div>
+      <div style="font-size:12px; color:var(--slate); margin-top:4px">⏱ 80–100분</div>
+    </div>
+    <div style="flex:1; min-width:180px; background:var(--lab3lt); border-left:4px solid var(--lab3); border-radius:8px; padding:14px 16px">
+      <div style="font-size:11px; font-weight:700; color:var(--lab3); text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px">실습 3</div>
+      <div style="font-size:14px; font-weight:700; color:var(--navy)">AI 레드팀 도구 — Garak · LLM Guard</div>
+      <div style="font-size:12px; color:var(--slate); margin-top:4px">⏱ 80–100분</div>
+    </div>
   </div>
 </div>
 
@@ -504,6 +532,65 @@
       </div>
     </div>
 
+    <!-- LAB 3 -->
+    <div class="lab-card lab3">
+      <div class="lab-card-header">
+        <div class="lab-num">실습 3 · 3강</div>
+        <h2>AI 레드팀 도구<br>Garak · LLM Guard</h2>
+        <p>자동화된 LLM 취약점 스캔 · 커스텀 프로브 · 방어 레이어</p>
+      </div>
+      <div class="lab-card-body">
+        <div class="meta-row">
+          <div class="meta-chip">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            80–100분
+          </div>
+          <div class="meta-chip" style="color:#DC2626; background:#FEE2E2;">
+            🔴 Garak
+          </div>
+          <div class="meta-chip" style="color:#059669; background:#D1FAE5;">
+            🛡️ LLM Guard
+          </div>
+        </div>
+        <ul class="activity-list">
+          <li>
+            <span class="act-badge" style="background:var(--lab3lt); color:var(--lab3)">A</span>
+            <div class="act-info">
+              <strong>Garak 첫 스캔 (LLM01)</strong>
+              <span>promptinject 프로브로 Gemini 자동 취약점 스캔</span>
+            </div>
+          </li>
+          <li>
+            <span class="act-badge" style="background:var(--lab3lt); color:var(--lab3)">B</span>
+            <div class="act-info">
+              <strong>결과 분석</strong>
+              <span>JSONL 파싱 · 프로브별 취약률 시각화</span>
+            </div>
+          </li>
+          <li>
+            <span class="act-badge" style="background:var(--lab3lt); color:var(--lab3)">C</span>
+            <div class="act-info">
+              <strong>커스텀 프로브</strong>
+              <span>한국어 군/보안 시나리오 페이로드 직접 작성</span>
+            </div>
+          </li>
+          <li>
+            <span class="act-badge" style="background:var(--lab3lt); color:var(--lab3)">D</span>
+            <div class="act-info">
+              <strong>LLM Guard 방어 레이어</strong>
+              <span>Garak 취약 페이로드를 스캐너로 차단</span>
+            </div>
+          </li>
+        </ul>
+        <a class="colab-btn"
+           href="https://colab.research.google.com/github/sulgik/security-workshop/blob/main/day3_lab3_red_team_tools_garak_llmguard.ipynb"
+           target="_blank" rel="noopener">
+          <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Colab" />
+          Google Colab에서 열기
+        </a>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -567,6 +654,13 @@
       <div>
         <strong>실습 2 슬라이드</strong>
         <span>프레임워크 · 임베딩 · VectorDB · RAG · 8장</span>
+      </div>
+    </a>
+    <a class="slide-card" href="3일차_3강_.pptx" download>
+      <div class="slide-icon" style="background:#FEE2E2">🔴</div>
+      <div>
+        <strong>실습 3 슬라이드</strong>
+        <span>Garak · LLM Guard · 커스텀 프로브</span>
       </div>
     </a>
     <a class="slide-card" href="https://embedding-inversion-demo.jina.ai/" target="_blank" rel="noopener">
