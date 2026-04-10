@@ -392,49 +392,30 @@
   </div>
 </div>
 
-<!-- ────────────────── SCHEDULE ────────────────── -->
-<div class="section" style="padding-bottom:0">
-  <div class="section-title">🕐 오후 일정 — 실습 전용</div>
-  <div class="section-sub">3일차 오후 시간은 전체 실습으로 구성됩니다.</div>
-  <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:8px">
-    <div style="flex:1; min-width:140px; background:#F5F3FF; border-left:4px solid #A78BFA; border-radius:8px; padding:14px 16px">
-      <div style="font-size:11px; font-weight:700; color:#7C3AED; text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px">강의 1</div>
-      <div style="font-size:14px; font-weight:700; color:var(--navy)">AI 보안 위협의 현실</div>
-    </div>
-    <div style="flex:1; min-width:140px; background:var(--lab1lt); border-left:4px solid var(--lab1); border-radius:8px; padding:14px 16px">
-      <div style="font-size:11px; font-weight:700; color:var(--lab1); text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px">실습 1</div>
-      <div style="font-size:14px; font-weight:700; color:var(--navy)">출력 통제 우회 · 데이터 유출 · 권한 오남용</div>
-    </div>
-    <div style="flex:1; min-width:140px; background:#F0F9FF; border-left:4px solid #93C5FD; border-radius:8px; padding:14px 16px">
-      <div style="font-size:11px; font-weight:700; color:#0369A1; text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px">강의 2</div>
-      <div style="font-size:14px; font-weight:700; color:var(--navy)">프레임워크 — NIS · OWASP · KISA</div>
-    </div>
-    <div style="flex:1; min-width:140px; background:var(--lab2lt); border-left:4px solid var(--lab2); border-radius:8px; padding:14px 16px">
-      <div style="font-size:11px; font-weight:700; color:var(--lab2); text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px">실습 2</div>
-      <div style="font-size:14px; font-weight:700; color:var(--navy)">임베딩 · VectorDB · RAG 보안</div>
-    </div>
-    <div style="flex:1; min-width:140px; background:#FFF1F2; border-left:4px solid #FCA5A5; border-radius:8px; padding:14px 16px">
-      <div style="font-size:11px; font-weight:700; color:#DC2626; text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px">강의 3</div>
-      <div style="font-size:14px; font-weight:700; color:var(--navy)">방어 체계 — M01~M30</div>
-    </div>
-    <div style="flex:1; min-width:140px; background:var(--lab3lt); border-left:4px solid var(--lab3); border-radius:8px; padding:14px 16px">
-      <div style="font-size:11px; font-weight:700; color:var(--lab3); text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px">실습 3</div>
-      <div style="font-size:14px; font-weight:700; color:var(--navy)">AI 레드팀 도구 — Garak · LLM Guard</div>
-    </div>
-  </div>
-</div>
-
-<!-- ────────────────── LABS ────────────────── -->
+<!-- ────────────────── 강의 · 실습 ────────────────── -->
 <div class="section">
-  <div class="section-title">🧪 실습 노트북</div>
-  <div class="section-sub">아래 버튼을 클릭하면 본인의 Google Colab에서 바로 열립니다.</div>
+  <div class="section-title">📚 3일차 강의 · 실습</div>
+  <div class="section-sub">강의 슬라이드를 먼저 확인하고, 실습 노트북을 Colab에서 열어 진행하세요.</div>
 
-  <div class="lab-grid">
+  <div style="display:flex; flex-direction:column; gap:24px">
 
-    <!-- LAB 1 -->
+    <!-- ── 강의 1 ── -->
+    <div class="slide-card" style="cursor:default">
+      <div class="slide-icon" style="background:#F5F3FF">📖</div>
+      <div style="flex:1">
+        <strong>강의 1 — AI 보안 위협의 현실</strong>
+        <span>삼성 ChatGPT 유출, NIS T코드, 공격 사례</span>
+      </div>
+      <a class="colab-btn" href="3일차_1강_.pptx" download
+         style="background:#F5F3FF; color:var(--lab1); font-size:13px; border:1px solid #E9E5FF; width:auto; padding:9px 18px">
+        📥 슬라이드
+      </a>
+    </div>
+
+    <!-- ── 실습 1 ── -->
     <div class="lab-card lab1">
       <div class="lab-card-header">
-        <div class="lab-num">실습 1 · 강의 1 연계</div>
+        <div class="lab-num">실습 1</div>
         <h2>출력 통제 우회<br>데이터 유출 · 권한 오남용</h2>
         <p>공격해보고 막아본다 — 공격 · 방어 대비 체험</p>
       </div>
@@ -469,13 +450,9 @@
           </li>
         </ul>
         <div style="display:flex; gap:8px; margin-bottom:10px">
-          <a class="colab-btn" href="3일차_1강_.pptx" download
-             style="background:#F5F3FF; color:var(--lab1); font-size:13px; border:1px solid #E9E5FF">
-            📖 강의 1 슬라이드
-          </a>
           <a class="colab-btn" href="3일차_실습1_.pptx" download
              style="background:#EDE9FE; color:var(--lab1); font-size:13px; border:1px solid #DDD6FE">
-            📋 실습 1 슬라이드
+            📋 실습 슬라이드
           </a>
         </div>
         <a class="colab-btn"
@@ -487,10 +464,23 @@
       </div>
     </div>
 
-    <!-- LAB 2 -->
+    <!-- ── 강의 2 ── -->
+    <div class="slide-card" style="cursor:default">
+      <div class="slide-icon" style="background:#F0F9FF">📖</div>
+      <div style="flex:1">
+        <strong>강의 2 — 프레임워크: NIS · OWASP · KISA</strong>
+        <span>위협 분류 체계, T코드 ↔ LLM Top 10 매핑, 역할별 가이드라인</span>
+      </div>
+      <a class="colab-btn" href="3일차_2강_.pptx" download
+         style="background:#F0F9FF; color:var(--lab2); font-size:13px; border:1px solid #BAE6FD; width:auto; padding:9px 18px">
+        📥 슬라이드
+      </a>
+    </div>
+
+    <!-- ── 실습 2 ── -->
     <div class="lab-card lab2">
       <div class="lab-card-header">
-        <div class="lab-num">실습 2 · 강의 2 연계</div>
+        <div class="lab-num">실습 2</div>
         <h2>프레임워크 적용<br>임베딩 · VectorDB · RAG 보안</h2>
         <p>LLM07 · LLM09 · LLM01 · T01 · T06 — Jina AI 역추출 포함</p>
       </div>
@@ -535,13 +525,9 @@
           </li>
         </ul>
         <div style="display:flex; gap:8px; margin-bottom:10px">
-          <a class="colab-btn" href="3일차_2강_.pptx" download
-             style="background:#F0F9FF; color:var(--lab2); font-size:13px; border:1px solid #BAE6FD">
-            📖 강의 2 슬라이드
-          </a>
           <a class="colab-btn" href="3일차_실습2_.pptx" download
              style="background:#E0F2FE; color:var(--lab2); font-size:13px; border:1px solid #7DD3FC">
-            📋 실습 2 슬라이드
+            📋 실습 슬라이드
           </a>
         </div>
         <a class="colab-btn"
@@ -553,10 +539,23 @@
       </div>
     </div>
 
-    <!-- LAB 3 -->
+    <!-- ── 강의 3 ── -->
+    <div class="slide-card" style="cursor:default">
+      <div class="slide-icon" style="background:#FFF1F2">📖</div>
+      <div style="flex:1">
+        <strong>강의 3 — 방어 체계: M01~M30</strong>
+        <span>입출력 보안, 데이터·모델 보안, 인프라·운영, 공급망·감사 4계층</span>
+      </div>
+      <a class="colab-btn" href="3일차_3강_.pptx" download
+         style="background:#FFF1F2; color:var(--lab3); font-size:13px; border:1px solid #FECACA; width:auto; padding:9px 18px">
+        📥 슬라이드
+      </a>
+    </div>
+
+    <!-- ── 실습 3 ── -->
     <div class="lab-card lab3">
       <div class="lab-card-header">
-        <div class="lab-num">실습 3 · 강의 3 연계</div>
+        <div class="lab-num">실습 3</div>
         <h2>AI 레드팀 도구<br>Garak · LLM Guard</h2>
         <p>자동화된 LLM 취약점 스캔 · 커스텀 프로브 · 방어 레이어</p>
       </div>
@@ -604,13 +603,9 @@
           </li>
         </ul>
         <div style="display:flex; gap:8px; margin-bottom:10px">
-          <a class="colab-btn" href="3일차_3강_.pptx" download
-             style="background:#FFF1F2; color:var(--lab3); font-size:13px; border:1px solid #FECACA">
-            📖 강의 3 슬라이드
-          </a>
           <a class="colab-btn" href="3일차_실습3_.pptx" download
              style="background:#FEE2E2; color:var(--lab3); font-size:13px; border:1px solid #FCA5A5">
-            📋 실습 3 슬라이드
+            📋 실습 슬라이드
           </a>
         </div>
         <a class="colab-btn"
