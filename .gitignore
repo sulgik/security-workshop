@@ -1,0 +1,10 @@
+# 배포 제외
+handout/
+archives/
+초안/
+
+# OS / editor
+.DS_Store
+~$*
+.env
+.claude/
