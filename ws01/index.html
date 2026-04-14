@@ -9,20 +9,16 @@
       --navy:    #111848;
       --navyMid: #1E2761;
       --navyLt:  #2A3580;
-      --lab1:    #7C3AED;
-      --lab1lt:  #EDE9FE;
-      --lab2:    #0369A1;
-      --lab2lt:  #E0F2FE;
-      --lab3:    #DC2626;
-      --lab3lt:  #FEE2E2;
-      --gemini:  #1A73E8;
-      --jina:    #0891B2;
-      --green:   #10B981;
-      --red:     #EF4444;
-      --amber:   #F59E0B;
-      --slate:   #94A3B8;
-      --off:     #F0F2FA;
+      --accent:  #334175;
+      --accentLt:#E8EAF2;
+      --slate:   #64748B;
+      --slateLt: #94A3B8;
+      --border:  #CBD5E1;
+      --off:     #F1F3F8;
       --white:   #FFFFFF;
+      --warn:    #92400E;
+      --warnBg:  #FEF9EE;
+      --warnBd:  #E5D5B0;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -36,7 +32,7 @@
 
     /* ── HERO ── */
     .hero {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navyLt) 100%);
+      background: linear-gradient(160deg, var(--navy) 0%, var(--navyMid) 100%);
       padding: 60px 24px 48px;
       text-align: center;
       position: relative;
@@ -48,7 +44,7 @@
       top: -60px; right: -60px;
       width: 320px; height: 320px;
       border-radius: 50%;
-      background: rgba(124,58,237,.15);
+      background: rgba(255,255,255,.04);
     }
     .hero::after {
       content: '';
@@ -56,12 +52,12 @@
       bottom: -80px; left: -40px;
       width: 260px; height: 260px;
       border-radius: 50%;
-      background: rgba(3,105,161,.18);
+      background: rgba(255,255,255,.03);
     }
     .hero-badge {
       display: inline-block;
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.25);
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
       color: #CBD5E1;
       font-size: 12px;
       letter-spacing: .08em;
@@ -78,7 +74,7 @@
       margin-bottom: 14px;
       position: relative; z-index: 1;
     }
-    .hero h1 span { color: #A78BFA; }
+    .hero h1 span { color: #C7D2FE; }
     .hero p {
       font-size: 16px;
       color: #94A3B8;
@@ -96,29 +92,12 @@
       position: relative; z-index: 1;
     }
     .pill {
-      background: rgba(255,255,255,.1);
-      border: 1px solid rgba(255,255,255,.2);
-      color: #E2E8F0;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      color: #CBD5E1;
       font-size: 12px;
       padding: 4px 12px;
       border-radius: 12px;
-    }
-    .gemini-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--gemini);
-      color: white;
-      font-size: 13px;
-      font-weight: 700;
-      padding: 9px 20px;
-      border-radius: 8px;
-      position: relative; z-index: 1;
-    }
-    .gemini-badge .dot {
-      width: 8px; height: 8px;
-      background: #93C5FD;
-      border-radius: 50%;
     }
 
     /* ── SECTION ── */
@@ -135,55 +114,49 @@
     }
     .section-sub {
       font-size: 14px;
-      color: var(--slate);
+      color: var(--slateLt);
       margin-bottom: 28px;
     }
 
-    /* ── LAB CARDS ── */
-    .lab-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
-    }
-    .lab-card {
+    /* ── CARD COMMON ── */
+    .card {
       background: white;
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(17,24,72,.10);
+      box-shadow: 0 2px 12px rgba(17,24,72,.07);
       transition: transform .2s, box-shadow .2s;
     }
-    .lab-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(17,24,72,.15);
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(17,24,72,.12);
     }
-    .lab-card-header {
+    .card-header {
+      background: linear-gradient(160deg, var(--navy) 0%, var(--accent) 100%);
       padding: 24px 24px 20px;
-      position: relative;
     }
-    .lab1 .lab-card-header { background: linear-gradient(135deg, #4C1D95, var(--lab1)); }
-    .lab2 .lab-card-header { background: linear-gradient(135deg, #0C4A6E, var(--lab2)); }
-    .lab3 .lab-card-header { background: linear-gradient(135deg, #7F1D1D, var(--lab3)); }
-    .lab-num {
+    .card-label {
       font-size: 11px;
       font-weight: 700;
       letter-spacing: .1em;
       text-transform: uppercase;
-      color: rgba(255,255,255,.7);
+      color: rgba(255,255,255,.55);
       margin-bottom: 8px;
     }
-    .lab-card-header h2 {
+    .card-header h2 {
       font-size: 20px;
       font-weight: 800;
       color: white;
       line-height: 1.3;
       margin-bottom: 10px;
     }
-    .lab-card-header p {
+    .card-header p {
       font-size: 13px;
-      color: rgba(255,255,255,.75);
+      color: rgba(255,255,255,.65);
       line-height: 1.5;
     }
-    .lab-card-body { padding: 20px 24px 24px; }
+    .card-body { padding: 20px 24px 24px; }
+
+    /* ── ACTIVITY LIST ── */
     .activity-list {
       list-style: none;
       margin-bottom: 20px;
@@ -193,7 +166,7 @@
       align-items: flex-start;
       gap: 10px;
       padding: 9px 0;
-      border-bottom: 1px solid #F1F5F9;
+      border-bottom: 1px solid #F1F3F8;
       font-size: 13.5px;
       line-height: 1.5;
     }
@@ -205,11 +178,11 @@
       padding: 2px 7px;
       border-radius: 4px;
       margin-top: 2px;
+      background: var(--accentLt);
+      color: var(--accent);
     }
-    .lab1 .act-badge { background: var(--lab1lt); color: var(--lab1); }
-    .lab2 .act-badge { background: var(--lab2lt); color: var(--lab2); }
     .act-info strong { display: block; font-size: 13px; color: var(--navy); }
-    .act-info span { font-size: 12px; color: var(--slate); }
+    .act-info span { font-size: 12px; color: var(--slateLt); }
 
     .meta-row {
       display: flex;
@@ -229,7 +202,8 @@
     }
     .meta-chip svg { flex-shrink: 0; }
 
-    .colab-btn {
+    /* ── BUTTONS ── */
+    .btn {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -243,27 +217,31 @@
       transition: opacity .2s, transform .1s;
       cursor: pointer;
       border: none;
+      background: var(--navy);
+      color: white;
     }
-    .colab-btn:hover { opacity: .9; transform: scale(.99); }
-    .lab1 .colab-btn { background: var(--lab1); color: white; }
-    .lab2 .colab-btn { background: var(--lab2); color: white; }
-    .lab3 .colab-btn { background: var(--lab3); color: white; }
-    .colab-btn img { width: 20px; height: 20px; }
+    .btn:hover { opacity: .88; transform: scale(.99); }
+    .btn-outline {
+      background: var(--accentLt);
+      color: var(--navy);
+      border: 1px solid var(--border);
+    }
+    .btn img { height: 20px; width: auto; }
 
     /* ── SETUP GUIDE ── */
     .setup-card {
       background: white;
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(17,24,72,.08);
+      box-shadow: 0 2px 12px rgba(17,24,72,.07);
     }
     .setup-header {
-      background: var(--gemini);
+      background: linear-gradient(160deg, var(--navy) 0%, var(--accent) 100%);
       padding: 20px 28px;
       color: white;
     }
     .setup-header h3 { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
-    .setup-header p { font-size: 13px; opacity: .85; }
+    .setup-header p { font-size: 13px; opacity: .7; }
     .steps {
       padding: 28px;
       display: grid;
@@ -278,7 +256,7 @@
     .step-num {
       width: 32px; height: 32px;
       border-radius: 50%;
-      background: var(--gemini);
+      background: var(--navy);
       color: white;
       font-size: 14px;
       font-weight: 800;
@@ -288,7 +266,7 @@
     }
     .step h4 { font-size: 14px; font-weight: 700; color: var(--navy); }
     .step p { font-size: 13px; color: var(--slate); line-height: 1.5; }
-    .step a { color: var(--gemini); font-weight: 600; word-break: break-all; }
+    .step a { color: var(--navyLt); font-weight: 600; word-break: break-all; }
     .code-inline {
       background: var(--off);
       border: 1px solid #E2E8F0;
@@ -303,8 +281,8 @@
 
     /* ── WARNING ── */
     .warning-bar {
-      background: #FEF3C7;
-      border: 1px solid #FCD34D;
+      background: var(--warnBg);
+      border: 1px solid var(--warnBd);
       border-radius: 10px;
       padding: 14px 18px;
       display: flex;
@@ -312,12 +290,12 @@
       gap: 12px;
       margin-bottom: 28px;
       font-size: 13.5px;
-      color: #92400E;
+      color: var(--warn);
       line-height: 1.6;
     }
     .warning-bar .icon { font-size: 18px; flex-shrink: 0; }
 
-    /* ── SLIDES SECTION ── */
+    /* ── SLIDES / EXTRA GRID ── */
     .slides-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -330,13 +308,13 @@
       display: flex;
       align-items: center;
       gap: 14px;
-      box-shadow: 0 2px 10px rgba(17,24,72,.08);
+      box-shadow: 0 2px 10px rgba(17,24,72,.06);
       text-decoration: none;
       color: var(--navy);
       transition: box-shadow .2s, transform .2s;
     }
     .slide-card:hover {
-      box-shadow: 0 6px 20px rgba(17,24,72,.14);
+      box-shadow: 0 6px 20px rgba(17,24,72,.12);
       transform: translateY(-2px);
     }
     .slide-icon {
@@ -347,20 +325,22 @@
       justify-content: center;
       font-size: 22px;
       flex-shrink: 0;
+      background: var(--accentLt);
+      color: var(--navy);
     }
     .slide-card strong { display: block; font-size: 14px; margin-bottom: 3px; }
-    .slide-card span { font-size: 12px; color: var(--slate); }
+    .slide-card span { font-size: 12px; color: var(--slateLt); }
 
     /* ── FOOTER ── */
     footer {
       background: var(--navy);
-      color: rgba(255,255,255,.5);
+      color: rgba(255,255,255,.45);
       text-align: center;
       padding: 24px;
       font-size: 13px;
       line-height: 1.8;
     }
-    footer a { color: #A78BFA; text-decoration: none; }
+    footer a { color: #C7D2FE; text-decoration: none; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
@@ -384,43 +364,41 @@
     <span class="pill">LLM07 프롬프트 유출</span>
     <span class="pill">LLM09 환각</span>
     <span class="pill">T01·T06 임베딩 역추출</span>
-    <span class="pill">🔴 Garak 자동 스캔</span>
-    <span class="pill">🛡️ LLM Guard</span>
+    <span class="pill">Garak 자동 스캔</span>
+    <span class="pill">LLM Guard</span>
   </div>
 </div>
 
 <!-- ────────────────── 강의 · 실습 ────────────────── -->
 <div class="section">
-  <div class="section-title">📚 3일차 강의 · 실습</div>
+  <div class="section-title">3일차 강의 · 실습</div>
   <div class="section-sub">강의 슬라이드를 먼저 확인하고, 실습 노트북을 Colab에서 열어 진행하세요.</div>
 
   <div style="display:flex; flex-direction:column; gap:24px">
 
     <!-- ── 강의 1 (Slot 1) ── -->
-    <div style="background:white; border-radius:16px; overflow:hidden; box-shadow:0 4px 20px rgba(17,24,72,.10)">
-      <div style="background:linear-gradient(135deg,#4C1D95,#7C3AED); padding:24px 24px 20px">
-        <div style="font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.7); margin-bottom:8px">강의 1</div>
-        <h2 style="font-size:20px; font-weight:800; color:white; line-height:1.3; margin:0 0 10px">생성형 AI 보안위협 및 보안성 검증</h2>
-        <p style="font-size:13px; color:rgba(255,255,255,.75); line-height:1.5; margin:0">NIS · KISA 보안 가이드 비교분석 · 국정원 T코드 · 실제 사례 분석</p>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-label">강의 1</div>
+        <h2>생성형 AI 보안위협 및 보안성 검증</h2>
+        <p>NIS · KISA 보안 가이드 비교분석 · 국정원 T코드 · 실제 사례 분석</p>
       </div>
-      <div style="padding:20px 24px">
-        <a class="colab-btn" href="class/3일차_1.pptx" download
-           style="background:var(--lab1); color:white">
+      <div class="card-body">
+        <a class="btn" href="class/3일차_1.pptx" download>
           📥 강의 슬라이드 다운로드
         </a>
       </div>
     </div>
 
     <!-- ── 강의 2 (Slot 2) ── -->
-    <div style="background:white; border-radius:16px; overflow:hidden; box-shadow:0 4px 20px rgba(17,24,72,.10)">
-      <div style="background:linear-gradient(135deg,#0C4A6E,#0369A1); padding:24px 24px 20px">
-        <div style="font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.7); margin-bottom:8px">강의 2</div>
-        <h2 style="font-size:20px; font-weight:800; color:white; line-height:1.3; margin:0 0 10px">생성형 AI 취약점 분석</h2>
-        <p style="font-size:13px; color:rgba(255,255,255,.75); line-height:1.5; margin:0">OWASP LLM Top 10 취약점 분석 · T코드 ↔ LLM Top 10 매핑 · 역할별 가이드라인</p>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-label">강의 2</div>
+        <h2>생성형 AI 취약점 분석</h2>
+        <p>OWASP LLM Top 10 취약점 분석 · T코드 ↔ LLM Top 10 매핑 · 역할별 가이드라인</p>
       </div>
-      <div style="padding:20px 24px">
-        <a class="colab-btn" href="class/3일차_2.pptx" download
-           style="background:var(--lab2); color:white">
+      <div class="card-body">
+        <a class="btn" href="class/3일차_2.pptx" download>
           📥 강의 슬라이드 다운로드
         </a>
       </div>
@@ -429,12 +407,12 @@
     <!-- ── 시작 전 준비 ── -->
     <div class="setup-card">
       <div class="setup-header">
-        <h3>🔑 시작 전 준비 — Gemini API 키 발급 및 Colab 설정</h3>
+        <h3>시작 전 준비 — Gemini API 키 발급 및 Colab 설정</h3>
         <p>Google 계정만 있으면 무료 · 별도 결제 불필요</p>
       </div>
       <div style="padding:20px 28px 8px">
         <div class="warning-bar" style="margin-bottom:20px">
-          <span class="icon">⚠️</span>
+          <span class="icon">⚠</span>
           <div>실습에는 <strong>합성(가상) 데이터만</strong> 사용하세요. 실제 이름·전화번호·군사정보·개인정보는 절대 입력 금지입니다.</div>
         </div>
       </div>
@@ -448,7 +426,7 @@
           <div class="step-num">2</div>
           <h4>API 키 발급</h4>
           <p>좌측 메뉴 <strong>Get API key</strong> → <strong>API key 만들기</strong> 클릭 후 키를 복사합니다.<br>
-          <span style="color:var(--red);font-size:12px">⚠ 키는 절대 타인에게 공유 금지</span></p>
+          <span style="color:var(--warn);font-size:12px">⚠ 키는 절대 타인에게 공유 금지</span></p>
         </div>
         <div class="step">
           <div class="step-num">3</div>
@@ -474,13 +452,13 @@
     </div>
 
     <!-- ── 실습 1 (Slot 3) ── -->
-    <div class="lab-card lab1">
-      <div class="lab-card-header">
-        <div class="lab-num">실습 1</div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-label">실습 1</div>
         <h2>출력 통제 우회<br>데이터 유출 · 권한 오남용</h2>
         <p>공격해보고 막아본다 — 공격 · 방어 대비 체험</p>
       </div>
-      <div class="lab-card-body">
+      <div class="card-body">
         <div class="meta-row">
           <div class="meta-chip">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -511,12 +489,11 @@
           </li>
         </ul>
         <div style="display:flex; gap:8px; margin-bottom:10px">
-          <a class="colab-btn" href="class/3일차_3.pptx" download
-             style="background:#EDE9FE; color:var(--lab1); font-size:13px; border:1px solid #DDD6FE">
+          <a class="btn btn-outline" href="class/3일차_3.pptx" download style="font-size:13px">
             📋 실습 슬라이드
           </a>
         </div>
-        <a class="colab-btn"
+        <a class="btn"
            href="https://colab.research.google.com/github/sulgik/security-workshop/blob/main/ws01/class/day3_lab1.ipynb"
            target="_blank" rel="noopener">
           <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Colab" />
@@ -526,19 +503,19 @@
     </div>
 
     <!-- ── 실습 2 (Slot 4) ── -->
-    <div class="lab-card lab2">
-      <div class="lab-card-header">
-        <div class="lab-num">실습 2</div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-label">실습 2</div>
         <h2>임베딩 · 벡터DB<br>취약점 실습</h2>
         <p>LLM07 · LLM09 · LLM01 · T01 · T06 — Jina AI 역추출 포함</p>
       </div>
-      <div class="lab-card-body">
+      <div class="card-body">
         <div class="meta-row">
           <div class="meta-chip">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             80–100분
           </div>
-          <div class="meta-chip" style="color:#0891B2; background:#E0F7FA;">
+          <div class="meta-chip">
             🌐 Jina 웹 데모
           </div>
         </div>
@@ -573,12 +550,11 @@
           </li>
         </ul>
         <div style="display:flex; gap:8px; margin-bottom:10px">
-          <a class="colab-btn" href="class/3일차_4.pptx" download
-             style="background:#E0F2FE; color:var(--lab2); font-size:13px; border:1px solid #7DD3FC">
+          <a class="btn btn-outline" href="class/3일차_4.pptx" download style="font-size:13px">
             📋 실습 슬라이드
           </a>
         </div>
-        <a class="colab-btn"
+        <a class="btn"
            href="https://colab.research.google.com/github/sulgik/security-workshop/blob/main/ws01/class/day3_lab2.ipynb"
            target="_blank" rel="noopener">
           <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Colab" />
@@ -588,49 +564,49 @@
     </div>
 
     <!-- ── 실습 3 (Slot 5) ── -->
-    <div class="lab-card lab3">
-      <div class="lab-card-header">
-        <div class="lab-num">실습 3</div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-label">실습 3</div>
         <h2>오픈소스 활용<br>LLM 취약점 진단과 방어</h2>
         <p>자동화된 LLM 취약점 스캔 · 커스텀 프로브 · 방어 레이어</p>
       </div>
-      <div class="lab-card-body">
+      <div class="card-body">
         <div class="meta-row">
           <div class="meta-chip">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             80–100분
           </div>
-          <div class="meta-chip" style="color:#DC2626; background:#FEE2E2;">
-            🔴 Garak
+          <div class="meta-chip">
+            Garak
           </div>
-          <div class="meta-chip" style="color:#059669; background:#D1FAE5;">
-            🛡️ LLM Guard
+          <div class="meta-chip">
+            LLM Guard
           </div>
         </div>
         <ul class="activity-list">
           <li>
-            <span class="act-badge" style="background:var(--lab3lt); color:var(--lab3)">A</span>
+            <span class="act-badge">A</span>
             <div class="act-info">
               <strong>Garak 첫 스캔 (LLM01)</strong>
               <span>promptinject 프로브로 Gemini 자동 취약점 스캔</span>
             </div>
           </li>
           <li>
-            <span class="act-badge" style="background:var(--lab3lt); color:var(--lab3)">B</span>
+            <span class="act-badge">B</span>
             <div class="act-info">
               <strong>결과 분석</strong>
               <span>JSONL 파싱 · 프로브별 취약률 시각화</span>
             </div>
           </li>
           <li>
-            <span class="act-badge" style="background:var(--lab3lt); color:var(--lab3)">C</span>
+            <span class="act-badge">C</span>
             <div class="act-info">
               <strong>커스텀 프로브</strong>
               <span>한국어 군/보안 시나리오 페이로드 직접 작성</span>
             </div>
           </li>
           <li>
-            <span class="act-badge" style="background:var(--lab3lt); color:var(--lab3)">D</span>
+            <span class="act-badge">D</span>
             <div class="act-info">
               <strong>LLM Guard 방어 레이어</strong>
               <span>Garak 취약 페이로드를 스캐너로 차단</span>
@@ -638,12 +614,11 @@
           </li>
         </ul>
         <div style="display:flex; gap:8px; margin-bottom:10px">
-          <a class="colab-btn" href="class/3일차_5.pptx" download
-             style="background:#FEE2E2; color:var(--lab3); font-size:13px; border:1px solid #FCA5A5">
+          <a class="btn btn-outline" href="class/3일차_5.pptx" download style="font-size:13px">
             📋 실습 슬라이드
           </a>
         </div>
-        <a class="colab-btn"
+        <a class="btn"
            href="https://colab.research.google.com/github/sulgik/security-workshop/blob/main/ws01/class/day3_lab3.ipynb"
            target="_blank" rel="noopener">
           <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Colab" />
@@ -657,20 +632,19 @@
 
 <!-- ────────────────── FEEDBACK ────────────────── -->
 <div class="section" style="padding-top:0">
-  <div style="background:linear-gradient(135deg, var(--navy) 0%, var(--navyLt) 100%);
-              border-radius:16px; padding:40px 36px; text-align:center; color:#fff;
-              box-shadow:0 4px 24px rgba(17,24,72,.18)">
-    <div style="font-size:36px; margin-bottom:10px">📋</div>
-    <h2 style="font-size:22px; font-weight:800; margin-bottom:8px; letter-spacing:-.01em">교육 만족도 조사</h2>
-    <p style="font-size:14px; opacity:.8; margin-bottom:24px; line-height:1.7; max-width:480px; margin-left:auto; margin-right:auto">
+  <div style="background:#fff; border:2px solid var(--border);
+              border-radius:16px; padding:40px 36px; text-align:center;
+              box-shadow:0 2px 16px rgba(17,24,72,.06)">
+    <h2 style="font-size:22px; font-weight:800; margin-bottom:8px; letter-spacing:-.01em; color:var(--navy)">교육 만족도 조사</h2>
+    <p style="font-size:14px; color:var(--slate); margin-bottom:24px; line-height:1.7; max-width:480px; margin-left:auto; margin-right:auto">
       교육 개선을 위해 솔직한 의견을 남겨 주세요.<br>
       이름·이메일이 수집되지 않는 완전 익명 설문입니다. (5~8분)
     </p>
     <a href="https://docs.google.com/forms/d/1tBaJk_OVAxRISLeEpgn_u2S5VhJrMC3L7bMesMYCQHo/viewform"
        target="_blank" rel="noopener"
-       style="display:inline-block; background:#fff; color:var(--navy); font-weight:800;
+       style="display:inline-block; background:var(--navy); color:#fff; font-weight:800;
               font-size:15px; padding:13px 36px; border-radius:9px;
-              text-decoration:none; box-shadow:0 2px 12px rgba(0,0,0,.15)">
+              text-decoration:none; box-shadow:0 2px 12px rgba(17,24,72,.15)">
       설문 참여하기 →
     </a>
   </div>
@@ -678,32 +652,32 @@
 
 <!-- ────────────────── EXTRA ────────────────── -->
 <div class="section" style="padding-top:0">
-  <div class="section-title">🔗 참고 자료</div>
+  <div class="section-title">참고 자료</div>
   <div class="section-sub">AI 보안 관련 추가 학습 및 참고 영상</div>
   <div class="slides-grid">
     <a class="slide-card" href="https://k-ai-sec.streamlit.app" target="_blank" rel="noopener">
-      <div class="slide-icon" style="background:#EDE9FE; color:var(--lab1);">🛡️</div>
+      <div class="slide-icon">🛡️</div>
       <div>
         <strong>K-AI-Sec</strong>
         <span>AI 보안 대시보드</span>
       </div>
     </a>
-    <a class="slide-card" href="https://www.youtube.com/@LiveOverflow" target="_blank" rel="noopener">
-      <div class="slide-icon" style="background:#FEE2E2; color:var(--lab3);">🎬</div>
+    <a class="slide-card" href="https://youtu.be/Sv5OLj2nVAQ?si=Kiw9OXRg6Uvbwlvt" target="_blank" rel="noopener">
+      <div class="slide-icon">🎬</div>
       <div>
         <strong>Live Overflow</strong>
         <span>보안 교육 유튜브 채널</span>
       </div>
     </a>
     <a class="slide-card" href="https://www.youtube.com/watch?v=5JZPUjumav0" target="_blank" rel="noopener">
-      <div class="slide-icon" style="background:#E0F2FE; color:var(--lab2);">📺</div>
+      <div class="slide-icon">📺</div>
       <div>
         <strong>Clearview AI</strong>
         <span>NBC 보도 영상</span>
       </div>
     </a>
     <a class="slide-card" href="https://www.youtube.com/watch?v=xF0nQKTfBiI&t=3s" target="_blank" rel="noopener">
-      <div class="slide-icon" style="background:#FEF3C7; color:#92400E;">🎭</div>
+      <div class="slide-icon">🎭</div>
       <div>
         <strong>홍콩 딥페이크 사건</strong>
         <span>딥페이크 피해 사례 영상</span>
