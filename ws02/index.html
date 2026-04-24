@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2차 워크숍 — 생성형 AI 보안 취약점 분석</title>
+  <style>
+    :root {
+      --navy:    #111848;
+      --navyMid: #1E2761;
+      --navyLt:  #2A3580;
+      --accent:  #334175;
+      --accentLt:#E8EAF2;
+      --slate:   #64748B;
+      --slateLt: #94A3B8;
+      --border:  #CBD5E1;
+      --off:     #F1F3F8;
+      --white:   #FFFFFF;
+      --warn:    #92400E;
+      --warnBg:  #FEF9EE;
+      --warnBd:  #E5D5B0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      background: var(--off);
+      color: var(--navy);
+      min-height: 100vh;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(160deg, var(--navy) 0%, var(--navyMid) 100%);
+      padding: 60px 24px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.04);
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -40px;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.03);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      color: #CBD5E1;
+      font-size: 12px;
+      letter-spacing: .08em;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(26px, 5vw, 46px);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 14px;
+      position: relative; z-index: 1;
+    }
+    .hero h1 span { color: #C7D2FE; }
+    .hero p {
+      font-size: 16px;
+      color: #94A3B8;
+      max-width: 560px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+      position: relative; z-index: 1;
+    }
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 36px;
+      position: relative; z-index: 1;
+    }
+    .pill {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      color: #CBD5E1;
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 12px;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+    .section-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .section-sub {
+      font-size: 14px;
+      color: var(--slateLt);
+      margin-bottom: 28px;
+    }
+
+    /* ── CARD COMMON ── */
+    .card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(17,24,72,.07);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(17,24,72,.12);
+    }
+    .card-header {
+      background: linear-gradient(160deg, var(--navy) 0%, var(--accent) 100%);
+      padding: 24px 24px 20px;
+    }
+    .card-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.55);
+      margin-bottom: 8px;
+    }
+    .card-header h2 {
+      font-size: 20px;
+      font-weight: 800;
+      color: white;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+    .card-header p {
+      font-size: 13px;
+      color: rgba(255,255,255,.65);
+      line-height: 1.5;
+    }
+    .card-body { padding: 20px 24px 24px; }
+
+    /* ── ACTIVITY LIST ── */
+    .activity-list {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+    .activity-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 9px 0;
+      border-bottom: 1px solid #F1F3F8;
+      font-size: 13.5px;
+      line-height: 1.5;
+    }
+    .activity-list li:last-child { border-bottom: none; }
+    .act-badge {
+      flex-shrink: 0;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      margin-top: 2px;
+      background: var(--accentLt);
+      color: var(--accent);
+    }
+    .act-info strong { display: block; font-size: 13px; color: var(--navy); }
+    .act-info span { font-size: 12px; color: var(--slateLt); }
+
+    .meta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .meta-chip {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      color: var(--slate);
+      background: var(--off);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+    .meta-chip svg { flex-shrink: 0; }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 13px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: opacity .2s, transform .1s;
+      cursor: pointer;
+      border: none;
+      background: var(--navy);
+      color: white;
+    }
+    .btn:hover { opacity: .88; transform: scale(.99); }
+    .btn-outline {
+      background: var(--accentLt);
+      color: var(--navy);
+      border: 1px solid var(--border);
+    }
+    .btn img { height: 20px; width: auto; }
+
+    /* ── SETUP GUIDE ── */
+    .setup-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(17,24,72,.07);
+    }
+    .setup-header {
+      background: linear-gradient(160deg, var(--navy) 0%, var(--accent) 100%);
+      padding: 20px 28px;
+      color: white;
+    }
+    .setup-header h3 { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+    .setup-header p { font-size: 13px; opacity: .7; }
+    .steps {
+      padding: 28px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .step {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .step-num {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: white;
+      font-size: 14px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .step h4 { font-size: 14px; font-weight: 700; color: var(--navy); }
+    .step p { font-size: 13px; color: var(--slate); line-height: 1.5; }
+    .step a { color: var(--navyLt); font-weight: 600; word-break: break-all; }
+    .code-inline {
+      background: var(--off);
+      border: 1px solid #E2E8F0;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      color: var(--navy);
+      margin-top: 4px;
+      line-height: 1.7;
+    }
+
+    /* ── WARNING ── */
+    .warning-bar {
+      background: var(--warnBg);
+      border: 1px solid var(--warnBd);
+      border-radius: 10px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 28px;
+      font-size: 13.5px;
+      color: var(--warn);
+      line-height: 1.6;
+    }
+    .warning-bar .icon { font-size: 18px; flex-shrink: 0; }
+
+    /* ── SLIDES / EXTRA GRID ── */
+    .slides-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .slide-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 2px 10px rgba(17,24,72,.06);
+      text-decoration: none;
+      color: var(--navy);
+      transition: box-shadow .2s, transform .2s;
+    }
+    .slide-card:hover {
+      box-shadow: 0 6px 20px rgba(17,24,72,.12);
+      transform: translateY(-2px);
+    }
+    .slide-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+      background: var(--accentLt);
+      color: var(--navy);
+    }
+    .slide-card strong { display: block; font-size: 14px; margin-bottom: 3px; }
+    .slide-card span { font-size: 12px; color: var(--slateLt); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,.45);
+      text-align: center;
+      padding: 24px;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+    footer a { color: #C7D2FE; text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .steps { grid-template-columns: 1fr; }
+      .hero { padding: 40px 16px 36px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ────────────────── HERO ────────────────── -->
+<div class="hero">
+  <div class="hero-badge">생성형 AI 보안 취약점 분석 · 2차 워크숍</div>
+  <h1>AI를 <span>공격</span>하고<br>자동화로 <span>검증</span>합니다</h1>
+  <p>Gemini API · LLM · RAG 보안 실습을 다시 정리하고,<br>
+     Garak과 promptfoo 관점으로 취약점 진단 자동화를 체험합니다.</p>
+  <div class="hero-pills">
+    <span class="pill">T07 데이터 유출</span>
+    <span class="pill">T08 프롬프트 인젝션</span>
+    <span class="pill">LLM01 RAG 인젝션</span>
+    <span class="pill">LLM07 프롬프트 유출</span>
+    <span class="pill">LLM09 환각</span>
+    <span class="pill">T01·T06 임베딩 역추출</span>
+    <span class="pill">Garak 자동 스캔</span>
+    <span class="pill">promptfoo eval</span>
+    <span class="pill">promptfoo redteam</span>
+  </div>
+</div>
+
+<!-- ────────────────── 강의 · 실습 ────────────────── -->
+<div class="section">
+  <div class="section-title">2차 워크숍 강의 · 실습</div>
+  <div class="section-sub">강의 슬라이드를 먼저 확인하고, 실습 노트북을 Colab에서 열어 진행하세요.</div>
+
+  <div style="display:flex; flex-direction:column; gap:24px">
+
+    <!-- ── 강의 1 (Slot 1) ── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-label">강의 1</div>
+        <h2>생성형 AI 보안위협 및 보안성 검증</h2>
+        <p>NIS · KISA 보안 가이드 비교분석 · 국정원 T코드 · 실제 사례 분석</p>
+      </div>
+      <div class="card-body">
+        <a class="btn" href="../ws01/class/3일차_1.pptx" download>
+          📥 강의 슬라이드 다운로드
+        </a>
+      </div>
+    </div>
+
+    <!-- ── 강의 2 (Slot 2) ── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-label">강의 2</div>
+        <h2>생성형 AI 취약점 분석</h2>
+        <p>OWASP LLM Top 10 취약점 분석 · T코드 ↔ LLM Top 10 매핑 · 역할별 가이드라인</p>
+      </div>
+      <div class="card-body">
+        <a class="btn" href="../ws01/class/3일차_2.pptx" download>
+          📥 강의 슬라이드 다운로드
+        </a>
+      </div>
+    </div>
+
+    <!-- ── 시작 전 준비 ── -->
+    <div class="setup-card">
+      <div class="setup-header">
+        <h3>시작 전 준비 — Gemini API 키 발급 및 Colab 설정</h3>
+        <p>Google 계정만 있으면 무료 · promptfoo 실습은 노트북에서 Node.js 환경을 함께 확인합니다</p>
+      </div>
+      <div style="padding:20px 28px 8px">
+        <div class="warning-bar" style="margin-bottom:20px">
+          <span class="icon">⚠</span>
+          <div>실습에는 <strong>합성(가상) 데이터만</strong> 사용하세요. 실제 이름·전화번호·군사정보·개인정보는 절대 입력 금지입니다.</div>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h4>Google 계정 로그인</h4>
+          <p>Gmail 계정으로 <a href="https://aistudio.google.com/api-keys" target="_blank">aistudio.google.com</a>에 접속합니다.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h4>API 키 발급</h4>
+          <p>좌측 메뉴 <strong>Get API key</strong> → <strong>API key 만들기</strong> 클릭 후 키를 복사합니다.<br>
+          <span style="color:var(--warn);font-size:12px">⚠ 키는 절대 타인에게 공유 금지</span></p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h4>Colab Secrets에 등록</h4>
+          <p>Colab 왼쪽 사이드바 🔑 아이콘 → <strong>+ 새 보안 비밀 추가</strong><br>
+          이름: <code>GEMINI_API_KEY</code> / 값: 복사한 키 붙여넣기</p>
+          <div class="code-inline">이름을 정확히 입력하세요<br>GEMINI_API_KEY</div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h4>노트북 접근 허용</h4>
+          <p>Secret 등록 후 <strong>노트북 액세스</strong> 토글을 ON으로 켭니다.<br>
+          실습 1·2·3 모두 동일한 키를 공유합니다 — 랩마다 재설정 불필요.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <h4>내 Drive에 사본 저장</h4>
+          <p>노트북 열기 후 <strong>파일 → Drive에 사본 저장</strong>을 클릭하세요.<br>
+          저장하지 않으면 세션 종료 시 <strong>.ipynb 파일 자체</strong>와 워크시트 답변·실행 결과가 모두 사라집니다.</p>
+          <div class="code-inline">파일 → Drive에 사본 저장</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 실습 1 (Slot 3) ── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-label">실습 1</div>
+        <h2>출력 통제 우회<br>데이터 유출 · 권한 오남용</h2>
+        <p>공격해보고 막아본다 — 공격 · 방어 대비 체험</p>
+      </div>
+      <div class="card-body">
+        <div class="meta-row">
+          <div class="meta-chip">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            60–75분
+          </div>
+        </div>
+        <ul class="activity-list">
+          <li>
+            <span class="act-badge">A</span>
+            <div class="act-info">
+              <strong>직접 프롬프트 인젝션 (T08 · LLM01)</strong>
+              <span>"지침을 무시해" → M02 필터 + M03 격리</span>
+            </div>
+          </li>
+          <li>
+            <span class="act-badge">B</span>
+            <div class="act-info">
+              <strong>데이터 유출 (T07 · LLM02)</strong>
+              <span>컨텍스트 JSON 덤프 → M04 입력 마스킹</span>
+            </div>
+          </li>
+          <li>
+            <span class="act-badge">C</span>
+            <div class="act-info">
+              <strong>권한 오남용 (LLM05)</strong>
+              <span>"관리자입니다" → M23 세션 기반 RBAC</span>
+            </div>
+          </li>
+        </ul>
+        <div style="display:flex; gap:8px; margin-bottom:10px">
+          <a class="btn btn-outline" href="../ws01/class/3일차_3.pptx" download style="font-size:13px">
+            📋 실습 슬라이드
+          </a>
+        </div>
+        <a class="btn"
+           href="https://colab.research.google.com/github/sulgik/security-workshop/blob/main/ws01/class/day3_lab1.ipynb"
+           target="_blank" rel="noopener">
+          <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Colab" />
+          Google Colab에서 열기
+        </a>
+      </div>
+    </div>
+
+    <!-- ── 실습 2 (Slot 4) ── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-label">실습 2</div>
+        <h2>임베딩 · 벡터DB<br>취약점 실습</h2>
+        <p>LLM07 · LLM09 · LLM01 · T01 · T06 — Jina AI 역추출 포함</p>
+      </div>
+      <div class="card-body">
+        <div class="meta-row">
+          <div class="meta-chip">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            80–100분
+          </div>
+          <div class="meta-chip">
+            🌐 Jina 웹 데모
+          </div>
+        </div>
+        <ul class="activity-list">
+          <li>
+            <span class="act-badge">A</span>
+            <div class="act-info">
+              <strong>시스템 프롬프트 유출 (LLM07)</strong>
+              <span>번역 프레이밍 → M03 불변 규칙 + M02 필터</span>
+            </div>
+          </li>
+          <li>
+            <span class="act-badge">B</span>
+            <div class="act-info">
+              <strong>환각 (LLM09)</strong>
+              <span>허위 법률 질문 → M11 RAG + 출처 인용 강제</span>
+            </div>
+          </li>
+          <li>
+            <span class="act-badge">C</span>
+            <div class="act-info">
+              <strong>RAG 프롬프트 인젝션 (LLM01)</strong>
+              <span>VectorDB 오염 문서 → &lt;DOC&gt; 격리 + M13</span>
+            </div>
+          </li>
+          <li>
+            <span class="act-badge">D</span>
+            <div class="act-info">
+              <strong>임베딩 역추출 (T01 · T06)</strong>
+              <span>Jina AI 웹 데모 — API 호출 없음</span>
+            </div>
+          </li>
+        </ul>
+        <div style="display:flex; gap:8px; margin-bottom:10px">
+          <a class="btn btn-outline" href="../ws01/class/3일차_4.pptx" download style="font-size:13px">
+            📋 실습 슬라이드
+          </a>
+        </div>
+        <a class="btn"
+           href="https://colab.research.google.com/github/sulgik/security-workshop/blob/main/ws01/class/day3_lab2.ipynb"
+           target="_blank" rel="noopener">
+          <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Colab" />
+          Google Colab에서 열기
+        </a>
+      </div>
+    </div>
+
+    <!-- ── 실습 3 (Slot 5) ── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-label">실습 3</div>
+        <h2>promptfoo 기반<br>LLM 자동화 보안 스캐닝</h2>
+        <p>YAML 테스트 케이스 · redteam 자동 스캔 · 웹 리포트 · Garak 비교</p>
+      </div>
+      <div class="card-body">
+        <div class="meta-row">
+          <div class="meta-chip">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            80–100분
+          </div>
+          <div class="meta-chip">
+            promptfoo
+          </div>
+          <div class="meta-chip">
+            YAML
+          </div>
+          <div class="meta-chip">
+            Web Report
+          </div>
+        </div>
+        <ul class="activity-list">
+          <li>
+            <span class="act-badge">A</span>
+            <div class="act-info">
+              <strong>promptfoo eval</strong>
+              <span>수동 테스트 케이스로 프롬프트 인젝션 판정</span>
+            </div>
+          </li>
+          <li>
+            <span class="act-badge">B</span>
+            <div class="act-info">
+              <strong>promptfoo redteam</strong>
+              <span>자동 생성 페이로드로 LLM01 · T08 계열 스캔</span>
+            </div>
+          </li>
+          <li>
+            <span class="act-badge">C</span>
+            <div class="act-info">
+              <strong>한국어 군/보안 커스텀 시나리오</strong>
+              <span>업무 맥락에 맞춘 YAML 테스트 작성</span>
+            </div>
+          </li>
+          <li>
+            <span class="act-badge">D</span>
+            <div class="act-info">
+              <strong>Garak vs promptfoo 비교</strong>
+              <span>두 도구의 설정 방식 · 리포트 · 활용 포인트 비교</span>
+            </div>
+          </li>
+        </ul>
+        <div style="display:flex; gap:8px; margin-bottom:10px">
+          <a class="btn btn-outline" href="../ws01/class/3일차_5.pptx" download style="font-size:13px">
+            📋 실습 슬라이드
+          </a>
+        </div>
+        <a class="btn"
+           href="https://colab.research.google.com/github/sulgik/security-workshop/blob/main/ws02/class/day3_lab_promptfoo.ipynb"
+           target="_blank" rel="noopener">
+          <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Colab" />
+          Google Colab에서 열기
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ────────────────── FEEDBACK ────────────────── -->
+<div class="section" style="padding-top:0">
+  <div style="background:#fff; border:2px solid var(--border);
+              border-radius:16px; padding:40px 36px; text-align:center;
+              box-shadow:0 2px 16px rgba(17,24,72,.06)">
+    <h2 style="font-size:22px; font-weight:800; margin-bottom:8px; letter-spacing:-.01em; color:var(--navy)">교육 만족도 조사</h2>
+    <p style="font-size:14px; color:var(--slate); margin-bottom:24px; line-height:1.7; max-width:480px; margin-left:auto; margin-right:auto">
+      교육 개선을 위해 솔직한 의견을 남겨 주세요.<br>
+      이름·이메일이 수집되지 않는 완전 익명 설문입니다. (5~8분)
+    </p>
+    <a href="https://docs.google.com/forms/d/1tBaJk_OVAxRISLeEpgn_u2S5VhJrMC3L7bMesMYCQHo/viewform"
+       target="_blank" rel="noopener"
+       style="display:inline-block; background:var(--navy); color:#fff; font-weight:800;
+              font-size:15px; padding:13px 36px; border-radius:9px;
+              text-decoration:none; box-shadow:0 2px 12px rgba(17,24,72,.15)">
+      설문 참여하기 →
+    </a>
+  </div>
+</div>
+
+<!-- ────────────────── EXTRA ────────────────── -->
+<div class="section" style="padding-top:0">
+  <div class="section-title">참고 자료</div>
+  <div class="section-sub">AI 보안 관련 추가 학습 및 참고 영상</div>
+  <div class="slides-grid">
+    <a class="slide-card" href="https://k-ai-sec.streamlit.app" target="_blank" rel="noopener">
+      <div class="slide-icon">🛡️</div>
+      <div>
+        <strong>K-AI-Sec</strong>
+        <span>AI 보안 대시보드</span>
+      </div>
+    </a>
+    <a class="slide-card" href="https://youtu.be/Sv5OLj2nVAQ?si=Kiw9OXRg6Uvbwlvt" target="_blank" rel="noopener">
+      <div class="slide-icon">🎬</div>
+      <div>
+        <strong>Live Overflow</strong>
+        <span>보안 교육 유튜브 채널</span>
+      </div>
+    </a>
+    <a class="slide-card" href="https://www.youtube.com/watch?v=5JZPUjumav0" target="_blank" rel="noopener">
+      <div class="slide-icon">📺</div>
+      <div>
+        <strong>Clearview AI</strong>
+        <span>NBC 보도 영상</span>
+      </div>
+    </a>
+    <a class="slide-card" href="https://www.youtube.com/watch?v=xF0nQKTfBiI&t=3s" target="_blank" rel="noopener">
+      <div class="slide-icon">🎭</div>
+      <div>
+        <strong>홍콩 딥페이크 사건</strong>
+        <span>딥페이크 피해 사례 영상</span>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ────────────────── FOOTER ────────────────── -->
+<footer>
+  <p>생성형 AI 보안 취약점 분석 교육 · 2차 워크숍</p>
+  <p style="margin-top:6px">
+    Jina 역추출 데모:
+    <a href="https://embedding-inversion-demo.jina.ai/" target="_blank">embedding-inversion-demo.jina.ai</a>
+  </p>
+  <p style="margin-top:10px; font-size:12px; opacity:.5">
+    이 페이지의 모든 실습은 합성 데이터를 사용합니다. 실제 민감정보 입력 금지.
+  </p>
+</footer>
+
+</body>
+</html>
