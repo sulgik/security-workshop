@@ -373,7 +373,7 @@
 <!-- ────────────────── 강의 · 실습 ────────────────── -->
 <div class="section">
   <div class="section-title">2차 워크숍 강의 · 실습</div>
-  <div class="section-sub">강의 슬라이드를 먼저 확인하고, 실습 노트북을 Colab에서 열어 진행하세요.</div>
+  <div class="section-sub">강의 슬라이드를 먼저 확인하고, 실습 1·2는 Colab, 실습 3(슬롯 5)은 로컬 promptfoo UI로 진행합니다.</div>
 
   <div style="display:flex; flex-direction:column; gap:24px">
 
@@ -419,11 +419,11 @@
       </div>
     </div>
 
-    <!-- ── 시작 전 준비 ── -->
+    <!-- ── 전체 준비 ── -->
     <div class="setup-card">
       <div class="setup-header">
-        <h3>시작 전 준비 — 강사 LiteLLM Proxy 연결</h3>
-        <p>실습은 강사 노트북의 proxy를 경유합니다 · 개인 API 키 불필요 · nb01에서 연결을 먼저 확인합니다</p>
+        <h3>전체 준비 — 수강 전 셋업 + 수강 중 셋업</h3>
+        <p>수강 전에는 계정과 로컬 도구를 준비하고, API 키와 proxy 설정은 수업 중 강사 안내에 따라 진행합니다 · <a href="setup.html" style="color:#C7D2FE">사전 설치 가이드 열기 →</a></p>
       </div>
       <div style="padding:20px 28px 8px">
         <div class="warning-bar" style="margin-bottom:20px">
@@ -434,26 +434,38 @@
       <div class="steps">
         <div class="step">
           <div class="step-num">1</div>
-          <h4>Google 계정 로그인</h4>
-          <p>Gmail 계정으로 Colab에 로그인합니다.</p>
+          <h4>수강 전 · Google 계정 준비</h4>
+          <p>실습 1·2(슬롯 4)는 Colab에서 진행합니다. Gmail 계정으로 로그인할 수 있는지 미리 확인하세요.</p>
         </div>
         <div class="step">
           <div class="step-num">2</div>
-          <h4>강사 IP 주소 확인</h4>
-          <p>수업 중 강사가 칠판/화면에 공지하는 IP 주소를 확인합니다.</p>
+          <h4>수강 전 · Node.js 22 LTS 설치</h4>
+          <p>실습 3(슬롯 5)은 로컬 promptfoo 웹 UI를 사용합니다. 수업 전 터미널에서 설치를 확인하세요.</p>
+          <div class="code-inline">node --version<br>npm --version</div>
         </div>
         <div class="step">
           <div class="step-num">3</div>
-          <h4>nb01 첫 셀에 IP 입력</h4>
-          <p>nb01을 열고 첫 셀의 <code>INSTRUCTOR_IP</code> 변수에 강사가 공지한 IP를 입력합니다.</p>
-          <div class="code-inline">INSTRUCTOR_IP = "강사가 공지한 IP"</div>
+          <h4>수강 전 · promptfoo 실행 확인</h4>
+          <p>전역 설치 대신 <code>npx</code>로 고정 버전을 실행합니다. 미리 다운로드 여부를 확인하세요.</p>
+          <div class="code-inline">npx --yes promptfoo@0.121.9 --version</div>
         </div>
         <div class="step">
           <div class="step-num">4</div>
-          <h4>Drive에 사본 저장</h4>
-          <p>노트북 열기 후 <strong>파일 → Drive에 사본 저장</strong>을 클릭하세요.<br>
-          저장하지 않으면 세션 종료 시 실행 결과가 모두 사라집니다.</p>
+          <h4>수강 중 · 강사 IP로 Proxy 연결</h4>
+          <p>수업 중 강사가 공지하는 IP 주소를 nb01 첫 셀에 입력합니다.</p>
+          <div class="code-inline">INSTRUCTOR_IP = "강사가 공지한 IP"</div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <h4>수강 중 · Drive에 사본 저장</h4>
+          <p>Colab 노트북은 열자마자 <strong>파일 → Drive에 사본 저장</strong>을 눌러 결과를 보존합니다.</p>
           <div class="code-inline">파일 → Drive에 사본 저장</div>
+        </div>
+        <div class="step">
+          <div class="step-num">6</div>
+          <h4>수강 중 · 로컬 API 키 설정</h4>
+          <p>슬롯 5 시작 전 터미널에서 강사가 제공하는 API 키를 환경변수로 설정합니다.</p>
+          <div class="code-inline">export GEMINI_API_KEY="..."&nbsp;&nbsp;&nbsp;# Mac/Linux<br>$env:GEMINI_API_KEY="..."&nbsp;&nbsp;&nbsp;&nbsp;# Windows</div>
         </div>
       </div>
     </div>
@@ -563,11 +575,8 @@
             📋 실습 슬라이드
           </a>
         </div>
-        <a class="btn"
-           href="https://colab.research.google.com/github/sulgik/security-workshop/blob/main/ws02/class/nb03_promptfoo.ipynb"
-           target="_blank" rel="noopener">
-          <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Colab" />
-          Google Colab에서 열기
+        <a class="btn" href="promptfoo-ui-lab.html">
+          🖥️ promptfoo UI 실습 열기
         </a>
       </div>
     </div>
