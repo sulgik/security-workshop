@@ -6,12 +6,13 @@
 
 set -e
 
-# ── 1. Gemini API 키 설정 ──────────────────────────────────
+# ── 1. DeepSeek API 키 설정 ───────────────────────────────
 # 아래 줄의 your-key-here 를 실제 키로 교체하세요
-export GEMINI_API_KEY="your-key-here"
+# 키 발급: https://platform.deepseek.com/api_keys
+export DEEPSEEK_API_KEY="your-key-here"
 
-if [ "$GEMINI_API_KEY" = "your-key-here" ]; then
-  echo "❌  GEMINI_API_KEY 를 설정하세요 (run_proxy.sh 파일 수정)"
+if [ "$DEEPSEEK_API_KEY" = "your-key-here" ]; then
+  echo "❌  DEEPSEEK_API_KEY 를 설정하세요 (run_proxy.sh 파일 수정)"
   exit 1
 fi
 
@@ -37,7 +38,7 @@ echo ""
 echo "  수강생 Colab 설정값:"
 echo "  INSTRUCTOR_IP    = \"<위 IP 주소>\""
 echo "  LITELLM_API_KEY  = \"sk-workshop-2025\""
-echo "  MODEL_NAME       = \"gemini-2.5-flash-lite\""
+echo "  MODEL_NAME       = \"deepseek-chat\""
 echo "================================================"
 echo ""
 
