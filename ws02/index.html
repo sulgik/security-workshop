@@ -405,11 +405,25 @@
       </div>
     </div>
 
+    <!-- ── 강의 3 (Slot 3) ── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-label">강의 3</div>
+        <h2>방어 대책과 자동화 검증</h2>
+        <p>LLM 공격을 막는 방어 레이어 · promptfoo 소개 · LiteLLM Proxy 연결 안내</p>
+      </div>
+      <div class="card-body">
+        <a class="btn" href="class/ws02_슬롯3_방어대책_promptfoo.pptx" download>
+          📥 강의 슬라이드 다운로드
+        </a>
+      </div>
+    </div>
+
     <!-- ── 시작 전 준비 ── -->
     <div class="setup-card">
       <div class="setup-header">
-        <h3>시작 전 준비 — 강사 제공 Gemini API 키 및 Colab 설정</h3>
-        <p>실습용 API 키는 강사가 공유합니다 · promptfoo 실습은 노트북에서 Node.js 환경을 함께 확인합니다</p>
+        <h3>시작 전 준비 — 강사 LiteLLM Proxy 연결</h3>
+        <p>실습은 강사 노트북의 proxy를 경유합니다 · 개인 API 키 불필요 · nb01에서 연결을 먼저 확인합니다</p>
       </div>
       <div style="padding:20px 28px 8px">
         <div class="warning-bar" style="margin-bottom:20px">
@@ -421,94 +435,88 @@
         <div class="step">
           <div class="step-num">1</div>
           <h4>Google 계정 로그인</h4>
-          <p>Gmail 계정으로 Colab에 로그인합니다. 별도 Gemini API 키를 직접 발급하지 않아도 됩니다.</p>
+          <p>Gmail 계정으로 Colab에 로그인합니다.</p>
         </div>
         <div class="step">
           <div class="step-num">2</div>
-          <h4>강사 제공 API 키 확인</h4>
-          <p>수업 중 강사가 공유하는 실습용 Gemini API 키를 확인합니다.<br>
-          <span style="color:var(--warn);font-size:12px">⚠ 실습용 키는 교육 시간에만 사용하고 외부에 재공유하지 마세요</span></p>
+          <h4>강사 IP 주소 확인</h4>
+          <p>수업 중 강사가 칠판/화면에 공지하는 IP 주소를 확인합니다.</p>
         </div>
         <div class="step">
           <div class="step-num">3</div>
-          <h4>Colab Secrets에 등록</h4>
-          <p>Colab 왼쪽 사이드바 🔑 아이콘 → <strong>+ 새 보안 비밀 추가</strong><br>
-          이름: <code>GEMINI_API_KEY</code> / 값: 강사가 공유한 키 붙여넣기</p>
-          <div class="code-inline">이름을 정확히 입력하세요<br>GEMINI_API_KEY</div>
+          <h4>nb01 첫 셀에 IP 입력</h4>
+          <p>nb01을 열고 첫 셀의 <code>INSTRUCTOR_IP</code> 변수에 강사가 공지한 IP를 입력합니다.</p>
+          <div class="code-inline">INSTRUCTOR_IP = "강사가 공지한 IP"</div>
         </div>
         <div class="step">
           <div class="step-num">4</div>
-          <h4>노트북 접근 허용</h4>
-          <p>Secret 등록 후 <strong>노트북 액세스</strong> 토글을 ON으로 켭니다.<br>
-          실습 1·2·3 모두 동일한 키를 공유합니다 — 랩마다 재설정 불필요.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">5</div>
-          <h4>내 Drive에 사본 저장</h4>
+          <h4>Drive에 사본 저장</h4>
           <p>노트북 열기 후 <strong>파일 → Drive에 사본 저장</strong>을 클릭하세요.<br>
-          저장하지 않으면 세션 종료 시 <strong>.ipynb 파일 자체</strong>와 워크시트 답변·실행 결과가 모두 사라집니다.</p>
+          저장하지 않으면 세션 종료 시 실행 결과가 모두 사라집니다.</p>
           <div class="code-inline">파일 → Drive에 사본 저장</div>
         </div>
       </div>
     </div>
 
-    <!-- ── 실습 1 (Slot 3) ── -->
+    <!-- ── 실습 · 슬롯 4 ── -->
     <div class="card">
       <div class="card-header">
-        <div class="card-label">실습 1</div>
-        <h2>출력 통제 우회<br>데이터 유출 · 권한 오남용</h2>
-        <p>공격해보고 막아본다 — 공격 · 방어 대비 체험</p>
+        <div class="card-label">실습 · 슬롯 4</div>
+        <h2>Proxy 연결 확인 +<br>Gandalf CTF</h2>
+        <p>nb01: LiteLLM proxy 연결 확인 (20분) · nb02: 프롬프트 인젝션 체험 (60분)</p>
       </div>
       <div class="card-body">
         <div class="meta-row">
           <div class="meta-chip">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            60–75분
+            80분
           </div>
+          <div class="meta-chip">🌐 gandalf.lakera.ai</div>
         </div>
         <ul class="activity-list">
           <li>
-            <span class="act-badge">A</span>
+            <span class="act-badge">nb01</span>
             <div class="act-info">
-              <strong>직접 프롬프트 인젝션 (T08 · LLM01)</strong>
-              <span>"지침을 무시해" → M02 필터 + M03 격리</span>
+              <strong>LiteLLM Proxy 연결 확인</strong>
+              <span>강사 proxy에 연결하고 API 호출 정상 동작 확인</span>
             </div>
           </li>
           <li>
-            <span class="act-badge">B</span>
+            <span class="act-badge">nb02</span>
             <div class="act-info">
-              <strong>데이터 유출 (T07 · LLM02)</strong>
-              <span>컨텍스트 JSON 덤프 → M04 입력 마스킹</span>
-            </div>
-          </li>
-          <li>
-            <span class="act-badge">C</span>
-            <div class="act-info">
-              <strong>권한 오남용 (LLM05)</strong>
-              <span>"관리자입니다" → M23 세션 기반 RBAC</span>
+              <strong>Gandalf CTF — 프롬프트 인젝션 체험</strong>
+              <span>Level 1~5 클리어 도전 · Python으로 공격 재현 · "왜 뚫렸나?" 토론</span>
             </div>
           </li>
         </ul>
         <div style="display:flex; gap:8px; margin-bottom:10px">
-          <a class="btn btn-outline" href="class/3일차_3.pptx" download style="font-size:13px">
+          <a class="btn btn-outline" href="class/ws02_슬롯4_실습_proxy연결_GandalfCTF.pptx" download style="font-size:13px">
             📋 실습 슬라이드
           </a>
         </div>
-        <a class="btn"
-           href="https://colab.research.google.com/github/sulgik/security-workshop/blob/main/ws02/class/day3_lab1.ipynb"
-           target="_blank" rel="noopener">
-          <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Colab" />
-          Google Colab에서 열기
-        </a>
+        <div style="display:flex; gap:8px">
+          <a class="btn" style="flex:1"
+             href="https://colab.research.google.com/github/sulgik/security-workshop/blob/main/ws02/class/nb01_proxy_connect.ipynb"
+             target="_blank" rel="noopener">
+            <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Colab" />
+            nb01 열기
+          </a>
+          <a class="btn" style="flex:1"
+             href="https://colab.research.google.com/github/sulgik/security-workshop/blob/main/ws02/class/nb02_gandalf_ctf.ipynb"
+             target="_blank" rel="noopener">
+            <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Colab" />
+            nb02 열기
+          </a>
+        </div>
       </div>
     </div>
 
-    <!-- ── 실습 2 (Slot 4) ── -->
+    <!-- ── 실습 · 슬롯 5 ── -->
     <div class="card">
       <div class="card-header">
-        <div class="card-label">실습 2</div>
-        <h2>임베딩 · 벡터DB<br>취약점 실습</h2>
-        <p>LLM07 · LLM09 · LLM01 · T01 · T06 — Jina AI 역추출 포함</p>
+        <div class="card-label">실습 · 슬롯 5</div>
+        <h2>promptfoo 자동화 보안 스캐닝</h2>
+        <p>YAML 테스트 케이스 · eval 모드 · redteam 자동 스캔 · 웹 리포트</p>
       </div>
       <div class="card-body">
         <div class="meta-row">
@@ -516,114 +524,47 @@
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             80–100분
           </div>
-          <div class="meta-chip">
-            🌐 Jina 웹 데모
-          </div>
+          <div class="meta-chip">promptfoo</div>
+          <div class="meta-chip">YAML</div>
+          <div class="meta-chip">Web Report</div>
         </div>
         <ul class="activity-list">
           <li>
             <span class="act-badge">A</span>
             <div class="act-info">
-              <strong>시스템 프롬프트 유출 (LLM07)</strong>
-              <span>번역 프레이밍 → M03 불변 규칙 + M02 필터</span>
+              <strong>eval 모드 — 수동 테스트 케이스 실행</strong>
+              <span>YAML 파일로 5개 보안 테스트 → PASS/FAIL 결과 확인</span>
             </div>
           </li>
           <li>
             <span class="act-badge">B</span>
             <div class="act-info">
-              <strong>환각 (LLM09)</strong>
-              <span>허위 법률 질문 → M11 RAG + 출처 인용 강제</span>
+              <strong>YAML 수정 미션</strong>
+              <span>assertion 타입 변경 · 한국어 공격 케이스 추가</span>
             </div>
           </li>
           <li>
             <span class="act-badge">C</span>
             <div class="act-info">
-              <strong>RAG 프롬프트 인젝션 (LLM01)</strong>
-              <span>VectorDB 오염 문서 → &lt;DOC&gt; 격리 + M13</span>
+              <strong>redteam 모드 — 자동 공격 생성</strong>
+              <span>LLM이 페이로드 자동 생성 → 웹 리포트 분석</span>
             </div>
           </li>
           <li>
             <span class="act-badge">D</span>
             <div class="act-info">
-              <strong>임베딩 역추출 (T01 · T06)</strong>
-              <span>Jina AI 웹 데모 — API 호출 없음</span>
+              <strong>Wrap-up — 내 방어가 얼마나 버텼나?</strong>
+              <span>eval + redteam 방어율 계산 + 소감 정리</span>
             </div>
           </li>
         </ul>
         <div style="display:flex; gap:8px; margin-bottom:10px">
-          <a class="btn btn-outline" href="class/3일차_4.pptx" download style="font-size:13px">
+          <a class="btn btn-outline" href="class/ws02_슬롯5_실습_promptfoo.pptx" download style="font-size:13px">
             📋 실습 슬라이드
           </a>
         </div>
         <a class="btn"
-           href="https://colab.research.google.com/github/sulgik/security-workshop/blob/main/ws02/class/day3_lab2.ipynb"
-           target="_blank" rel="noopener">
-          <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Colab" />
-          Google Colab에서 열기
-        </a>
-      </div>
-    </div>
-
-    <!-- ── 실습 3 (Slot 5) ── -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-label">실습 3</div>
-        <h2>promptfoo 기반<br>LLM 자동화 보안 스캐닝</h2>
-        <p>YAML 테스트 케이스 · redteam 자동 스캔 · 웹 리포트 · Garak 비교</p>
-      </div>
-      <div class="card-body">
-        <div class="meta-row">
-          <div class="meta-chip">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            80–100분
-          </div>
-          <div class="meta-chip">
-            promptfoo
-          </div>
-          <div class="meta-chip">
-            YAML
-          </div>
-          <div class="meta-chip">
-            Web Report
-          </div>
-        </div>
-        <ul class="activity-list">
-          <li>
-            <span class="act-badge">A</span>
-            <div class="act-info">
-              <strong>promptfoo eval</strong>
-              <span>수동 테스트 케이스로 프롬프트 인젝션 판정</span>
-            </div>
-          </li>
-          <li>
-            <span class="act-badge">B</span>
-            <div class="act-info">
-              <strong>promptfoo redteam</strong>
-              <span>자동 생성 페이로드로 LLM01 · T08 계열 스캔</span>
-            </div>
-          </li>
-          <li>
-            <span class="act-badge">C</span>
-            <div class="act-info">
-              <strong>한국어 군/보안 커스텀 시나리오</strong>
-              <span>업무 맥락에 맞춘 YAML 테스트 작성</span>
-            </div>
-          </li>
-          <li>
-            <span class="act-badge">D</span>
-            <div class="act-info">
-              <strong>Garak vs promptfoo 비교</strong>
-              <span>두 도구의 설정 방식 · 리포트 · 활용 포인트 비교</span>
-            </div>
-          </li>
-        </ul>
-        <div style="display:flex; gap:8px; margin-bottom:10px">
-          <a class="btn btn-outline" href="class/3일차_5.pptx" download style="font-size:13px">
-            📋 실습 슬라이드
-          </a>
-        </div>
-        <a class="btn"
-           href="https://colab.research.google.com/github/sulgik/security-workshop/blob/main/ws02/class/day3_lab_promptfoo.ipynb"
+           href="https://colab.research.google.com/github/sulgik/security-workshop/blob/main/ws02/class/nb03_promptfoo.ipynb"
            target="_blank" rel="noopener">
           <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Colab" />
           Google Colab에서 열기
