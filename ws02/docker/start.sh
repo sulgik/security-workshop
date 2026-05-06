@@ -9,30 +9,29 @@ fi
 
 mkdir -p /workspace/results
 
-echo ""
-echo "╔══════════════════════════════════════════╗"
-echo "║  Lab 2 — promptfoo 자동화 보안 스캐닝   ║"
-echo "╚══════════════════════════════════════════╝"
-echo ""
-echo "  📋  Step 1: eval 실행"
-echo "      promptfoo eval -c configs/eval_config.yaml"
-echo ""
-echo "  ✏️   Step 2: YAML 수정 미션"
-echo "      nano configs/eval_config.yaml  (수정 후 Step 1 재실행)"
-echo ""
-echo "  🔴  Step 3: redteam 실행"
-echo "      promptfoo redteam run -c configs/redteam_config.yaml"
-echo ""
-echo "  🌐  결과 UI: http://localhost:15500"
-echo ""
-echo "────────────────────────────────────────────"
-echo "  [결과 UI 시작 중...]"
+cat <<'EOF'
 
-# 백그라운드에서 view 서버 시작
-promptfoo view --port 15500 --yes &
+╔══════════════════════════════════════════╗
+║  Lab 2 — promptfoo 자동화 보안 스캐닝   ║
+╚══════════════════════════════════════════╝
 
-echo "  ✓  http://localhost:15500 에서 확인하세요"
-echo ""
+📋  Step 1 — eval (CLI 실행 → UI 결과 확인)
+    promptfoo eval -c configs/eval_config.yaml
+    promptfoo view --yes
+    → 브라우저: http://localhost:15500
 
-# 인터랙티브 셸 진입
+✏️   Step 2 — YAML 수정 미션
+    nano configs/eval_config.yaml
+    promptfoo eval -c configs/eval_config.yaml      # 재실행
+
+🔴  Step 3 — redteam (UI 풀 사용, 미리 로드됨)
+    promptfoo redteam setup configs/redteam_config.yaml
+    → 브라우저가 자동으로 열림 (config 미리 채워진 상태)
+    → UI에서 plugin/strategy 조정 후 'Run' 클릭
+
+────────────────────────────────────────────
+종료: exit 또는 Ctrl+D
+
+EOF
+
 exec /bin/bash

@@ -7,13 +7,6 @@ Docker가 설치되어 있어야 합니다.
 docker --version
 ```
 
-## 이미지 빌드 (최초 1회, 약 1~2분)
-
-```bash
-cd ws02/docker
-docker build -t ws02-lab2 .
-```
-
 ## 실습 시작
 
 **Mac / Linux:**
@@ -26,29 +19,41 @@ bash run.sh
 run.bat
 ```
 
-컨테이너가 시작되면 셸이 열립니다.
+이미지가 없으면 자동으로 빌드됩니다 (최초 1회, 약 1~2분).
 
 ---
 
 ## 실습 순서
 
-### Step 1 — eval 모드 (수동 테스트)
+### Step 1 — eval 모드 (CLI 실행 + UI 결과 확인)
+
+미리 준비된 5개 보안 테스트 케이스를 실행:
+
 ```bash
 promptfoo eval -c configs/eval_config.yaml
+promptfoo view --yes
 ```
-→ 브라우저에서 **http://localhost:15500** 열기 → PASS/FAIL 확인
+
+→ 브라우저에서 **http://localhost:15500** 에서 PASS/FAIL 확인
 
 ### Step 2 — YAML 수정 미션
+
 ```bash
-nano configs/eval_config.yaml   # 테스트 케이스 수정
-promptfoo eval -c configs/eval_config.yaml  # 재실행
+nano configs/eval_config.yaml      # assertion 변경, 테스트 케이스 추가
+promptfoo eval -c configs/eval_config.yaml
 ```
 
-### Step 3 — redteam 모드 (자동 공격 생성)
+### Step 3 — redteam 모드 (UI 풀 사용)
+
+미리 작성된 YAML을 UI에 로드해서 인터랙티브하게 조정 → 실행:
+
 ```bash
-promptfoo redteam run -c configs/redteam_config.yaml
+promptfoo redteam setup configs/redteam_config.yaml
 ```
-→ UI에서 자동 생성된 공격 페이로드와 결과 분석
+
+→ 브라우저가 자동으로 열림 (provider, system prompt, plugins 미리 채워진 상태)
+→ UI에서 plugin / strategy 추가/수정 후 **Run** 클릭
+→ 결과 자동 표시
 
 ---
 
@@ -57,3 +62,5 @@ promptfoo redteam run -c configs/redteam_config.yaml
 ```bash
 exit
 ```
+
+`--rm` 옵션으로 실행되어 컨테이너는 자동 정리됩니다. 재실행은 `bash run.sh` 만 다시 입력하면 됩니다 (빌드 단계는 이미 캐시됨).
