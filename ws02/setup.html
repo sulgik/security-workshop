@@ -310,8 +310,8 @@
 <!-- NAV DOTS -->
 <nav class="nav">
   <a href="#s1"></a><a href="#s2"></a><a href="#s3"></a>
-  <a href="#s4"></a><a href="#s5"></a><a href="#s6"></a>
-  <a href="#s7"></a>
+  <a href="#s4"></a><a href="#s5"></a><a href="#s6b"></a>
+  <a href="#s6"></a><a href="#s7"></a>
 </nav>
 
 <!-- ══════════════ SLIDE 1 — 표지 ══════════════ -->
@@ -319,36 +319,42 @@
   <div class="badge">생성형 AI 보안취약점 분석 교육 · 2차 워크숍</div>
   <h1>사전 준비<br><span>가이드</span></h1>
   <p class="sub">워크숍 당일 원활한 실습을 위해<br>아래 항목을 미리 확인해 주세요.<br>설치는 <strong style="color:white">최소화</strong>했습니다 — 대부분 브라우저만 있으면 됩니다.</p>
-  <div class="slide-num">1 / 7</div>
+  <div class="slide-num">1 / 8</div>
 </section>
 
 <!-- ══════════════ SLIDE 2 — 도구 개요 ══════════════ -->
 <section class="slide slide-dark" id="s2">
   <div class="badge">이번 워크숍에서 사용하는 도구</div>
-  <h2>도구 <span>3가지</span></h2>
-  <p style="color:rgba(255,255,255,.55);font-size:14px;margin-top:8px">설치가 필요한 것은 없습니다 — Colab 안에서 자동 설치됩니다</p>
+  <h2>도구 <span>4가지</span></h2>
+  <p style="color:rgba(255,255,255,.55);font-size:14px;margin-top:8px">Docker 만 사전 설치가 필요합니다 — 나머지는 모두 브라우저 / Colab 안에서 진행</p>
 
   <div class="tool-grid">
     <div class="tool-card">
       <span class="tool-icon">📓</span>
       <h3>Google Colab</h3>
-      <p>브라우저에서 Python 코드를 실행하는 구글 서비스. 별도 설치 없이 Google 계정으로 바로 사용.</p>
+      <p>브라우저에서 Python 코드를 실행하는 구글 서비스. Google 계정만 있으면 바로 사용.</p>
       <span class="tool-tag tag-browser">브라우저</span>
     </div>
     <div class="tool-card">
       <span class="tool-icon">🗡️</span>
       <h3>Gandalf 챌린지</h3>
-      <p>프롬프트 인젝션을 게임으로 체험하는 보안 챌린지. 사이트 접속만 하면 됩니다.</p>
+      <p>프롬프트 인젝션을 게임으로 체험. 사이트 접속만 하면 됩니다.</p>
       <span class="tool-tag tag-browser">브라우저</span>
+    </div>
+    <div class="tool-card">
+      <span class="tool-icon">🐳</span>
+      <h3>Docker</h3>
+      <p>Lab 2 promptfoo 환경. 이미지 한 번 받으면 모든 도구가 준비됩니다.</p>
+      <span class="tool-tag tag-proxy">사전 설치 필수</span>
     </div>
     <div class="tool-card">
       <span class="tool-icon">🔍</span>
       <h3>promptfoo</h3>
-      <p>YAML 파일로 LLM 보안 테스트를 자동화하는 도구. Colab 안에서 설치·실행합니다.</p>
-      <span class="tool-tag tag-colab">Colab 자동설치</span>
+      <p>YAML 으로 LLM 보안 테스트를 자동화하는 도구. Docker 이미지에 포함.</p>
+      <span class="tool-tag tag-colab">Docker 포함</span>
     </div>
   </div>
-  <div class="slide-num">2 / 7</div>
+  <div class="slide-num">2 / 8</div>
 </section>
 
 <!-- ══════════════ SLIDE 3 — 체크리스트 ══════════════ -->
@@ -385,6 +391,13 @@
         <span style="color:var(--slate);font-size:13px">Colab은 최신 Chrome/Edge에서 가장 안정적으로 동작합니다</span>
       </div>
     </li>
+    <li>
+      <div class="check-box"></div>
+      <div>
+        <strong style="color:var(--navy);display:block;font-size:15px">Docker 설치 (Lab 2 용)</strong>
+        <span style="color:var(--slate);font-size:13px">터미널에서 <code>docker --version</code> 동작 확인 — Docker Desktop 권장</span>
+      </div>
+    </li>
   </ul>
 
   <div class="alert alert-warn" style="margin-top:28px">
@@ -392,7 +405,7 @@
     <div style="color:var(--warn)">정부·기관 네트워크에서는 <strong>gandalf.lakera.ai</strong>가 차단될 수 있습니다. 사전에 반드시 확인하고, 차단된 경우 담당자에게 접속 허용을 요청하세요.</div>
   </div>
 
-  <div class="slide-num" style="color:var(--slateLt)">3 / 7</div>
+  <div class="slide-num" style="color:var(--slateLt)">3 / 8</div>
 </section>
 
 <!-- ══════════════ SLIDE 4 — Colab 설정 ══════════════ -->
@@ -428,7 +441,7 @@
     </div>
   </div>
 
-  <div class="slide-num">4 / 7</div>
+  <div class="slide-num">4 / 8</div>
 </section>
 
 <!-- ══════════════ SLIDE 5 — Gandalf CTF ══════════════ -->
@@ -484,10 +497,55 @@
     </div>
   </div>
 
-  <div class="slide-num">5 / 7</div>
+  <div class="slide-num">5 / 8</div>
 </section>
 
-<!-- ══════════════ SLIDE 6 — 당일 준비 ══════════════ -->
+<!-- ══════════════ SLIDE 6 — Docker 설치 ══════════════ -->
+<section class="slide slide-light" id="s6b">
+  <div class="badge badge-dark">Step 3 — Lab 2 용</div>
+  <h2 style="color:var(--navy)">Docker<br><span style="color:var(--accent)">설치 확인</span></h2>
+  <p class="section-sub section-sub-dark">Lab 2 (promptfoo 자동화 스캐닝) 은 Docker 컨테이너에서 진행합니다</p>
+
+  <div class="step-wrap" style="margin-top:24px">
+    <div class="step-num-big step-num-big-dark">1</div>
+    <div class="step-content step-content-dark">
+      <h3 style="color:var(--navy)">Docker Desktop 설치</h3>
+      <p>OS에 맞는 설치 파일을 받습니다 — 무료입니다.</p>
+      <p style="margin-top:6px">
+        Mac / Windows: <a href="https://www.docker.com/products/docker-desktop/" target="_blank">docker.com/products/docker-desktop</a><br>
+        Linux: 패키지 매니저로 <code>docker</code> 설치
+      </p>
+    </div>
+
+    <div class="step-divider step-divider-dark"></div>
+    <div></div>
+
+    <div class="step-num-big step-num-big-dark">2</div>
+    <div class="step-content step-content-dark">
+      <h3 style="color:var(--navy)">설치 확인</h3>
+      <p>터미널에서 아래 명령이 동작하는지 확인하세요.</p>
+      <div class="code-box-light">docker --version<br><span style="opacity:.5"># 예상 출력: Docker version 24.x.x ...</span></div>
+    </div>
+
+    <div class="step-divider step-divider-dark"></div>
+    <div></div>
+
+    <div class="step-num-big step-num-big-dark">3</div>
+    <div class="step-content step-content-dark">
+      <h3 style="color:var(--navy)">Docker Desktop 실행</h3>
+      <p>설치 후 Docker Desktop 앱을 실행해 백그라운드에서 데몬이 동작 중인지 확인합니다. (시스템 트레이에 🐳 아이콘 확인)</p>
+    </div>
+  </div>
+
+  <div class="alert alert-info">
+    <span class="alert-icon">💡</span>
+    <span>이미지 빌드/다운로드는 강의 당일 진행됩니다 (약 1~2분 소요). 사전엔 <strong>Docker 설치 + 동작 확인</strong>까지만 하면 됩니다.</span>
+  </div>
+
+  <div class="slide-num" style="color:var(--slateLt)">6 / 8</div>
+</section>
+
+<!-- ══════════════ SLIDE 7 — 당일 준비 ══════════════ -->
 <section class="slide slide-light" id="s6">
   <div class="badge badge-dark">당일 준비 — 강의 시작 전</div>
   <h2 style="color:var(--navy)">당일 추가로<br><span style="color:var(--accent)">확인할 사항</span></h2>
@@ -526,7 +584,7 @@
     </div>
   </div>
 
-  <div class="slide-num" style="color:var(--slateLt)">6 / 7</div>
+  <div class="slide-num" style="color:var(--slateLt)">7 / 8</div>
 </section>
 
 <!-- ══════════════ SLIDE 7 — 완료 체크리스트 ══════════════ -->
@@ -551,6 +609,10 @@
       <div class="check-box check-box-done">✓</div>
       <span style="color:rgba(255,255,255,.85)">Chrome / Edge 브라우저 준비</span>
     </li>
+    <li>
+      <div class="check-box check-box-done">✓</div>
+      <span style="color:rgba(255,255,255,.85)">Docker 설치 + 동작 확인 (Lab 2 용)</span>
+    </li>
   </ul>
 
   <div class="alert alert-ok" style="max-width:500px;margin:28px auto 0;border-radius:12px">
@@ -565,7 +627,7 @@
     문의: 강사에게 사전 연락 주세요
   </p>
 
-  <div class="slide-num">7 / 7</div>
+  <div class="slide-num">8 / 8</div>
 </section>
 
 </body>
