@@ -3,6 +3,10 @@ handout/
 archives/
 초안/
 
+# Dependencies
+node_modules/
+package-lock.json
+
 # OS / editor
 .DS_Store
 ~$*
