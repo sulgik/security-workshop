@@ -419,11 +419,11 @@
       </div>
     </div>
 
-    <!-- ── 전체 준비 ── -->
+    <!-- ── 시작 전 준비 ── -->
     <div class="setup-card">
       <div class="setup-header">
-        <h3>전체 준비 — 수강 전 셋업 + 수강 중 셋업</h3>
-        <p>수강 전에는 계정과 로컬 도구를 준비하고, API 키와 proxy 설정은 수업 중 강사 안내에 따라 진행합니다 · <a href="setup.html" style="color:#C7D2FE">사전 설치 가이드 열기 →</a></p>
+        <h3>시작 전 준비 — API 키 등록</h3>
+        <p>강사가 배포하는 DeepSeek API 키를 Colab Secrets에 등록합니다 · <a href="setup.html" style="color:#C7D2FE">사전 준비 가이드 열기 →</a></p>
       </div>
       <div style="padding:20px 28px 8px">
         <div class="warning-bar" style="margin-bottom:20px">
@@ -434,19 +434,20 @@
       <div class="steps">
         <div class="step">
           <div class="step-num">1</div>
-          <h4>수강 전 · Google 계정 준비</h4>
-          <p>모든 실습은 Colab에서 진행합니다. Gmail 계정으로 로그인할 수 있는지 미리 확인하세요.</p>
+          <h4>Google 계정으로 Colab 로그인</h4>
+          <p>Gmail 계정으로 <a href="https://colab.research.google.com" target="_blank">colab.research.google.com</a> 에 로그인합니다.</p>
         </div>
         <div class="step">
           <div class="step-num">2</div>
-          <h4>수강 중 · 강사 IP로 Proxy 연결</h4>
-          <p>수업 중 강사가 공지하는 IP 주소를 nb01 첫 셀에 입력합니다.</p>
-          <div class="code-inline">INSTRUCTOR_IP = "강사가 공지한 IP"</div>
+          <h4>Colab Secrets에 API 키 등록</h4>
+          <p>왼쪽 사이드바 🔑 아이콘 → <strong>+ 새 보안 비밀 추가</strong><br>
+          강사가 배포한 키를 아래 이름으로 정확히 입력하세요.</p>
+          <div class="code-inline">DEEPSEEK_API_KEY</div>
         </div>
         <div class="step">
           <div class="step-num">3</div>
-          <h4>수강 중 · Drive에 사본 저장</h4>
-          <p>Colab 노트북은 열자마자 <strong>파일 → Drive에 사본 저장</strong>을 눌러 결과를 보존합니다.</p>
+          <h4>Drive에 사본 저장</h4>
+          <p>노트북 열자마자 <strong>파일 → Drive에 사본 저장</strong>을 클릭하세요.</p>
           <div class="code-inline">파일 → Drive에 사본 저장</div>
         </div>
       </div>
@@ -488,41 +489,6 @@
             📖 가이드 &amp; 치트시트
           </a>
         </div>
-      </div>
-    </div>
-
-    <!-- ── 환경 설정 — nb01 ── -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-label">환경 설정</div>
-        <h2>⚙️ Proxy 연결 확인</h2>
-        <p>강사 LiteLLM proxy에 연결 — 이후 모든 실습의 기반</p>
-      </div>
-      <div class="card-body">
-        <div class="meta-row">
-          <div class="meta-chip">Colab</div>
-          <div class="meta-chip">DeepSeek-chat</div>
-        </div>
-        <ul class="activity-list">
-          <li>
-            <span class="act-badge">nb01</span>
-            <div class="act-info">
-              <strong>강사 IP 입력 → API 호출 확인</strong>
-              <span>INSTRUCTOR_IP 설정 후 모델 응답 확인 — 연결 성공 시 이후 실습 진행</span>
-            </div>
-          </li>
-        </ul>
-        <div style="display:flex; gap:8px; margin-bottom:10px">
-          <a class="btn btn-outline" href="class/ws02_슬롯4_실습_proxy연결_GandalfCTF.pptx" download style="font-size:13px">
-            📋 실습 슬라이드
-          </a>
-        </div>
-        <a class="btn"
-           href="https://colab.research.google.com/github/sulgik/security-workshop/blob/main/ws02/class/nb01_proxy_connect.ipynb"
-           target="_blank" rel="noopener">
-          <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Colab" />
-          nb01 열기
-        </a>
       </div>
     </div>
 
