@@ -450,12 +450,6 @@
           <p>노트북 열자마자 <strong>파일 → Drive에 사본 저장</strong>을 클릭하세요.</p>
           <div class="code-inline">파일 → Drive에 사본 저장</div>
         </div>
-        <div class="step">
-          <div class="step-num">4</div>
-          <h4>Docker 설치 (Lab 2 용)</h4>
-          <p><a href="https://www.docker.com/products/docker-desktop/" target="_blank">Docker Desktop</a> 설치 후 동작 확인.</p>
-          <div class="code-inline">docker --version</div>
-        </div>
       </div>
     </div>
 
@@ -559,58 +553,59 @@
       </div>
     </div>
 
-    <!-- ── Lab 2 — promptfoo ── -->
+    <!-- ── Lab 2 — Garak ── -->
     <div class="card">
       <div class="card-header">
         <div class="card-label">Lab 2</div>
-        <h2>🔍 promptfoo 자동화 스캐닝</h2>
-        <p>YAML 테스트 케이스 · eval 모드 · redteam 자동 스캔 · 웹 리포트</p>
+        <h2>🔍 Garak 자동화 보안 스캐닝</h2>
+        <p>NVIDIA 오픈소스 LLM 취약점 스캐너 · 프로브 자동 실행 · JSONL 결과 분석</p>
       </div>
       <div class="card-body">
         <div class="meta-row">
-          <div class="meta-chip">🐳 Docker</div>
-          <div class="meta-chip">promptfoo</div>
-          <div class="meta-chip">YAML</div>
+          <div class="meta-chip">Colab</div>
+          <div class="meta-chip">Garak</div>
+          <div class="meta-chip">LiteLLM 어댑터</div>
         </div>
         <ul class="activity-list">
           <li>
             <span class="act-badge">A</span>
             <div class="act-info">
-              <strong>eval 모드 — 수동 테스트 케이스 실행</strong>
-              <span>YAML로 5개 보안 테스트 → PASS/FAIL 결과 확인</span>
+              <strong>Garak 첫 스캔 — 2종 프로브</strong>
+              <span>Jailbreak (dan) · Toxicity (lmrc) — 자동 페이로드 + PASS/FAIL</span>
             </div>
           </li>
           <li>
             <span class="act-badge">B</span>
             <div class="act-info">
-              <strong>YAML 수정 미션</strong>
-              <span>assertion 타입 변경 · 한국어 공격 케이스 추가</span>
+              <strong>JSONL 결과 분석</strong>
+              <span>디텍터별 취약률 집계 + 시각화</span>
             </div>
           </li>
           <li>
             <span class="act-badge">C</span>
             <div class="act-info">
-              <strong>redteam 모드 — 자동 공격 생성</strong>
-              <span>LLM이 페이로드 자동 생성 → 웹 리포트 분석</span>
+              <strong>커스텀 프로브 — 한국어 페이로드</strong>
+              <span>OpenAI 호환 API + 키워드 디텍터로 직접 작성</span>
             </div>
           </li>
           <li>
             <span class="act-badge">D</span>
             <div class="act-info">
-              <strong>Wrap-up — 내 방어가 얼마나 버텼나?</strong>
-              <span>eval + redteam 방어율 계산 + 소감 정리</span>
+              <strong>방어 개념 — AI for Security</strong>
+              <span>다층 방어 레이어 (입력/출력 검사 · 마스킹 · RBAC) 이해</span>
             </div>
           </li>
         </ul>
         <div style="display:flex; gap:8px; margin-bottom:10px">
-          <a class="btn btn-outline" href="class/ws02_Lab2_promptfoo.pptx" download style="font-size:13px">
+          <a class="btn btn-outline" href="class/ws02_Lab2_garak.pptx" download style="font-size:13px">
             📋 실습 슬라이드
           </a>
         </div>
-        <a class="btn" href="https://github.com/sulgik/security-workshop/tree/main/ws02/docker"
+        <a class="btn"
+           href="https://colab.research.google.com/github/sulgik/security-workshop/blob/main/ws02/class/nb02_garak.ipynb"
            target="_blank" rel="noopener">
-          🐳 Docker 실습 가이드
-        </a>
+          <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Colab" />
+          nb02 열기
       </div>
     </div>
 
