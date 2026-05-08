@@ -453,54 +453,48 @@
       </div>
     </div>
 
-    <!-- ── 슬롯3 실습 — 프롬프트 인젝션 직접 체험 ── -->
+    <!-- ── 슬롯3 강의 + 실습 ── -->
     <div class="card">
       <div class="card-header">
-        <div class="card-label">슬롯3 실습</div>
-        <h2>🎮 프롬프트 인젝션 직접 체험</h2>
-        <p>Gandalf 챌린지 (브라우저) → nb00 수동 공격·방어 (Colab) — 게임으로 체감, 코드로 재현</p>
+        <div class="card-label">슬롯3</div>
+        <h2>🛡️ 방어 대책 · 자동화 검증 + 🎮 Gandalf 챌린지</h2>
+        <p>강의 (방어 4 레이어 + 도구 소개) → Gandalf 챌린지로 직접 체험</p>
       </div>
       <div class="card-body">
         <div class="meta-row">
+          <div class="meta-chip">강의 40분</div>
+          <div class="meta-chip">Gandalf 50분</div>
           <div class="meta-chip">🌐 브라우저</div>
-          <div class="meta-chip">Colab</div>
         </div>
         <ul class="activity-list">
           <li>
-            <span class="act-badge">①</span>
+            <span class="act-badge">P1</span>
             <div class="act-info">
-              <strong>워밍업 — Gandalf 챌린지 (~30분)</strong>
-              <span>gandalf.lakera.ai 접속 → Lv 1~5+ 도전, 우회 패턴 발견</span>
+              <strong>방어 4 레이어 (20분)</strong>
+              <span>입력 검증 · 출력 필터 · 권한 최소화 · 모니터링 — 슬롯2 OWASP 매핑을 운영 레이어로</span>
             </div>
           </li>
           <li>
-            <span class="act-badge">A</span>
+            <span class="act-badge">P2</span>
             <div class="act-info">
-              <strong>nb00 — 출력 통제 우회 (T08 · LLM01)</strong>
-              <span>"지침을 무시해" → M03 격리 + M02 출력 필터</span>
+              <strong>자동화 검증 + 도구 소개 (15분)</strong>
+              <span>수동 테스트 한계 → Garak (소개) · vs promptfoo</span>
             </div>
           </li>
           <li>
-            <span class="act-badge">B</span>
+            <span class="act-badge">P3</span>
             <div class="act-info">
-              <strong>nb00 — 데이터 유출 (T07 · LLM02)</strong>
-              <span>RAG 컨텍스트 JSON 덤프 → M04 입력 마스킹</span>
-            </div>
-          </li>
-          <li>
-            <span class="act-badge">C</span>
-            <div class="act-info">
-              <strong>nb00 — 권한 오남용 (LLM05)</strong>
-              <span>"관리자입니다" → M23 세션 RBAC</span>
+              <strong>Gandalf 챌린지 (50분) ★</strong>
+              <span>Lv 1 시범 → Lv 2~3 자율 → Lv 4 라이브 데모 5가지 → Lv 4~5+ 도전 → 토론</span>
             </div>
           </li>
         </ul>
         <div style="display:flex; gap:8px; margin-bottom:10px">
-          <a class="btn btn-outline" href="class/ws02_slot3_lab_intro.pptx" download style="font-size:13px">
-            📋 실습 슬라이드
+          <a class="btn btn-outline" href="class/ws02_slot3_defense_lecture.pptx" download style="font-size:13px">
+            📋 강의 슬라이드
           </a>
         </div>
-        <div style="display:flex; gap:8px; margin-bottom:10px">
+        <div style="display:flex; gap:8px">
           <a class="btn" href="https://gandalf.lakera.ai" target="_blank" rel="noopener" style="flex:1">
             🗡️ Gandalf 열기
           </a>
@@ -508,12 +502,6 @@
             📖 가이드 &amp; 치트시트
           </a>
         </div>
-        <a class="btn"
-           href="https://colab.research.google.com/github/sulgik/security-workshop/blob/main/ws02/class/nb00_manual_attacks.ipynb"
-           target="_blank" rel="noopener">
-          <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Colab" />
-          nb00 열기 (수동 공격·방어)
-        </a>
       </div>
     </div>
 
