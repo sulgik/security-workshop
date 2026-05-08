@@ -385,7 +385,7 @@
         <p>NIS · KISA 보안 가이드 비교분석 · 국정원 T코드 · 실제 사례 분석</p>
       </div>
       <div class="card-body">
-        <a class="btn" href="class/ws02_슬롯1_NIS_KISA.pptx" download>
+        <a class="btn" href="class/ws02_slot1_nis_kisa.pptx" download>
           📥 강의 슬라이드 다운로드
         </a>
       </div>
@@ -399,7 +399,7 @@
         <p>OWASP LLM Top 10 취약점 분석 · T코드 ↔ LLM Top 10 매핑 · 역할별 가이드라인</p>
       </div>
       <div class="card-body">
-        <a class="btn" href="class/ws02_슬롯2_OWASP.pptx" download>
+        <a class="btn" href="class/ws02_slot2_owasp_llm_top10.pptx" download>
           📥 강의 슬라이드 다운로드
         </a>
       </div>
@@ -413,7 +413,7 @@
         <p>LLM 공격을 막는 방어 레이어 · promptfoo 소개</p>
       </div>
       <div class="card-body">
-        <a class="btn" href="class/ws02_슬롯3_방어대책_promptfoo.pptx" download>
+        <a class="btn" href="class/ws02_slot3_defense_promptfoo.pptx" download>
           📥 강의 슬라이드 다운로드
         </a>
       </div>
@@ -482,7 +482,7 @@
           </li>
         </ul>
         <div style="display:flex; gap:8px; margin-bottom:10px">
-          <a class="btn btn-outline" href="class/ws02_슬롯4_실습_Gandalf챌린지.pptx" download style="font-size:13px">
+          <a class="btn btn-outline" href="class/ws02_slot4_gandalf_challenge_lab.pptx" download style="font-size:13px">
             📋 실습 슬라이드
           </a>
         </div>
@@ -497,66 +497,10 @@
       </div>
     </div>
 
-    <!-- ── Lab 1 — VectorDB · RAG ── -->
+    <!-- ── Lab 1 — Garak ── -->
     <div class="card">
       <div class="card-header">
         <div class="card-label">Lab 1</div>
-        <h2>🗄️ VectorDB · RAG 취약점</h2>
-        <p>임베딩 오염 · 프롬프트 유출 · 환각 유발 · Jina 역추출 데모</p>
-      </div>
-      <div class="card-body">
-        <div class="meta-row">
-          <div class="meta-chip">Colab</div>
-          <div class="meta-chip">🌐 Jina 웹 데모</div>
-        </div>
-        <ul class="activity-list">
-          <li>
-            <span class="act-badge">A</span>
-            <div class="act-info">
-              <strong>시스템 프롬프트 유출 (LLM07)</strong>
-              <span>번역 프레이밍으로 내부 지시 탈취</span>
-            </div>
-          </li>
-          <li>
-            <span class="act-badge">B</span>
-            <div class="act-info">
-              <strong>환각 유발 (LLM09)</strong>
-              <span>허위 전제 질문 → RAG 출처 인용 방어</span>
-            </div>
-          </li>
-          <li>
-            <span class="act-badge">C</span>
-            <div class="act-info">
-              <strong>RAG 프롬프트 인젝션 (LLM01)</strong>
-              <span>오염 문서로 VectorDB 조종</span>
-            </div>
-          </li>
-          <li>
-            <span class="act-badge">D</span>
-            <div class="act-info">
-              <strong>임베딩 역추출 (T01 · T06)</strong>
-              <span>Jina AI 웹 데모 — 브라우저에서 직접 확인</span>
-            </div>
-          </li>
-        </ul>
-        <div style="display:flex; gap:8px; margin-bottom:10px">
-          <a class="btn btn-outline" href="class/ws02_Lab1_RAG_VectorDB.pptx" download style="font-size:13px">
-            📋 실습 슬라이드
-          </a>
-        </div>
-        <a class="btn"
-           href="https://colab.research.google.com/github/sulgik/security-workshop/blob/main/ws02/class/nb01_rag_vectordb.ipynb"
-           target="_blank" rel="noopener">
-          <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Colab" />
-          nb01 열기
-        </a>
-      </div>
-    </div>
-
-    <!-- ── Lab 2 — Garak ── -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-label">Lab 2</div>
         <h2>🔍 Garak 자동화 보안 스캐닝</h2>
         <p>NVIDIA 오픈소스 LLM 취약점 스캐너 · 프로브 자동 실행 · JSONL 결과 분석</p>
       </div>
@@ -597,15 +541,72 @@
           </li>
         </ul>
         <div style="display:flex; gap:8px; margin-bottom:10px">
-          <a class="btn btn-outline" href="class/ws02_Lab2_garak.pptx" download style="font-size:13px">
+          <a class="btn btn-outline" href="class/ws02_Lab1_garak.pptx" download style="font-size:13px">
             📋 실습 슬라이드
           </a>
         </div>
         <a class="btn"
-           href="https://colab.research.google.com/github/sulgik/security-workshop/blob/main/ws02/class/nb02_garak.ipynb"
+           href="https://colab.research.google.com/github/sulgik/security-workshop/blob/main/ws02/class/nb01_garak.ipynb"
+           target="_blank" rel="noopener">
+          <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Colab" />
+          nb01 열기
+        </a>
+      </div>
+    </div>
+
+    <!-- ── Lab 2 — VectorDB · RAG ── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-label">Lab 2</div>
+        <h2>🗄️ VectorDB · RAG 취약점</h2>
+        <p>임베딩 오염 · 프롬프트 유출 · 환각 유발 · Jina 역추출 데모</p>
+      </div>
+      <div class="card-body">
+        <div class="meta-row">
+          <div class="meta-chip">Colab</div>
+          <div class="meta-chip">🌐 Jina 웹 데모</div>
+        </div>
+        <ul class="activity-list">
+          <li>
+            <span class="act-badge">A</span>
+            <div class="act-info">
+              <strong>시스템 프롬프트 유출 (LLM07)</strong>
+              <span>번역 프레이밍으로 내부 지시 탈취</span>
+            </div>
+          </li>
+          <li>
+            <span class="act-badge">B</span>
+            <div class="act-info">
+              <strong>환각 유발 (LLM09)</strong>
+              <span>허위 전제 질문 → RAG 출처 인용 방어</span>
+            </div>
+          </li>
+          <li>
+            <span class="act-badge">C</span>
+            <div class="act-info">
+              <strong>RAG 프롬프트 인젝션 (LLM01)</strong>
+              <span>오염 문서로 VectorDB 조종</span>
+            </div>
+          </li>
+          <li>
+            <span class="act-badge">D</span>
+            <div class="act-info">
+              <strong>임베딩 역추출 (T01 · T06)</strong>
+              <span>Jina AI 웹 데모 — 브라우저에서 직접 확인</span>
+            </div>
+          </li>
+        </ul>
+        <div style="display:flex; gap:8px; margin-bottom:10px">
+          <a class="btn btn-outline" href="class/ws02_Lab2_RAG_VectorDB.pptx" download style="font-size:13px">
+            📋 실습 슬라이드
+          </a>
+        </div>
+        <a class="btn"
+           href="https://colab.research.google.com/github/sulgik/security-workshop/blob/main/ws02/class/nb02_rag_vectordb.ipynb"
            target="_blank" rel="noopener">
           <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Colab" />
           nb02 열기
+        </a>
       </div>
     </div>
 
