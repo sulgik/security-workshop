@@ -453,40 +453,54 @@
       </div>
     </div>
 
-    <!-- ── 워밍업 — Gandalf 미니게임 ── -->
+    <!-- ── 슬롯3 실습 — 프롬프트 인젝션 직접 체험 ── -->
     <div class="card">
       <div class="card-header">
-        <div class="card-label">워밍업</div>
-        <h2>🎮 Gandalf 미니게임</h2>
-        <p>프롬프트 인젝션을 게임으로 체험 — 브라우저만 있으면 됩니다</p>
+        <div class="card-label">슬롯3 실습</div>
+        <h2>🎮 프롬프트 인젝션 직접 체험</h2>
+        <p>Gandalf 챌린지 (브라우저) → nb00 수동 공격·방어 (Colab) — 게임으로 체감, 코드로 재현</p>
       </div>
       <div class="card-body">
         <div class="meta-row">
           <div class="meta-chip">🌐 브라우저</div>
-          <div class="meta-chip">설치 없음</div>
+          <div class="meta-chip">Colab</div>
         </div>
         <ul class="activity-list">
           <li>
-            <span class="act-badge">게임</span>
+            <span class="act-badge">①</span>
             <div class="act-info">
-              <strong>gandalf.lakera.ai 접속</strong>
-              <span>Level 1부터 도전 — 레벨이 올라갈수록 방어가 강해집니다</span>
+              <strong>워밍업 — Gandalf 챌린지 (~30분)</strong>
+              <span>gandalf.lakera.ai 접속 → Lv 1~5+ 도전, 우회 패턴 발견</span>
             </div>
           </li>
           <li>
-            <span class="act-badge">가이드</span>
+            <span class="act-badge">A</span>
             <div class="act-info">
-              <strong>막히면 치트시트 참고</strong>
-              <span>공격 패턴 18종 · 레벨별 방어 구조 · 메타 전략</span>
+              <strong>nb00 — 출력 통제 우회 (T08 · LLM01)</strong>
+              <span>"지침을 무시해" → M03 격리 + M02 출력 필터</span>
+            </div>
+          </li>
+          <li>
+            <span class="act-badge">B</span>
+            <div class="act-info">
+              <strong>nb00 — 데이터 유출 (T07 · LLM02)</strong>
+              <span>RAG 컨텍스트 JSON 덤프 → M04 입력 마스킹</span>
+            </div>
+          </li>
+          <li>
+            <span class="act-badge">C</span>
+            <div class="act-info">
+              <strong>nb00 — 권한 오남용 (LLM05)</strong>
+              <span>"관리자입니다" → M23 세션 RBAC</span>
             </div>
           </li>
         </ul>
         <div style="display:flex; gap:8px; margin-bottom:10px">
-          <a class="btn btn-outline" href="class/ws02_slot4_gandalf_challenge_lab.pptx" download style="font-size:13px">
+          <a class="btn btn-outline" href="class/ws02_slot3_lab_intro.pptx" download style="font-size:13px">
             📋 실습 슬라이드
           </a>
         </div>
-        <div style="display:flex; gap:8px">
+        <div style="display:flex; gap:8px; margin-bottom:10px">
           <a class="btn" href="https://gandalf.lakera.ai" target="_blank" rel="noopener" style="flex:1">
             🗡️ Gandalf 열기
           </a>
@@ -494,6 +508,12 @@
             📖 가이드 &amp; 치트시트
           </a>
         </div>
+        <a class="btn"
+           href="https://colab.research.google.com/github/sulgik/security-workshop/blob/main/ws02/class/nb00_manual_attacks.ipynb"
+           target="_blank" rel="noopener">
+          <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Colab" />
+          nb00 열기 (수동 공격·방어)
+        </a>
       </div>
     </div>
 
