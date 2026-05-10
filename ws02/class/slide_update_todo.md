@@ -7,6 +7,27 @@
 
 ---
 
+## ⚠️ 강의 범위 결정 (2026-05-10) — Agent 영역 제외
+
+본 워크숍 (ws02) 은 **단일 LLM / RAG 보안** 중심.
+**Agentic AI · MCP · 멀티 에이전트** 는 별도 회차로 분리.
+
+### ❌ 제외된 TODO (참조용으로만 유지)
+
+- **TODO 1.3 — Cursor IDE CVE** (CVE-2025-54135 / 54136) — MCP 신뢰 우회
+- **TODO 2 — OWASP Agentic Top 10** (ASI01–10, 2026 신규)
+- **TODO 3 — MCP 보안** (Anthropic SDK RCE, Tool poisoning 통계)
+
+### ✅ 진행할 TODO
+
+- **TODO 1.1 — EchoLeak** (zero-click — 일반 LLM 사례로)
+- **TODO 1.2 — GitHub Copilot CVE-2025-53773**
+- **TODO 4.1 — Vector DB 노출 통계** (Lab 2)
+- **TODO 4.2 — Second-order Prompt Injection** (RAG → 후속 시스템, 다중 에이전트 표현 X)
+- **TODO 5 — KISA 안내서 2026.03 + 개인정보 처리 안내서 (2025.08)**
+
+---
+
 ## 🔥 우선순위 1 — 사고 사례 (슬롯1)
 
 ### TODO 1.1 — EchoLeak (Microsoft 365 Copilot, 2025 후반)

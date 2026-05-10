@@ -5,6 +5,25 @@
 
 ---
 
+## ⚠️ 강의 범위 결정 (2026-05-10) — Agent 영역 제외
+
+본 워크숍은 **단일 LLM / RAG 보안** 중심. **Agentic AI · MCP · 멀티 에이전트** 위협은 별도 회차.
+
+### ❌ 본 회차 제외 (아래 본문 항목은 **참조용으로만 유지**)
+
+- 슬롯1: **Cursor IDE CVE** (54135 / 54136 — MCP 신뢰 우회)
+- 슬롯2: **OWASP Agentic Top 10** (ASI01–10, 2026 신규)
+- 슬롯3: **MCP Security** 1장 (Anthropic SDK RCE / Tool poisoning 통계)
+
+### ✅ 본 회차 진행
+
+- 슬롯1: EchoLeak · GitHub Copilot CVE · KISA 안내서 두 가지
+- 슬롯5: Vector DB 노출 통계 · Second-order injection (RAG → 후속 시스템 톤)
+
+→ 적용 결과는 `class/slide_update_todo.md` 와 `ws02_instructor_guide.md` 참조
+
+---
+
 ## 1. 슬롯1 (NIS·KISA) — 사고 사례 강화 🔥 최우선
 
 ### 추가할 사례 (도입부 임팩트용)

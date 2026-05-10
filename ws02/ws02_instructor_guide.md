@@ -68,15 +68,16 @@
 | 마무리 | 10분 | 슬롯2 (OWASP) 와 연결 |
 
 ### 강사 포인트
-- **EchoLeak (2025 후반)** 을 강력한 도입 사례로: Microsoft 365 Copilot 의 **zero-click prompt injection** — 이메일만 받아도 OneDrive · SharePoint · Teams 데이터 유출. *"사용자가 클릭 한 번 안 해도 AI 가 공격자 도구가 됐다"*
-- **GitHub Copilot CVE-2025-53773 (CVSS 9.3)** — 프롬프트 인젝션으로 RCE, 수백만 개발자 영향
-- **Cursor IDE CVE-2025-54135 / 54136** — MCP 신뢰 우회로 임의 명령 실행
+- **EchoLeak (2025 후반)** 을 강력한 도입 사례로: Microsoft 365 Copilot 의 **zero-click prompt injection** — 이메일만 받아도 OneDrive · SharePoint · Teams 데이터 유출. *"사용자가 클릭 한 번 안 해도 LLM 응답 처리만으로 공격이 일어난다"*
+- **GitHub Copilot CVE-2025-53773 (CVSS 9.3)** — 프롬프트 인젝션으로 RCE, 수백만 개발자 영향. AI 코딩 도구의 자동 승인 모드가 악용
 - NIS T코드는 4 레이어 (입력 / 학습데이터 / 운영·인프라 / 공급망) 로 묶어서 외우기 쉽게
 - **KISA 안내서 두 가지** 모두 강조:
   - **AI 보안 안내서 (2026.03 수정판)** — Security for AI (외부 공격으로부터 AI 보호)
   - **생성형 AI 개인정보 처리 안내서 (2025.08, 신규)** — Privacy in AI (AI 가 만드는 위험으로부터 사람 보호, 4단계 수명주기)
 
 > 📎 자세한 사고 흐름 + KISA 안내서 비교: [`ws02_incident_briefs.md`](ws02_incident_briefs.md)
+>
+> 💡 **강의 범위**: 본 워크숍은 **단일 LLM / RAG 보안** 중심. Agentic AI (도구 호출, 멀티 에이전트, MCP) 는 다음 회차 주제로 분리.
 
 ### 시간 조정
 - 시간 부족 시: T코드 일부 사례 슬라이드 빠르게 (T05·T11 등 운영 위협)
@@ -96,13 +97,12 @@
 
 ### 강사 포인트
 - LLM01 프롬프트 인젝션 — **GitHub Copilot CVE-2025-53773 (CVSS 9.3)** 사례
-- LLM07 시스템 프롬프트 유출 / LLM08 Vector & Embedding Weakness 는 슬롯5 Lab 2 와 연결
-- **OWASP Top 10 for Agentic Applications (2026 신규)** 1장 — Agent Hijacking · Multi-Modal Injection · Memory Persistence Attacks 도입
-- **MCP (Model Context Protocol) 보안 위기** 한 줄 강조:
-  - Anthropic SDK 의 STDIO RCE — **Python · TypeScript · Java · Rust** 모든 언어 SDK 영향
-  - 공개 MCP 서버 7,000개 중 **36.7% SSRF**, **43% 1개 이상 취약점**
-  - Tool poisoning 84% 성공률 (auto-approval 시)
-  - → "에이전트 / 도구 호출 시대의 새 공격면"
+- LLM06 Excessive Agency — Copilot 자동 승인 모드 사례와 연결
+- LLM07 시스템 프롬프트 유출 / LLM08 Vector & Embedding Weakness — 슬롯5 Lab 2 와 연결
+- LLM02 Sensitive Information Disclosure — EchoLeak 같은 zero-click 사례
+
+> 💡 **강의 범위 안내**: OWASP 는 2026년부터 **Agentic Applications Top 10 (ASI01–10)** 을 별도 프레임워크로 발표.
+> 본 워크숍은 **단일 LLM Top 10 (LLM01–10)** 만 다룸. 멀티 에이전트·MCP·도구 호출 위협은 별도 회차.
 
 ### 시간 조정
 - 시간 부족 시: 각 LLM 항목 1줄씩만, 매핑 표 강조
@@ -204,8 +204,9 @@
   - Swagger 문서까지 노출 → 공격자가 스키마·쿼리 알고 직접 공격
 - 2B (환각) 가 가장 임팩트 — 모델이 그럴싸한 가짜 조문 생성하는 모습
 - 2C 오염 문서 시나리오 + **신규 2C-3 Second-order injection 셀**:
-  - **ServiceNow AI 비서 사례 (2025 후반)** — 저권한 에이전트가 오염 문서 통해 고권한 에이전트에게 요청 위임 → 권한 검사 우회
-  - 응답 안에 `[ESCALATE: ...]` 같은 토큰이 끼어들어가는 모습 시연
+  - 1단계 (RAG 인젝션) 만으로는 부족 — 문제는 **응답이 후속 시스템 입력으로 들어갈 때**
+  - 응답 안에 `[ESCALATE: ...]` 같은 토큰이 끼어들어가 다음 시스템(워크플로우/스크립트)이 명령으로 해석
+  - → "출력 검증 (Output Sanitization)" 의 중요성
 - 2D Jina 데모는 **API 호출 0회** — 브라우저만으로
 
 ### 자주 발생하는 이슈
