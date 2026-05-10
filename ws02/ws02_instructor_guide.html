@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="theme-color" content="#0a0e2a" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f1f3f8" media="(prefers-color-scheme: light)" />
+  <title>ws02 강사 가이드</title>
+  <style>
+    /* ── 다크 모드 자동 (침대 친화) ── */
+    :root {
+      color-scheme: light dark;
+      --bg:        #f1f3f8;
+      --surface:   #ffffff;
+      --surface-2: #fafbff;
+      --text:      #0f172a;
+      --text-soft: #475569;
+      --border:    #cbd5e1;
+      --accent:    #1E2761;
+      --accent-2:  #334175;
+      --accent-lt: #C7D2FE;
+      --code-bg:   #1e293b;
+      --code-fg:   #e2e8f0;
+
+      --slot-1: #2563eb;
+      --slot-2: #2563eb;
+      --slot-3: #7c3aed;
+      --slot-4: #0891b2;
+      --slot-5: #ea580c;
+      --warn:   #dc2626;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:        #0a0e2a;
+        --surface:   #111848;
+        --surface-2: #182056;
+        --text:      #f1f5f9;
+        --text-soft: #94a3b8;
+        --border:    #2a3580;
+        --accent:    #c7d2fe;
+        --accent-2:  #a5b4fc;
+        --accent-lt: #1e2761;
+        --code-bg:   #050816;
+        --code-fg:   #c7d2fe;
+
+        --slot-1: #60a5fa;
+        --slot-2: #60a5fa;
+        --slot-3: #a78bfa;
+        --slot-4: #22d3ee;
+        --slot-5: #fb923c;
+        --warn:   #f87171;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Apple SD Gothic Neo', -apple-system, BlinkMacSystemFont,
+                   'Noto Sans KR', 'Segoe UI', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-text-size-adjust: 100%;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    @media (max-width: 768px) {
+      body { font-size: 17px; line-height: 1.75; }
+    }
+
+    .progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--slot-1), var(--slot-3), var(--slot-5));
+      z-index: 100;
+      transition: width 0.1s ease-out;
+    }
+
+    header {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 28px 18px 16px;
+      text-align: center;
+    }
+    header .badge {
+      display: inline-block;
+      background: var(--accent-lt);
+      color: var(--accent);
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 14px;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    @media (prefers-color-scheme: dark) {
+      header .badge { background: var(--surface); color: var(--accent); }
+    }
+    header h1 {
+      font-size: 28px;
+      letter-spacing: -.02em;
+      margin-bottom: 6px;
+    }
+    header p {
+      color: var(--text-soft);
+      font-size: 14px;
+    }
+
+    nav.quickjump {
+      max-width: 760px;
+      margin: 0 auto 8px;
+      padding: 0 18px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    nav.quickjump::-webkit-scrollbar { display: none; }
+    nav.quickjump a {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-soft);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: transform .15s, color .15s;
+    }
+    nav.quickjump a:hover, nav.quickjump a:active {
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+    nav.quickjump a.s1, nav.quickjump a.s2 { border-left: 3px solid var(--slot-1); }
+    nav.quickjump a.s3 { border-left: 3px solid var(--slot-3); }
+    nav.quickjump a.s4 { border-left: 3px solid var(--slot-4); }
+    nav.quickjump a.s5 { border-left: 3px solid var(--slot-5); }
+    nav.quickjump a.warn { border-left: 3px solid var(--warn); }
+
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 12px 18px 80px;
+    }
+
+    section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin: 16px 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,.04);
+    }
+    @media (prefers-color-scheme: dark) {
+      section { box-shadow: none; }
+    }
+
+    section.slot {
+      border-left: 6px solid var(--accent);
+      padding-left: 18px;
+    }
+    section.slot.s1, section.slot.s2 { border-left-color: var(--slot-1); }
+    section.slot.s3 { border-left-color: var(--slot-3); }
+    section.slot.s4 { border-left-color: var(--slot-4); }
+    section.slot.s5 { border-left-color: var(--slot-5); }
+    section.warn { border-left: 6px solid var(--warn); }
+
+    section h2 {
+      font-size: 22px;
+      letter-spacing: -.01em;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    section h2 .slot-time {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-soft);
+      background: var(--bg);
+      padding: 3px 10px;
+      border-radius: 8px;
+    }
+    section h2 .slot-min {
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 8px;
+      color: white;
+    }
+    section.slot.s1 h2 .slot-min, section.slot.s2 h2 .slot-min { background: var(--slot-1); }
+    section.slot.s3 h2 .slot-min { background: var(--slot-3); }
+    section.slot.s4 h2 .slot-min { background: var(--slot-4); }
+    section.slot.s5 h2 .slot-min { background: var(--slot-5); }
+    section.warn h2 .slot-min { background: var(--warn); }
+
+    section .lead {
+      color: var(--text-soft);
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    section h3 {
+      font-size: 16px;
+      margin: 18px 0 8px;
+      color: var(--accent);
+    }
+    @media (prefers-color-scheme: dark) {
+      section h3 { color: var(--accent-2); }
+    }
+    section h4 {
+      font-size: 14px;
+      margin: 12px 0 6px;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0;
+      font-size: 14px;
+    }
+    th, td {
+      border-bottom: 1px solid var(--border);
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: var(--bg);
+      font-weight: 700;
+      color: var(--text);
+      font-size: 13px;
+    }
+    td:first-child { font-weight: 600; color: var(--text); }
+    @media (max-width: 480px) {
+      table { font-size: 13px; }
+      th, td { padding: 6px 6px; }
+    }
+
+    code {
+      font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+      font-size: 13px;
+      background: var(--bg);
+      padding: 1px 6px;
+      border-radius: 4px;
+      color: var(--accent);
+    }
+    @media (prefers-color-scheme: dark) {
+      code { background: var(--code-bg); color: var(--code-fg); }
+    }
+    pre {
+      background: var(--code-bg);
+      color: var(--code-fg);
+      padding: 14px 16px;
+      border-radius: 10px;
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.55;
+      margin: 8px 0;
+    }
+    pre code { background: none; padding: 0; color: var(--code-fg); }
+
+    blockquote {
+      border-left: 3px solid var(--accent-2);
+      background: var(--surface-2);
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+      margin: 8px 0;
+      color: var(--text-soft);
+      font-size: 14px;
+    }
+
+    ul, ol { padding-left: 22px; margin: 8px 0; }
+    li { margin: 4px 0; }
+    li strong { color: var(--text); }
+
+    .checklist { list-style: none; padding: 0; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 12px;
+      margin: 6px 0;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      user-select: none;
+      transition: all .15s;
+    }
+    .checklist li:active { transform: scale(.99); }
+    .checklist li.done {
+      background: var(--bg);
+      opacity: .55;
+      text-decoration: line-through;
+    }
+    .checklist li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      border: 2px solid var(--border);
+      border-radius: 5px;
+      margin-top: 2px;
+      background: var(--surface);
+      transition: all .15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      line-height: 1;
+      font-weight: 800;
+      color: white;
+    }
+    .checklist li.done::before {
+      background: var(--slot-4);
+      border-color: var(--slot-4);
+      content: '✓';
+    }
+
+    .callout {
+      border-left: 4px solid var(--slot-5);
+      background: var(--surface-2);
+      padding: 12px 14px;
+      border-radius: 0 8px 8px 0;
+      margin: 12px 0;
+      font-size: 14px;
+    }
+    .callout.tip { border-left-color: var(--slot-4); }
+    .callout.warn { border-left-color: var(--warn); }
+    .callout strong { color: var(--text); }
+
+    .timeline {
+      margin: 16px 0;
+      padding: 16px 0;
+      border-left: 2px solid var(--border);
+      margin-left: 12px;
+    }
+    .timeline-item {
+      position: relative;
+      padding: 6px 0 6px 18px;
+      font-size: 14px;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -7px; top: 12px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--surface);
+    }
+    .timeline-item.s1::before, .timeline-item.s2::before { background: var(--slot-1); }
+    .timeline-item.s3::before { background: var(--slot-3); }
+    .timeline-item.s4::before { background: var(--slot-4); }
+    .timeline-item.s5::before { background: var(--slot-5); }
+    .timeline-item .time {
+      font-weight: 700;
+      color: var(--text);
+      font-family: 'SF Mono', Menlo, monospace;
+      margin-right: 10px;
+    }
+    .timeline-item .label { color: var(--text-soft); }
+
+    details {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin: 8px 0;
+    }
+    details summary {
+      cursor: pointer;
+      font-weight: 600;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    details summary::after {
+      content: '▾';
+      transition: transform .2s;
+      color: var(--text-soft);
+    }
+    details[open] summary::after { transform: rotate(180deg); }
+    details summary::-webkit-details-marker { display: none; }
+    details > *:not(summary) { margin-top: 10px; }
+
+    footer {
+      max-width: 760px;
+      margin: 40px auto 60px;
+      padding: 0 18px;
+      text-align: center;
+      color: var(--text-soft);
+      font-size: 13px;
+    }
+    footer .quote {
+      font-size: 16px;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    @media print {
+      body { background: white; color: black; font-size: 10pt; }
+      .progress-bar, nav.quickjump { display: none; }
+      header, main { max-width: none; }
+      section {
+        page-break-inside: avoid;
+        background: white !important;
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+      }
+      details > *:not(summary) { display: block !important; }
+      details summary::after { display: none; }
+      a { text-decoration: none; color: black; }
+    }
+
+    .text-soft { color: var(--text-soft); font-size: 14px; }
+    strong em {
+      font-style: normal;
+      font-weight: 800;
+      color: var(--accent);
+      background: var(--accent-lt);
+      padding: 0 4px;
+      border-radius: 3px;
+    }
+    @media (prefers-color-scheme: dark) {
+      strong em { background: var(--surface); color: var(--accent); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<header>
+  <span class="badge">강사 가이드 · 2026 ws02</span>
+  <h1>ws02 강사 가이드</h1>
+  <p>2026 생성형 AI 보안취약점 분석 교육 · 2회차 · 수강생 약 15~20명</p>
+  <p style="margin-top:4px;font-size:12px;opacity:.7">작성 2026-05-10</p>
+</header>
+
+<nav class="quickjump" aria-label="빠른 점프">
+  <a href="#schedule">📅 시간표</a>
+  <a href="#checklist">✅ 시작 전</a>
+  <a href="#slot1" class="s1">슬롯1</a>
+  <a href="#slot2" class="s2">슬롯2</a>
+  <a href="#slot3" class="s3">슬롯3</a>
+  <a href="#slot4" class="s4">Lab 1</a>
+  <a href="#slot5" class="s5">Lab 2</a>
+  <a href="#emergency" class="warn">🚨 비상</a>
+</nav>
+
+<main>
+
+<section id="schedule">
+  <h2>📅 하루 시간표 <span class="slot-time">실전 버전</span></h2>
+  <p class="lead">사전 설치/설정 완료 가정 → 슬롯3·4·5 실습 시간 충분히 확보</p>
+
+  <div class="timeline">
+    <div class="timeline-item s1"><span class="time">09:00 – 10:00</span><span class="label">슬롯1 · NIS·KISA 강의 (60분)</span></div>
+    <div class="timeline-item"><span class="time">10:00 – 10:10</span><span class="label">휴식</span></div>
+    <div class="timeline-item s2"><span class="time">10:10 – 11:10</span><span class="label">슬롯2 · OWASP LLM Top 10 (60분)</span></div>
+    <div class="timeline-item"><span class="time">11:10 – 12:50</span><span class="label">점심 (100분)</span></div>
+    <div class="timeline-item s3"><span class="time">12:50 – 14:20</span><span class="label">슬롯3 · 방어 + 🎮 Gandalf (90분)</span></div>
+    <div class="timeline-item"><span class="time">14:20 – 14:30</span><span class="label">휴식</span></div>
+    <div class="timeline-item s4"><span class="time">14:30 – 16:00</span><span class="label">슬롯4 · 🔍 Lab 1 — Garak (90분)</span></div>
+    <div class="timeline-item"><span class="time">16:00 – 16:10</span><span class="label">휴식</span></div>
+    <div class="timeline-item s5"><span class="time">16:10 – 17:30</span><span class="label">슬롯5 · 🗄️ Lab 2 — RAG/VectorDB (80분)</span></div>
+    <div class="timeline-item"><span class="time" style="color:var(--warn)">17:30</span><span class="label"><strong>종료</strong></span></div>
+  </div>
+
+  <div class="callout">
+    <strong>목표</strong> · 17:30 이내 종료. 시간 빠듯할 시 각 슬롯 끝 "시간 조정" 참고.
+  </div>
+</section>
+
+<section id="checklist">
+  <h2>✅ 강의 시작 전 체크리스트</h2>
+  <p class="lead">탭 클릭으로 체크 (저장됨)</p>
+
+  <ul class="checklist" id="cklist">
+    <li><span><strong>DEEPSEEK_API_KEY 사전 배포 확인</strong><br><span class="text-soft">수강생 인당 1키 또는 강사 공유 키 결정 / 여분 2~3개 준비</span></span></li>
+    <li><span><strong>화면 공유 / 프로젝터 연결 확인</strong></span></li>
+    <li><span><strong>슬라이드 5개 미리 열기</strong><br><code>slot1·2·3 + Lab 1 garak + Lab 2 RAG</code></span></li>
+    <li><span><strong>Colab 노트북 미리 열기</strong><br><code>nb01_garak.ipynb</code>, <code>nb02_rag_vectordb.ipynb</code></span></li>
+    <li><span><strong>gandalf.lakera.ai 브라우저 탭 열어두기</strong><br><span class="text-soft">Lv 1 화면 띄워둠</span></span></li>
+    <li><span><strong>DeepSeek API 연결 테스트 완료</strong><br><span class="text-soft">chat.completions 1번 호출 확인</span></span></li>
+    <li><span><strong>백업 핫스팟 준비</strong><br><span class="text-soft">기관 네트워크 차단 대비</span></span></li>
+    <li><span><strong>(옵션) cyberchef.io</strong><br><span class="text-soft">base64 응답 디코딩 시연용</span></span></li>
+  </ul>
+</section>
+
+<section class="slot s1" id="slot1">
+  <h2>슬롯1 — LLM 보안 개요 + 위협 분류 <span class="slot-min">60분</span></h2>
+  <p class="lead">NIS T01–T15 · KISA 안내서 · 사고 사례</p>
+
+  <h3>시간 배분</h3>
+  <table>
+    <thead><tr><th>구간</th><th>분</th><th>내용</th></tr></thead>
+    <tbody>
+      <tr><td>도입</td><td>5</td><td>사고 사례 — 삼성·딥시크·<strong><em>EchoLeak</em></strong></td></tr>
+      <tr><td>위협 분류</td><td>25</td><td>NIS T01–T15 · 4 레이어</td></tr>
+      <tr><td>KISA 안내서</td><td>20</td><td>3대 역할 (개발자·제공자·이용자)</td></tr>
+      <tr><td>마무리</td><td>10</td><td>슬롯2 OWASP 와 연결</td></tr>
+    </tbody>
+  </table>
+
+  <h3>강사 포인트</h3>
+  <ul>
+    <li><strong>EchoLeak (2025 후반)</strong> 강력한 도입 사례
+      <ul>
+        <li>Microsoft 365 Copilot 의 <strong><em>zero-click prompt injection</em></strong></li>
+        <li>이메일만 받아도 OneDrive · SharePoint · Teams 데이터 유출</li>
+        <li>"사용자가 클릭 한 번 안 해도 AI 가 공격자 도구가 됐다"</li>
+      </ul>
+    </li>
+    <li><strong>GitHub Copilot CVE-2025-53773 (CVSS 9.3)</strong> — 프롬프트 인젝션 → RCE, 수백만 개발자 영향</li>
+    <li><strong>Cursor IDE CVE-2025-54135 / 54136</strong> — MCP 신뢰 우회로 임의 명령 실행</li>
+    <li>NIS T코드는 <strong>4 레이어 (입력 / 학습데이터 / 운영·인프라 / 공급망)</strong> 로 묶기</li>
+    <li>KISA 안내서는 <strong>2026.03 수정판</strong> 기준 + 생성형 AI 개인정보 처리 안내서 (2025.08) 신규</li>
+  </ul>
+
+  <div class="callout warn">
+    <strong>시간 조정</strong> · 부족 시 운영 위협 (T05·T11) 사례 빠르게 / 남으면 사고 사례 1~2개 추가 토론
+  </div>
+</section>
+
+<section class="slot s2" id="slot2">
+  <h2>슬롯2 — OWASP LLM Top 10 <span class="slot-min">60분</span></h2>
+  <p class="lead">LLM01–10 · NIS×OWASP 매핑 · Agentic Top 10 (2026 신규)</p>
+
+  <h3>시간 배분</h3>
+  <table>
+    <thead><tr><th>구간</th><th>분</th><th>내용</th></tr></thead>
+    <tbody>
+      <tr><td>도입</td><td>5</td><td>OWASP 가 왜 필요 (NIS 와 다른 시각)</td></tr>
+      <tr><td>Part 1</td><td>25</td><td>LLM01–LLM10 핵심 요약</td></tr>
+      <tr><td>Part 2</td><td>20</td><td>NIS × OWASP 매핑 + Agentic Top 10 (2026)</td></tr>
+      <tr><td>마무리</td><td>10</td><td>슬롯3 으로 전환 (이론 → 운영 레이어)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>강사 포인트</h3>
+  <ul>
+    <li>LLM01 — <strong>GitHub Copilot CVE-2025-53773</strong> 사례</li>
+    <li>LLM07 시스템 프롬프트 유출 / LLM08 Vector & Embedding Weakness — 슬롯5 Lab 2 와 연결</li>
+    <li><strong><em>OWASP Top 10 for Agentic Applications (2026 신규)</em></strong> 1장
+      <ul>
+        <li>Agent Hijacking · Multi-Modal Injection · Memory Persistence Attacks</li>
+      </ul>
+    </li>
+    <li><strong>MCP 보안 위기</strong> 한 줄
+      <ul>
+        <li>Anthropic SDK 의 STDIO RCE — Python · TS · Java · Rust 모든 언어</li>
+        <li>공개 MCP 서버 7,000개 중 <strong>36.7% SSRF · 43% 1개 이상 취약</strong></li>
+        <li>Tool poisoning <strong>84% 성공률</strong> (auto-approval 시)</li>
+        <li>→ "에이전트 / 도구 호출 시대의 새 공격면"</li>
+      </ul>
+    </li>
+  </ul>
+
+  <div class="callout warn">
+    <strong>시간 조정</strong> · 부족 시 LLM 항목 1줄씩 + 매핑 표 강조 / 남으면 ServiceNow second-order 같은 advanced 사례
+  </div>
+</section>
+
+<section class="slot s3" id="slot3">
+  <h2>슬롯3 — 방어 + 🎮 Gandalf <span class="slot-min">90분</span></h2>
+  <p class="lead">옵션 B · 강의 40분 + Gandalf 50분</p>
+
+  <h3>시간 배분</h3>
+  <table>
+    <thead><tr><th>구간</th><th>분</th><th>내용</th></tr></thead>
+    <tbody>
+      <tr><td>오프닝</td><td>5</td><td>흐름 안내</td></tr>
+      <tr><td><strong>PART 1</strong></td><td>20</td><td>방어 4 레이어 (입력/출력/권한/모니터링)</td></tr>
+      <tr><td><strong>PART 2</strong></td><td>15</td><td>수동 한계 + Garak 소개 + vs promptfoo</td></tr>
+      <tr><td><strong>PART 3</strong></td><td>50</td><td>🎮 Gandalf 챌린지</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Gandalf 50분 세부</h3>
+  <table>
+    <thead><tr><th>시간</th><th>내용</th></tr></thead>
+    <tbody>
+      <tr><td>0:40–0:48</td><td>Lv 1 강사 시범 (5분) → 학생 따라</td></tr>
+      <tr><td>0:48–0:58</td><td>Lv 2~3 학생 자율</td></tr>
+      <tr><td>0:58–1:08</td><td><strong>Lv 4 라이브 데모 5가지 ★</strong></td></tr>
+      <tr><td>1:08–1:23</td><td>Lv 4~5+ 자율 도전</td></tr>
+      <tr><td>1:23–1:30</td><td>마무리 토론 + 슬롯4·5 예고</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Lv 4 라이브 데모 5가지 ★</h3>
+  <ol>
+    <li><strong>역할극</strong> (관리자/디버거 사칭)</li>
+    <li><strong>언어 전환</strong> (영어/일본어) <span class="text-soft">— 비코더 친화</span></li>
+    <li><strong>거꾸로 / 한 글자씩</strong> (Spell backwards) <span class="text-soft">— 비코더 친화</span></li>
+    <li><strong>간접 추출</strong> (첫 글자, 길이)</li>
+    <li><strong>Agent / DAN</strong> ("규칙 없는 AI" 페르소나)</li>
+  </ol>
+
+  <h3>강사 포인트</h3>
+  <ul>
+    <li>슬롯2 OWASP 매핑이 <strong>위협별</strong> 이라면, 여기는 <strong>운영 레이어별</strong> — 시각의 차이</li>
+    <li>T12 (모니터링) 이 핵심 — 빠지면 나머지 무용지물</li>
+    <li>Gandalf 마무리에서 <em>"이걸 자동화하면 = Lab 1 Garak"</em></li>
+  </ul>
+
+  <div class="callout warn">
+    <strong>시간 조정</strong> · 부족 시 PART 2 도구 압축 / 남으면 부록 — Gandalf Adventures, Gandalf the White, "내 회사 챗봇" 토론
+  </div>
+</section>
+
+<section class="slot s4" id="slot4">
+  <h2>슬롯4 — 🔍 Lab 1 · Garak 자동화 <span class="slot-min">90분</span></h2>
+  <p class="lead">NVIDIA 오픈소스 LLM 취약점 스캐너 · LiteLLM 어댑터로 DeepSeek 호출</p>
+
+  <h3>시간 배분</h3>
+  <table>
+    <thead><tr><th>구간</th><th>분</th><th>내용</th></tr></thead>
+    <tbody>
+      <tr><td>Step 0</td><td>10</td><td>환경 설정 (DEEPSEEK_API_KEY, garak 설치)</td></tr>
+      <tr><td>Step A</td><td>25</td><td>첫 스캔 — 2종 프로브 (dan + lmrc)</td></tr>
+      <tr><td>Step B</td><td>20</td><td>JSONL 결과 분석 + 디텍터별 취약률 시각화</td></tr>
+      <tr><td>Step C</td><td>25</td><td>한국어 커스텀 프로브 작성</td></tr>
+      <tr><td>Step D</td><td>10</td><td>AI for Security 다층 방어 개념</td></tr>
+    </tbody>
+  </table>
+
+  <h3>강사 포인트</h3>
+  <ul>
+    <li>Step A 스캔 시간 (2~4분) 동안 다른 학생 진도 확인</li>
+    <li><strong>Garak v0.14.1 (2026.04)</strong> 신규 기능
+      <ul>
+        <li><strong>redesigned HTML 리포트</strong> — 시각화 자동</li>
+        <li>JSON config 지원</li>
+        <li><strong>37+ 프로브 모듈</strong>, DAN 변종 15+ (v6.0~11.0, STAN, DUDE, AntiDAN, Developer Mode)</li>
+      </ul>
+    </li>
+    <li>DAN 변종 — Gandalf Lv 4 패턴이 자동화된 형태</li>
+    <li>LiteLLM 어댑터로 <strong>Gemini · OpenAI · DeepSeek · 로컬 모델</strong> 모두 동일 — 실무 확장 강조</li>
+  </ul>
+
+  <h3>자주 발생하는 이슈</h3>
+  <table>
+    <thead><tr><th>증상</th><th>대응</th></tr></thead>
+    <tbody>
+      <tr><td><code>API key not valid</code></td><td>키 오타 확인, 여분 키</td></tr>
+      <tr><td><code>quota exceeded</code></td><td>5명씩 순차 / 여분 키</td></tr>
+      <tr><td>garak 설치 느림</td><td>Colab 런타임 <code>T4 GPU</code> 사용</td></tr>
+      <tr><td><code>RateLimitError</code></td><td>DeepSeek RPM 한도 — 잠시 대기</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout warn">
+    <strong>시간 조정</strong> · 부족 시 Step C 작성은 시간 남는 학생만 / 남으면 다른 프로브 (encoding, latentinjection)
+  </div>
+</section>
+
+<section class="slot s5" id="slot5">
+  <h2>슬롯5 — 🗄️ Lab 2 · VectorDB · RAG <span class="slot-min">80분</span></h2>
+  <p class="lead">FAISS + 헌법 PDF · LLM07 / LLM09 / LLM01 · Jina 역추출</p>
+
+  <h3>시간 배분</h3>
+  <table>
+    <thead><tr><th>구간</th><th>분</th><th>내용</th></tr></thead>
+    <tbody>
+      <tr><td>Step 0</td><td>10</td><td>환경 + RAG 인프라 (FAISS + 헌법 PDF)</td></tr>
+      <tr><td>2A</td><td>12</td><td>시스템 프롬프트 유출 (LLM07)</td></tr>
+      <tr><td>2B</td><td>18</td><td>환각 — RAG 출처 인용 (LLM09)</td></tr>
+      <tr><td>2C</td><td>18</td><td>RAG 인젝션 — 오염 문서 (LLM01)</td></tr>
+      <tr><td>2D</td><td>12</td><td>임베딩 역추출 — Jina 데모 (T01·T06)</td></tr>
+      <tr><td>마무리</td><td>10</td><td>종합 정리 + 다음 회차 예고</td></tr>
+    </tbody>
+  </table>
+
+  <h3>강사 포인트</h3>
+  <ul>
+    <li>Step 0 RAG 인프라 구축 <strong>2~4분 소요</strong> — 이때 강사 라이브 토크
+      <ul>
+        <li><strong><em>Vector DB 노출 통계 — 3,000+ 공개 인증 없는 서버</em></strong> (Milvus · Weaviate · Chroma)</li>
+        <li>Swagger 문서까지 노출 → 공격자가 스키마·쿼리 알고 직접 공격</li>
+      </ul>
+    </li>
+    <li>2B (환각) 가 가장 임팩트 — 그럴싸한 가짜 조문 생성</li>
+    <li>2C 오염 문서 + <strong>신규 2C-3 Second-order injection 셀</strong>
+      <ul>
+        <li><strong>ServiceNow AI 비서 (2025 후반)</strong> — 저권한 → 고권한 에이전트 권한 검사 우회</li>
+        <li>응답 내 <code>[ESCALATE: ...]</code> 토큰 시연</li>
+      </ul>
+    </li>
+    <li>2D Jina 데모는 <strong>API 호출 0회</strong> — 브라우저만으로</li>
+  </ul>
+
+  <h3>자주 발생하는 이슈</h3>
+  <table>
+    <thead><tr><th>증상</th><th>대응</th></tr></thead>
+    <tbody>
+      <tr><td>FAISS 인덱스 4분 초과</td><td>강사가 미리 만든 인덱스 zip (Drive 링크)</td></tr>
+      <tr><td>헌법 PDF 다운로드 실패</td><td>강사 노트북에서 직접 첨부 — Colab 업로드</td></tr>
+      <tr><td>임베딩 모델 다운 느림</td><td><code>BAAI/bge-m3</code> ~570MB — 첫 실행만 느림</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout warn">
+    <strong>시간 조정</strong> · 부족 시 2D Jina 강사가 시연만 / 남으면 자유 공격 시간 (자기만의 오염 문서)
+  </div>
+</section>
+
+<section class="warn" id="emergency">
+  <h2>🚨 비상 대응 시나리오</h2>
+  <p class="lead">진행 중 발생 가능한 상황 → 즉시 대응 (탭하여 펼치기)</p>
+
+  <details>
+    <summary><code>API key not valid</code> 오류</summary>
+    <p>키 오타 확인 → 안 되면 여분 키 배포</p>
+  </details>
+
+  <details>
+    <summary><code>quota exceeded</code> / RateLimit</summary>
+    <p>여분 키 / 동시 실행 분산 (5명씩 순차)</p>
+  </details>
+
+  <details>
+    <summary><code>gandalf.lakera.ai</code> 차단</summary>
+    <p>개인 핫스팟 안내 → 백업 강사 핫스팟</p>
+  </details>
+
+  <details>
+    <summary>garak 설치 timeout</summary>
+    <p>Colab 런타임 재시작 → 다시</p>
+  </details>
+
+  <details>
+    <summary>FAISS 인덱스 4분 초과</summary>
+    <p>미리 만든 인덱스 zip 배포 (Google Drive)</p>
+  </details>
+
+  <details>
+    <summary>시간이 너무 남음</summary>
+    <p>Gandalf Adventures / Gandalf the White / 자유 토론 ("내 회사 챗봇이라면")</p>
+  </details>
+
+  <details>
+    <summary>17:30 넘길 것 같음</summary>
+    <p>Lab 2 Step 2D 시연만 / Step C 종합표 생략 → 깔끔히 마무리</p>
+  </details>
+
+  <details>
+    <summary>강사 노트북 다운</summary>
+    <p>학생 한 명에게 화면 공유 부탁 — Colab 은 클라우드라 어차피 강사 머신과 무관</p>
+  </details>
+</section>
+
+<section>
+  <h2>📊 전체 시간 흐름 요약</h2>
+  <pre>09:00 ─┬─ 슬롯1 (60) — NIS·KISA
+10:00 ─┤  휴식
+10:10 ─┼─ 슬롯2 (60) — OWASP LLM Top 10
+11:10 ─┤  점심
+12:50 ─┼─ 슬롯3 (90) — 방어 + Gandalf
+14:20 ─┤  휴식
+14:30 ─┼─ 슬롯4 (90) — Lab 1 Garak
+16:00 ─┤  휴식
+16:10 ─┼─ 슬롯5 (80) — Lab 2 RAG/VectorDB
+17:30 ─┴─ 종료</pre>
+</section>
+
+</main>
+
+<footer>
+  <div class="quote">"보안이 없으면, AI 도 없습니다."</div>
+  <p>참고: <a href="curriculum_update_2026.md" style="color:var(--accent-2)">curriculum_update_2026.md</a> · <a href="slide_update_todo.md" style="color:var(--accent-2)">slide_update_todo.md</a></p>
+</footer>
+
+<script>
+  const bar = document.getElementById('progressBar');
+  function updateBar() {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    bar.style.width = pct + '%';
+  }
+  document.addEventListener('scroll', updateBar, {passive: true});
+  updateBar();
+
+  // 인터랙티브 체크리스트 + localStorage
+  const KEY = 'ws02_instructor_checklist_v1';
+  const list = document.getElementById('cklist');
+  const saved = JSON.parse(localStorage.getItem(KEY) || '[]');
+  list.querySelectorAll('li').forEach((li, i) => {
+    if (saved.includes(i)) li.classList.add('done');
+    li.addEventListener('click', () => {
+      li.classList.toggle('done');
+      const done = [...list.querySelectorAll('li')].map((x, idx) => x.classList.contains('done') ? idx : -1).filter(x => x >= 0);
+      localStorage.setItem(KEY, JSON.stringify(done));
+    });
+  });
+</script>
+
+</body>
+</html>
