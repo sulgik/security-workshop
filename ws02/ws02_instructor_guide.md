@@ -66,9 +66,11 @@
 | 마무리 | 10분 | 슬롯2 (OWASP) 와 연결 |
 
 ### 강사 포인트
-- **EchoLeak (2025 후반)** 을 강력한 도입 사례로: 이메일만 받아도 OneDrive 데이터 유출 — *"AI 가 공격자 도구가 됐다"*
+- **EchoLeak (2025 후반)** 을 강력한 도입 사례로: Microsoft 365 Copilot 의 **zero-click prompt injection** — 이메일만 받아도 OneDrive · SharePoint · Teams 데이터 유출. *"사용자가 클릭 한 번 안 해도 AI 가 공격자 도구가 됐다"*
+- **GitHub Copilot CVE-2025-53773 (CVSS 9.3)** — 프롬프트 인젝션으로 RCE, 수백만 개발자 영향
+- **Cursor IDE CVE-2025-54135 / 54136** — MCP 신뢰 우회로 임의 명령 실행
 - NIS T코드는 4 레이어 (입력 / 학습데이터 / 운영·인프라 / 공급망) 로 묶어서 외우기 쉽게
-- KISA 안내서는 **2026.03 수정판** 기준으로 인용
+- KISA 안내서는 **2026.03 수정판** 기준으로 인용 + KISA 생성형 AI 개인정보 처리 안내서 (2025.08) 신규 발간 언급
 
 ### 시간 조정
 - 시간 부족 시: T코드 일부 사례 슬라이드 빠르게 (T05·T11 등 운영 위협)
@@ -89,7 +91,12 @@
 ### 강사 포인트
 - LLM01 프롬프트 인젝션 — **GitHub Copilot CVE-2025-53773 (CVSS 9.3)** 사례
 - LLM07 시스템 프롬프트 유출 / LLM08 Vector & Embedding Weakness 는 슬롯5 Lab 2 와 연결
-- **OWASP Top 10 for Agentic Applications (2026 신규)** 1장 — Agent Hijacking·Multi-Modal Injection·Memory Persistence 도입
+- **OWASP Top 10 for Agentic Applications (2026 신규)** 1장 — Agent Hijacking · Multi-Modal Injection · Memory Persistence Attacks 도입
+- **MCP (Model Context Protocol) 보안 위기** 한 줄 강조:
+  - Anthropic SDK 의 STDIO RCE — **Python · TypeScript · Java · Rust** 모든 언어 SDK 영향
+  - 공개 MCP 서버 7,000개 중 **36.7% SSRF**, **43% 1개 이상 취약점**
+  - Tool poisoning 84% 성공률 (auto-approval 시)
+  - → "에이전트 / 도구 호출 시대의 새 공격면"
 
 ### 시간 조정
 - 시간 부족 시: 각 LLM 항목 1줄씩만, 매핑 표 강조
@@ -152,9 +159,12 @@
 
 ### 강사 포인트
 - Step A 스캔 시간 (약 2~4분) 동안 다른 학생 진도 확인
-- v0.14.1 (2026.04) **HTML 리포트 자동 생성** — 강조
-- DAN 변종 다양성 (v6.0~11.0, STAN, DUDE, AntiDAN, Developer Mode) — Gandalf Lv 4 의 패턴이 자동화된 형태
-- LiteLLM 어댑터로 **Gemini · OpenAI · 로컬 모델** 모두 동일 방식 — 실무 확장 강조
+- **Garak v0.14.1 (2026.04 출시)** 신규 기능:
+  - **redesigned HTML 리포트** — 시각화 자동
+  - JSON config 지원
+  - **37+ 프로브 모듈**, DAN 변종 15+ (v6.0~11.0, STAN, DUDE, AntiDAN, Developer Mode)
+- DAN 변종 다양성 — Gandalf Lv 4 의 패턴이 자동화된 형태
+- LiteLLM 어댑터로 **Gemini · OpenAI · DeepSeek · 로컬 모델** 모두 동일 방식 — 실무 확장 강조
 
 ### 자주 발생하는 이슈
 | 증상 | 대응 |
@@ -183,9 +193,13 @@
 | 마무리 | 10분 | 종합 정리 + 다음 회차 예고 |
 
 ### 강사 포인트
-- Step 0 RAG 인프라 구축은 **2~4분 소요** — 이때 강사 라이브 토크 (Vector DB 노출 통계: 3,000+ 공개 인증 없는 서버)
+- Step 0 RAG 인프라 구축은 **2~4분 소요** — 이때 강사 라이브 토크:
+  - **Vector DB 노출 통계: 3,000+ 공개 인증 없는 서버** (Milvus · Weaviate · Chroma)
+  - Swagger 문서까지 노출 → 공격자가 스키마·쿼리 알고 직접 공격
 - 2B (환각) 가 가장 임팩트 — 모델이 그럴싸한 가짜 조문 생성하는 모습
-- 2C 오염 문서 시나리오 → **ServiceNow second-order prompt injection (2025 후반)** 사례 언급
+- 2C 오염 문서 시나리오 + **신규 2C-3 Second-order injection 셀**:
+  - **ServiceNow AI 비서 사례 (2025 후반)** — 저권한 에이전트가 오염 문서 통해 고권한 에이전트에게 요청 위임 → 권한 검사 우회
+  - 응답 안에 `[ESCALATE: ...]` 같은 토큰이 끼어들어가는 모습 시연
 - 2D Jina 데모는 **API 호출 0회** — 브라우저만으로
 
 ### 자주 발생하는 이슈
