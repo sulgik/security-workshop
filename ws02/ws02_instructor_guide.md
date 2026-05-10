@@ -30,7 +30,7 @@
 ## 강의 시작 전 체크리스트
 
 ```
-□ DEEPSEEK_API_KEY 사전 배포 확인
+□ GEMINI_API_KEY 사전 배포 확인
    수강생 인당 1키 또는 강사 공유 키 — 배포 방법 결정
    여분 키 2~3개 준비 (분실/오타 대비)
 
@@ -48,7 +48,7 @@
    nb02_rag_vectordb.ipynb
 
 □ gandalf.lakera.ai 브라우저 탭 열어두기 (Lv 1 화면)
-□ DeepSeek API 연결 테스트 완료 확인 (chat.completions 1번 호출)
+□ Gemini API 연결 테스트 완료 확인 (chat.completions 1번 호출)
 □ 백업 핫스팟 준비 (기관 네트워크 차단 대비)
 □ (옵션) cyberchef.io — base64 응답 디코딩 시연용
 ```
@@ -151,7 +151,7 @@
 ### 시간 배분
 | 구간 | 시간 | 내용 |
 |---|---|---|
-| Step 0 | 10분 | 환경 설정 (DEEPSEEK_API_KEY, garak 설치) |
+| Step 0 | 10분 | 환경 설정 (GEMINI_API_KEY, garak 설치) |
 | Step A | 25분 | 첫 스캔 — 2종 프로브 (dan + lmrc) |
 | Step B | 20분 | JSONL 결과 분석 + 디텍터별 취약률 시각화 |
 | Step C | 25분 | 한국어 커스텀 프로브 작성 |
@@ -164,7 +164,7 @@
   - JSON config 지원
   - **37+ 프로브 모듈**, DAN 변종 15+ (v6.0~11.0, STAN, DUDE, AntiDAN, Developer Mode)
 - DAN 변종 다양성 — Gandalf Lv 4 의 패턴이 자동화된 형태
-- LiteLLM 어댑터로 **Gemini · OpenAI · DeepSeek · 로컬 모델** 모두 동일 방식 — 실무 확장 강조
+- LiteLLM 어댑터로 **OpenAI · Gemini · Gemini · 로컬 모델** 모두 동일 방식 — 실무 확장 강조
 
 ### 자주 발생하는 이슈
 | 증상 | 대응 |
@@ -172,7 +172,7 @@
 | `API key not valid` | 키 오타 확인, 여분 키 |
 | `quota exceeded` | 동시 실행 분산 (5명씩 순차), 여분 키 |
 | garak 설치 느림 | Colab 런타임 `T4 GPU` 사용 시 빠름 |
-| `RateLimitError` | DeepSeek RPM 한도 — 잠시 대기 |
+| `RateLimitError` | Gemini RPM 한도 — 잠시 대기 |
 
 ### 시간 조정
 - 시간 부족 시: Step C 커스텀 프로브 제출 표만 (작성은 시간 남는 학생만)

@@ -495,12 +495,12 @@
   <p class="lead">탭 클릭으로 체크 (저장됨)</p>
 
   <ul class="checklist" id="cklist">
-    <li><span><strong>DEEPSEEK_API_KEY 사전 배포 확인</strong><br><span class="text-soft">수강생 인당 1키 또는 강사 공유 키 결정 / 여분 2~3개 준비</span></span></li>
+    <li><span><strong>GEMINI_API_KEY 사전 배포 확인</strong><br><span class="text-soft">수강생 인당 1키 또는 강사 공유 키 결정 / 여분 2~3개 준비</span></span></li>
     <li><span><strong>화면 공유 / 프로젝터 연결 확인</strong></span></li>
     <li><span><strong>슬라이드 5개 미리 열기</strong><br><code>slot1·2·3 + Lab 1 garak + Lab 2 RAG</code></span></li>
     <li><span><strong>Colab 노트북 미리 열기</strong><br><code>nb01_garak.ipynb</code>, <code>nb02_rag_vectordb.ipynb</code></span></li>
     <li><span><strong>gandalf.lakera.ai 브라우저 탭 열어두기</strong><br><span class="text-soft">Lv 1 화면 띄워둠</span></span></li>
-    <li><span><strong>DeepSeek API 연결 테스트 완료</strong><br><span class="text-soft">chat.completions 1번 호출 확인</span></span></li>
+    <li><span><strong>Gemini API 연결 테스트 완료</strong><br><span class="text-soft">chat.completions 1번 호출 확인</span></span></li>
     <li><span><strong>백업 핫스팟 준비</strong><br><span class="text-soft">기관 네트워크 차단 대비</span></span></li>
     <li><span><strong>(옵션) cyberchef.io</strong><br><span class="text-soft">base64 응답 디코딩 시연용</span></span></li>
   </ul>
@@ -630,13 +630,13 @@
 
 <section class="slot s4" id="slot4">
   <h2>슬롯4 — 🔍 Lab 1 · Garak 자동화 <span class="slot-min">90분</span></h2>
-  <p class="lead">NVIDIA 오픈소스 LLM 취약점 스캐너 · LiteLLM 어댑터로 DeepSeek 호출</p>
+  <p class="lead">NVIDIA 오픈소스 LLM 취약점 스캐너 · LiteLLM 어댑터로 Gemini 호출</p>
 
   <h3>시간 배분</h3>
   <table>
     <thead><tr><th>구간</th><th>분</th><th>내용</th></tr></thead>
     <tbody>
-      <tr><td>Step 0</td><td>10</td><td>환경 설정 (DEEPSEEK_API_KEY, garak 설치)</td></tr>
+      <tr><td>Step 0</td><td>10</td><td>환경 설정 (GEMINI_API_KEY, garak 설치)</td></tr>
       <tr><td>Step A</td><td>25</td><td>첫 스캔 — 2종 프로브 (dan + lmrc)</td></tr>
       <tr><td>Step B</td><td>20</td><td>JSONL 결과 분석 + 디텍터별 취약률 시각화</td></tr>
       <tr><td>Step C</td><td>25</td><td>한국어 커스텀 프로브 작성</td></tr>
@@ -655,7 +655,7 @@
       </ul>
     </li>
     <li>DAN 변종 — Gandalf Lv 4 패턴이 자동화된 형태</li>
-    <li>LiteLLM 어댑터로 <strong>Gemini · OpenAI · DeepSeek · 로컬 모델</strong> 모두 동일 — 실무 확장 강조</li>
+    <li>LiteLLM 어댑터로 <strong>OpenAI · Gemini · Gemini · 로컬 모델</strong> 모두 동일 — 실무 확장 강조</li>
   </ul>
 
   <h3>자주 발생하는 이슈</h3>
@@ -665,7 +665,7 @@
       <tr><td><code>API key not valid</code></td><td>키 오타 확인, 여분 키</td></tr>
       <tr><td><code>quota exceeded</code></td><td>5명씩 순차 / 여분 키</td></tr>
       <tr><td>garak 설치 느림</td><td>Colab 런타임 <code>T4 GPU</code> 사용</td></tr>
-      <tr><td><code>RateLimitError</code></td><td>DeepSeek RPM 한도 — 잠시 대기</td></tr>
+      <tr><td><code>RateLimitError</code></td><td>Gemini RPM 한도 — 잠시 대기</td></tr>
     </tbody>
   </table>
 
