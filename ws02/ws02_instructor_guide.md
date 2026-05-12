@@ -5,7 +5,7 @@
 >
 > 본 문서: 슬롯 1~5 전체 강사 진행 가이드 (시간 배분 · 강사 포인트 · 시간 조정 · 비상 대응)
 >
-> 📎 참조: [`ws02_incident_briefs.md`](ws02_incident_briefs.md) — 사고 사례 (EchoLeak / Copilot CVE / Cursor CVE / ServiceNow) + KISA 안내서 두 가지 한 페이지 요약
+> 📎 참조: [`references/`](references/README.md) — 수강생 참고자료 (📖 보안 용어 / 🚨 사고 사례 / 🔬 심화 개념 / 📜 정책)
 
 ---
 
@@ -75,7 +75,7 @@
   - **AI 보안 안내서 (2026.03 수정판)** — Security for AI (외부 공격으로부터 AI 보호)
   - **생성형 AI 개인정보 처리 안내서 (2025.08, 신규)** — Privacy in AI (AI 가 만드는 위험으로부터 사람 보호, 4단계 수명주기)
 
-> 📎 자세한 사고 흐름 + KISA 안내서 비교: [`ws02_incident_briefs.md`](ws02_incident_briefs.md)
+> 📎 자세한 사고 흐름 + KISA 안내서 비교: [`references/incidents.md`](references/incidents.md) · [`references/policy.md`](references/policy.md)
 >
 > 💡 **강의 범위**: 본 워크숍은 **단일 LLM / RAG 보안** 중심. Agentic AI (도구 호출, 멀티 에이전트, MCP) 는 다음 회차 주제로 분리.
 
@@ -148,7 +148,7 @@
 
 ### 시간 조정
 - 시간 부족 시: PART 2 도구 소개 압축 (Garak 자세한 부분은 Lab 1 으로)
-- 시간 남으면: 부록 — Gandalf Adventures, Gandalf the White, "내 회사 챗봇이라면" 토론
+- 시간 남으면: 부록 — Lv 8 (Ultimate) 추가 도전 / 다른 패턴 재시도 / "내 회사 챗봇이라면" 토론
 
 ---
 
@@ -170,7 +170,7 @@
   - JSON config 지원
   - **37+ 프로브 모듈**, DAN 변종 15+ (v6.0~11.0, STAN, DUDE, AntiDAN, Developer Mode)
 - DAN 변종 다양성 — Gandalf Lv 4 의 패턴이 자동화된 형태
-- LiteLLM 어댑터로 **OpenAI · Gemini · Gemini · 로컬 모델** 모두 동일 방식 — 실무 확장 강조
+- LiteLLM 어댑터로 **OpenAI · Gemini · 로컬 모델** 모두 동일 방식 — 실무 확장 강조
 
 ### 자주 발생하는 이슈
 | 증상 | 대응 |
@@ -232,7 +232,7 @@
 | `gandalf.lakera.ai` 차단 | 개인 핫스팟 안내 / 백업 강사 핫스팟 |
 | garak 설치 timeout | Colab 런타임 재시작 → 다시 |
 | FAISS 인덱스 4분 초과 | 미리 만든 인덱스 zip 배포 (Drive) |
-| 시간이 너무 남음 | Gandalf Adventures / Gandalf the White / 자유 토론 ("내 회사 챗봇") |
+| 시간이 너무 남음 | Lv 8 (Ultimate) 추가 도전 / 다른 패턴 재시도 / 자유 토론 ("내 회사 챗봇") |
 | 17:30 넘길 것 같음 | Lab 2 Step 2D 시연만 / Step C 종합표 생략 |
 | 강사 노트북 다운 | 학생 한 명에게 화면 공유 부탁 (Colab 은 어차피 클라우드) |
 

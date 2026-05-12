@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="theme-color" content="#0a0e2a" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f1f3f8" media="(prefers-color-scheme: light)" />
+  <title>ws02 참고자료</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="progress-bar index" id="progressBar"></div>
+
+<header>
+  <span class="badge">ws02 참고자료</span>
+  <h1>참고자료 — 카테고리별 정리</h1>
+  <p>강의에 등장하는 보안 용어 · 사고 사례 · 심화 개념 · 정책 자료</p>
+  <p style="margin-top:4px;font-size:12px;opacity:.7">최종 갱신 2026-05-11</p>
+</header>
+
+<nav class="crumbs">
+  <a href="../ws02_instructor_guide.html">← 강사 가이드</a>
+</nav>
+
+<main>
+
+<div class="cat-grid">
+
+  <a class="cat-card term" href="terms.html">
+    <div class="icon">📖</div>
+    <h3>보안 용어</h3>
+    <p>강의·실습에 등장하는 핵심 용어를 한 줄 정의 + 표 + 예시로</p>
+    <div class="items">
+      <strong>RCE</strong> · <strong>CVSS</strong> · <strong>Prompt Injection</strong> · <strong>Zero-click</strong>
+    </div>
+    <div class="arrow">바로가기 →</div>
+  </a>
+
+  <a class="cat-card threat" href="incidents.html">
+    <div class="icon">🚨</div>
+    <h3>실제 사고 사례</h3>
+    <p>2025–2026 LLM 보안 사고 — 공격 흐름 · 영향 · 핵심 교훈</p>
+    <div class="items">
+      <strong>EchoLeak</strong> · <strong>GitHub Copilot RCE</strong> (CVE-2025-53773)
+    </div>
+    <div class="arrow">바로가기 →</div>
+  </a>
+
+  <a class="cat-card warn" href="concepts.html">
+    <div class="icon">🔬</div>
+    <h3>심화 개념</h3>
+    <p>기본 위협을 넘어서는 진화형 공격 패턴과 방어 전략</p>
+    <div class="items">
+      <strong>Second-order Prompt Injection</strong> (RAG → 후속 시스템)
+    </div>
+    <div class="arrow">바로가기 →</div>
+  </a>
+
+  <a class="cat-card policy" href="policy.html">
+    <div class="icon">📜</div>
+    <h3>정책 자료</h3>
+    <p>국내 AI 보안·개인정보 정책 안내서 (KISA / 개인정보보호위원회)</p>
+    <div class="items">
+      <strong>AI 보안 안내서</strong> (2026.03) · <strong>생성형 AI 개인정보 처리 안내서</strong> (2025.08)
+    </div>
+    <div class="arrow">바로가기 →</div>
+  </a>
+
+</div>
+
+<div class="growing-note">
+  <strong>📝 이 자료는 계속 확장됩니다</strong><br>
+  강의에 새로운 용어·사고 사례·개념이 등장할 때마다 해당 카테고리에 추가됩니다.<br>
+  최근 추가: <strong>RCE</strong> · <strong>CVSS</strong> · <strong>Prompt Injection</strong> · <strong>Zero-click</strong> (2026-05-11)
+</div>
+
+<section style="margin-top: 28px">
+  <h3 class="title" style="color: var(--text)">📚 이 참고자료의 사용법</h3>
+  <ul style="margin-top: 8px">
+    <li><strong>강의 중</strong> — 모르는 용어가 나오면 <a href="terms.html">📖 보안 용어</a> 페이지에서 검색</li>
+    <li><strong>강의 후</strong> — 실제 사고 흐름을 다시 보고 싶다면 <a href="incidents.html">🚨 사고 사례</a></li>
+    <li><strong>심화 학습</strong> — 강의에서 한 줄로 지나간 개념의 자세한 설명은 <a href="concepts.html">🔬 심화 개념</a></li>
+    <li><strong>실무 적용</strong> — 회사·기관 정책 수립 시 <a href="policy.html">📜 정책 자료</a> 참조</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <div class="quote">"보안이 없으면, AI 도 없습니다."</div>
+  <p style="margin-top:10px">참고자료 · 강의 중 등장한 용어/사례/개념/정책을 카테고리별로</p>
+</footer>
+
+<script>
+  const bar = document.getElementById('progressBar');
+  function updateBar() {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    bar.style.width = pct + '%';
+  }
+  document.addEventListener('scroll', updateBar, {passive: true});
+  updateBar();
+</script>
+
+</body>
+</html>

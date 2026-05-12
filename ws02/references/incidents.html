@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="theme-color" content="#0a0e2a" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f1f3f8" media="(prefers-color-scheme: light)" />
+  <title>🚨 사고 사례 — ws02 참고자료</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="progress-bar threat" id="progressBar"></div>
+
+<header>
+  <span class="badge threat">🚨 실제 사고 사례</span>
+  <h1>실제 사고 사례</h1>
+  <p>2025–2026 LLM 보안 사고 — 공격 흐름 · 영향 · 핵심 교훈</p>
+</header>
+
+<nav class="crumbs">
+  <a href="index.html">← 참고자료 인덱스</a>
+  <span class="sep">·</span>
+  <a href="../ws02_instructor_guide.html">강사 가이드</a>
+</nav>
+
+<nav class="quickjump" aria-label="빠른 점프">
+  <a href="#echoleak"    class="threat">EchoLeak (M365 Copilot)</a>
+  <a href="#copilot-rce" class="threat">CVE-2025-53773 (Copilot)</a>
+</nav>
+
+<main>
+
+<section class="threat" id="echoleak">
+  <h3 class="title"><span class="tag">EchoLeak</span> Microsoft 365 Copilot Zero-click</h3>
+  <div class="one-liner">
+    공격자가 이메일 1통 보내면 — 사용자가 클릭 한 번 안 해도 회사 데이터 유출
+  </div>
+
+  <dl class="meta">
+    <dt>시기</dt><dd>2025년 후반 발견</dd>
+    <dt>대상</dt><dd>Microsoft 365 Copilot</dd>
+    <dt>신규 클래스</dt><dd><a href="terms.html#zero-click">Zero-click</a> <a href="terms.html#prompt-injection">prompt injection</a></dd>
+    <dt>영향</dt><dd>OneDrive · SharePoint · Teams 데이터 추출</dd>
+  </dl>
+
+  <h4>공격 흐름</h4>
+  <pre class="flow">① 공격자가 이메일 발송 (히든 지시 포함)
+② Copilot 이 사용자 메일함 처리 시 그 이메일도 읽음
+③ 이메일 내 숨은 지시가 Copilot 시스템 프롬프트와 섞임
+④ Copilot 이 "사용자를 위한 도움" 으로 위장된
+   데이터 검색·전송 실행
+⑤ 외부로 데이터 유출 — 사용자 클릭 0회</pre>
+
+  <div class="insight">
+    <strong>주요 통찰</strong>
+    <ul>
+      <li><strong>사용자 행동 의존 없는 공격</strong> — 기존 프롬프트 인젝션은 사용자가 입력해야 했음</li>
+      <li>AI 비서가 자동으로 "도움" 을 주려는 행동이 공격 표면이 됨</li>
+      <li>LLM 시대의 <strong>"수동적 침투"</strong> — 메일 받기만 해도 위험</li>
+    </ul>
+  </div>
+
+  <div class="keytake">
+    🔑 <strong>핵심 교훈</strong>: AI 비서 = 신뢰의 자동화. 그 자동화 자체가 새로운 공격면.
+  </div>
+</section>
+
+<section class="threat" id="copilot-rce">
+  <h3 class="title"><span class="tag">CVE-2025-53773</span> GitHub Copilot RCE (<a href="terms.html#cvss">CVSS</a> 9.3)</h3>
+  <div class="one-liner">
+    AI 가 자기 손으로 자기 사용자 승인을 끄고 <a href="terms.html#rce">RCE</a> 까지
+  </div>
+
+  <dl class="meta">
+    <dt>보고</dt><dd>2025.06.29 (Embrace The Red)</dd>
+    <dt>패치</dt><dd>2025.08 Patch Tuesday</dd>
+    <dt>영향</dt><dd>Visual Studio Code · GitHub Copilot 사용 모든 OS</dd>
+    <dt>CVSS</dt><dd><strong style="color:var(--threat)">9.3 (Critical)</strong></dd>
+  </dl>
+
+  <h4>공격 흐름</h4>
+  <pre class="flow">① 공격자가 악성 프롬프트 숨김
+   - 소스 파일 / 웹 / GitHub 이슈
+   - invisible Unicode 로 사람 눈에 안 보이게도 가능
+
+② Copilot 이 그 콘텐츠를 처리할 때 인젝션 인식
+
+③ Copilot 이 .vscode/settings.json 에 한 줄 추가:
+   "chat.tools.autoApprove": true     ← "YOLO mode" 활성화
+
+④ 모든 셸 명령이 사용자 승인 없이 실행
+   → RCE (Windows · macOS · Linux 다 영향)
+
+⑤ 웜화: 다른 Git 프로젝트에 같은 인젝션 commit/push
+   → 다른 개발자 머신 감염 → 봇넷 ("ZombAI")</pre>
+
+  <div class="insight">
+    <strong>주요 통찰</strong>
+    <ul>
+      <li><strong>"자동 승인" 모드 자체가 공격 표면</strong></li>
+      <li>AI 가 <strong>자기 권한을 자기 명령으로 올림</strong> — Privilege escalation by AI itself</li>
+      <li>Invisible Unicode — 사람 코드 리뷰로는 못 잡음</li>
+      <li>보고 → 패치까지 <strong>약 6주</strong> (Microsoft 신속 대응)</li>
+    </ul>
+  </div>
+
+  <div class="keytake">
+    🔑 <strong>핵심 교훈</strong>: AI IDE = 권한이 많은 도우미. 권한 최소화 + 매번 명시적 승인 — 슬롯3 방어 4 레이어 ③ 의 중요성.
+  </div>
+</section>
+
+<div class="category" style="margin-top:32px">
+  <h2 style="color:var(--text-soft)">📚 출처</h2>
+  <div class="line" style="background:var(--border)"></div>
+</div>
+
+<section>
+  <h4>EchoLeak</h4>
+  <div class="sources">
+    <ul>
+      <li><a href="https://sombrainc.com/blog/llm-security-risks-2026" target="_blank" rel="noopener">LLM Security Risks in 2026 — Sombra</a></li>
+      <li><a href="https://www.reco.ai/blog/ai-and-cloud-security-breaches-2025" target="_blank" rel="noopener">AI & Cloud Security Breaches: 2025 Year in Review — Reco AI</a></li>
+    </ul>
+  </div>
+
+  <h4>GitHub Copilot CVE-2025-53773</h4>
+  <div class="sources">
+    <ul>
+      <li><a href="https://embracethered.com/blog/posts/2025/github-copilot-remote-code-execution-via-prompt-injection/" target="_blank" rel="noopener">GitHub Copilot RCE via Prompt Injection — Embrace The Red</a></li>
+      <li><a href="https://nvd.nist.gov/vuln/detail/CVE-2025-53773" target="_blank" rel="noopener">CVE-2025-53773 Detail — NVD</a></li>
+      <li><a href="https://www.wiz.io/vulnerability-database/cve/cve-2025-53773" target="_blank" rel="noopener">CVE-2025-53773 Impact & Mitigation — Wiz</a></li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>🚨 실제 사고 사례 · <a href="index.html" style="color:var(--accent-2)">← 참고자료 인덱스</a></p>
+</footer>
+
+<script>
+  const bar = document.getElementById('progressBar');
+  function updateBar() {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    bar.style.width = pct + '%';
+  }
+  document.addEventListener('scroll', updateBar, {passive: true});
+  updateBar();
+</script>
+
+</body>
+</html>
