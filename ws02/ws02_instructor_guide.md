@@ -5,7 +5,7 @@
 >
 > 본 문서: 슬롯 1~5 전체 강사 진행 가이드 (시간 배분 · 강사 포인트 · 시간 조정 · 비상 대응)
 >
-> 📎 참조: [`references/`](references/README.md) — 수강생 참고자료 (📖 보안 용어 / 🚨 사고 사례 / 🔬 심화 개념 / 📜 정책)
+> 📎 참조: [`references/`](references/README.md) — 수강생 보안 용어집 (30선)
 
 ---
 
@@ -75,7 +75,7 @@
   - **AI 보안 안내서 (2026.03 수정판)** — Security for AI (외부 공격으로부터 AI 보호)
   - **생성형 AI 개인정보 처리 안내서 (2025.08, 신규)** — Privacy in AI (AI 가 만드는 위험으로부터 사람 보호, 4단계 수명주기)
 
-> 📎 자세한 사고 흐름 + KISA 안내서 비교: [`references/incidents.md`](references/incidents.md) · [`references/policy.md`](references/policy.md)
+> 📎 KISA 안내서 비교 + 핵심 용어: [`references/README.md`](references/README.md)
 >
 > 💡 **강의 범위**: 본 워크숍은 **단일 LLM / RAG 보안** 중심. Agentic AI (도구 호출, 멀티 에이전트, MCP) 는 다음 회차 주제로 분리.
 
