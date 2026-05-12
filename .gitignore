@@ -3,6 +3,9 @@ handout/
 archives/
 초안/
 
+# 강사 비공개 답안 (학생 배포 금지)
+worksheet_answers.*
+
 # Dependencies
 node_modules/
 package-lock.json
