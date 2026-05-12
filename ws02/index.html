@@ -500,20 +500,27 @@
       </div>
     </div>
 
-    <!-- ── Lab 1 — Garak ── -->
+    <!-- ── Lab 1 — Manual + Garak ── -->
     <div class="card">
       <div class="card-header">
         <div class="card-label">Lab 1</div>
-        <h2>🔍 Garak 자동화 보안 스캐닝</h2>
-        <p>NVIDIA 오픈소스 LLM 취약점 스캐너 · 프로브 자동 실행 · JSONL 결과 분석</p>
+        <h2>🔍 수동 공격 → Garak 자동화 스캐닝</h2>
+        <p>nb00 으로 직접 공격해보고 → nb01 Garak 로 자동 스캔 · 두 노트북 연계 실습</p>
       </div>
       <div class="card-body">
         <div class="meta-row">
           <div class="meta-chip">Colab</div>
-          <div class="meta-chip">Garak</div>
+          <div class="meta-chip">수동 · Garak</div>
           <div class="meta-chip">LiteLLM 어댑터</div>
         </div>
         <ul class="activity-list">
+          <li>
+            <span class="act-badge">W</span>
+            <div class="act-info">
+              <strong>워밍업 (nb00) — 수동 프롬프트 공격</strong>
+              <span>시스템 프롬프트 유출 · 역할극 · 인코딩 우회 — Gandalf 패턴을 코드로 재현</span>
+            </div>
+          </li>
           <li>
             <span class="act-badge">A</span>
             <div class="act-info">
@@ -548,12 +555,20 @@
             📋 실습 슬라이드
           </a>
         </div>
-        <a class="btn"
-           href="https://colab.research.google.com/github/sulgik/security-workshop/blob/main/ws02/class/nb01_garak.ipynb"
-           target="_blank" rel="noopener">
-          <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Colab" />
-          nb01 열기
-        </a>
+        <div style="display:flex; gap:8px">
+          <a class="btn"
+             href="https://colab.research.google.com/github/sulgik/security-workshop/blob/main/ws02/class/nb00_manual_attacks.ipynb"
+             target="_blank" rel="noopener" style="flex:1">
+            <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Colab" />
+            nb00 워밍업
+          </a>
+          <a class="btn"
+             href="https://colab.research.google.com/github/sulgik/security-workshop/blob/main/ws02/class/nb01_garak.ipynb"
+             target="_blank" rel="noopener" style="flex:1">
+            <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Colab" />
+            nb01 Garak
+          </a>
+        </div>
       </div>
     </div>
 
@@ -619,34 +634,13 @@
 <!-- ────────────────── EXTRA ────────────────── -->
 <div class="section" style="padding-top:0">
   <div class="section-title">📚 수강생 참고자료</div>
-  <div class="section-sub">강의에 등장한 보안 용어 · 사고 사례 · 심화 개념 · 정책 자료 — 카테고리별로 정리</div>
+  <div class="section-sub">강의·실습에 등장한 핵심 보안 용어 30선 — 한 페이지 용어집</div>
   <div class="slides-grid" style="margin-bottom:32px">
-    <a class="slide-card" href="references/terms.html" style="border-left:4px solid #0891b2">
+    <a class="slide-card" href="references/" style="border-left:4px solid #0891b2">
       <div class="slide-icon" style="background:#cffafe; color:#0891b2">📖</div>
       <div>
-        <strong>보안 용어</strong>
-        <span>RCE · CVSS · Prompt Injection · Zero-click</span>
-      </div>
-    </a>
-    <a class="slide-card" href="references/incidents.html" style="border-left:4px solid #dc2626">
-      <div class="slide-icon" style="background:#fee2e2; color:#dc2626">🚨</div>
-      <div>
-        <strong>실제 사고 사례</strong>
-        <span>EchoLeak · GitHub Copilot RCE</span>
-      </div>
-    </a>
-    <a class="slide-card" href="references/concepts.html" style="border-left:4px solid #ea580c">
-      <div class="slide-icon" style="background:#ffedd5; color:#ea580c">🔬</div>
-      <div>
-        <strong>심화 개념</strong>
-        <span>Second-order Prompt Injection</span>
-      </div>
-    </a>
-    <a class="slide-card" href="references/policy.html" style="border-left:4px solid #2563eb">
-      <div class="slide-icon" style="background:#dbeafe; color:#2563eb">📜</div>
-      <div>
-        <strong>정책 자료</strong>
-        <span>KISA AI 보안 · 개인정보 처리 안내서</span>
+        <strong>보안 용어집 (30선)</strong>
+        <span>핵심 약어 · LLM 기본 · 공격 기법 · 방어·도구 · 프레임워크</span>
       </div>
     </a>
   </div>

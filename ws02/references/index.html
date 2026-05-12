@@ -5,91 +5,419 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <meta name="theme-color" content="#0a0e2a" media="(prefers-color-scheme: dark)" />
   <meta name="theme-color" content="#f1f3f8" media="(prefers-color-scheme: light)" />
-  <title>ws02 참고자료</title>
+  <title>📖 ws02 보안 용어집 — 수강생 참고자료</title>
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* 컴팩트 용어집 전용 추가 스타일 */
+    .glossary { display: grid; gap: 10px; margin: 12px 0; }
+    .term-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--term);
+      border-radius: 10px;
+      padding: 12px 16px;
+    }
+    .term-card .name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--term);
+      margin-bottom: 2px;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .term-card .name .ko {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-soft);
+    }
+    .term-card .one-line {
+      font-size: 14px;
+      color: var(--text);
+      margin: 2px 0;
+      line-height: 1.6;
+    }
+    .term-card .detail {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-top: 4px;
+      line-height: 1.65;
+    }
+    .term-card .detail code {
+      background: var(--bg);
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+    @media (prefers-color-scheme: dark) {
+      .term-card .detail code { background: var(--code-bg); color: var(--code-fg); }
+    }
+    .term-card .xref {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-top: 4px;
+    }
+    .group-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 28px 0 6px;
+    }
+    .group-head h2 {
+      font-size: 17px;
+      letter-spacing: -.01em;
+      color: var(--term);
+    }
+    .group-head .count {
+      font-size: 11px;
+      color: var(--text-soft);
+      background: var(--surface-2);
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+    .group-head .line {
+      flex: 1;
+      height: 2px;
+      background: var(--term);
+      border-radius: 2px;
+      opacity: .5;
+    }
+  </style>
 </head>
 <body>
 
-<div class="progress-bar index" id="progressBar"></div>
+<div class="progress-bar term" id="progressBar" style="background: var(--term)"></div>
 
 <header>
   <span class="badge">ws02 참고자료</span>
-  <h1>참고자료 — 카테고리별 정리</h1>
-  <p>강의에 등장하는 보안 용어 · 사고 사례 · 심화 개념 · 정책 자료</p>
-  <p style="margin-top:4px;font-size:12px;opacity:.7">최종 갱신 2026-05-11</p>
+  <h1>📖 보안 용어집</h1>
+  <p>강의·실습에 등장하는 핵심 용어 30선</p>
+  <p style="margin-top:4px;font-size:12px;opacity:.7">최종 갱신 2026-05-12</p>
 </header>
 
 <nav class="crumbs">
   <a href="../ws02_instructor_guide.html">← 강사 가이드</a>
 </nav>
 
+<nav class="quickjump" aria-label="빠른 점프">
+  <a href="#g-core"   class="term">📌 핵심 약어</a>
+  <a href="#g-llm"    class="term">🤖 LLM 기본</a>
+  <a href="#g-attack" class="term">💥 공격 기법</a>
+  <a href="#g-defense" class="term">🛡️ 방어·도구</a>
+  <a href="#g-policy" class="term">📋 프레임워크</a>
+</nav>
+
 <main>
 
-<div class="cat-grid">
+<!-- ═══════════ 핵심 약어 ═══════════ -->
+<div class="group-head" id="g-core">
+  <h2>📌 핵심 약어</h2>
+  <span class="count">4</span>
+  <span class="line"></span>
+</div>
+<div class="glossary">
 
-  <a class="cat-card term" href="terms.html">
-    <div class="icon">📖</div>
-    <h3>보안 용어</h3>
-    <p>강의·실습에 등장하는 핵심 용어를 한 줄 정의 + 표 + 예시로</p>
-    <div class="items">
-      <strong>RCE</strong> · <strong>CVSS</strong> · <strong>Prompt Injection</strong> · <strong>Zero-click</strong>
+  <div class="term-card" id="rce">
+    <div class="name">RCE <span class="ko">Remote Code Execution · 원격 코드 실행</span></div>
+    <div class="one-line">공격자가 원격에서 피해자 시스템에 임의의 코드/명령을 실행할 수 있는 취약점</div>
+    <div class="detail">
+      CVSS 9.0+ Critical 의 대부분이 RCE. LLM 보안에서 프롬프트 인젝션이 RCE 로 연결되는 순간 — "챗봇 오작동" 이 아닌 "개발자 머신 장악" 으로 격상.
+      관련: <code>LCE</code> 로컬 권한 필요 · <code>SSRF</code> 서버가 임의 URL 요청
     </div>
-    <div class="arrow">바로가기 →</div>
-  </a>
+  </div>
 
-  <a class="cat-card threat" href="incidents.html">
-    <div class="icon">🚨</div>
-    <h3>실제 사고 사례</h3>
-    <p>2025–2026 LLM 보안 사고 — 공격 흐름 · 영향 · 핵심 교훈</p>
-    <div class="items">
-      <strong>EchoLeak</strong> · <strong>GitHub Copilot RCE</strong> (CVE-2025-53773)
+  <div class="term-card" id="cvss">
+    <div class="name">CVSS <span class="ko">Common Vulnerability Scoring System</span></div>
+    <div class="one-line">취약점 심각도를 0.0–10.0 점수로 표준화한 채점 체계 (v3.1 / v4.0)</div>
+    <div class="detail">
+      등급: <code>0.1–3.9</code> Low · <code>4.0–6.9</code> Medium · <code>7.0–8.9</code> High · <code>9.0–10.0</code> Critical.
+      점수 구성: Attack Vector / Complexity / Privileges / User Interaction / CIA Impact.
     </div>
-    <div class="arrow">바로가기 →</div>
-  </a>
+  </div>
 
-  <a class="cat-card warn" href="concepts.html">
-    <div class="icon">🔬</div>
-    <h3>심화 개념</h3>
-    <p>기본 위협을 넘어서는 진화형 공격 패턴과 방어 전략</p>
-    <div class="items">
-      <strong>Second-order Prompt Injection</strong> (RAG → 후속 시스템)
+  <div class="term-card" id="cve">
+    <div class="name">CVE <span class="ko">Common Vulnerabilities and Exposures · 공통 취약점 식별자</span></div>
+    <div class="one-line">공개된 보안 취약점에 부여되는 고유 ID (예: CVE-2025-53773)</div>
+    <div class="detail">
+      MITRE 가 관리, NVD 에서 상세 조회. 형식: <code>CVE-{연도}-{일련번호}</code>.
+      예: GitHub Copilot RCE = <code>CVE-2025-53773</code> (CVSS 9.3).
     </div>
-    <div class="arrow">바로가기 →</div>
-  </a>
+  </div>
 
-  <a class="cat-card policy" href="policy.html">
-    <div class="icon">📜</div>
-    <h3>정책 자료</h3>
-    <p>국내 AI 보안·개인정보 정책 안내서 (KISA / 개인정보보호위원회)</p>
-    <div class="items">
-      <strong>AI 보안 안내서</strong> (2026.03) · <strong>생성형 AI 개인정보 처리 안내서</strong> (2025.08)
+  <div class="term-card" id="ssrf">
+    <div class="name">SSRF <span class="ko">Server-Side Request Forgery · 서버측 요청 위조</span></div>
+    <div class="one-line">공격자가 서버를 속여 내부망/임의 URL 로 요청을 보내게 만드는 공격</div>
+    <div class="detail">
+      LLM 이 외부 URL 을 fetch 하는 도구(웹 검색·이미지 분석) 가 있으면 새 공격 표면. 내부 메타데이터 서버 (AWS IMDS 등) 조회로 자격증명 유출.
     </div>
-    <div class="arrow">바로가기 →</div>
-  </a>
+  </div>
+
+</div>
+
+
+<!-- ═══════════ LLM 기본 ═══════════ -->
+<div class="group-head" id="g-llm">
+  <h2>🤖 LLM 기본</h2>
+  <span class="count">8</span>
+  <span class="line"></span>
+</div>
+<div class="glossary">
+
+  <div class="term-card" id="llm">
+    <div class="name">LLM <span class="ko">Large Language Model · 대형 언어 모델</span></div>
+    <div class="one-line">방대한 텍스트 코퍼스로 사전학습된 Transformer 기반 신경망</div>
+    <div class="detail">
+      GPT-4, Claude, Gemini, Llama 등. 다음 토큰 예측이 본질 — "이해" 가 아닌 통계적 패턴 매칭. 이것이 환각·인젝션의 근원.
+    </div>
+  </div>
+
+  <div class="term-card" id="system-prompt">
+    <div class="name">System Prompt <span class="ko">시스템 프롬프트</span></div>
+    <div class="one-line">LLM 에 미리 주입되는 역할·지시·제약 — 챗봇의 "성격" 과 "규칙"</div>
+    <div class="detail">
+      사용자 입력 앞단에 자동 삽입. <strong>LLM 에게는 사용자 입력과 동등한 토큰</strong> — 공격자가 우회/덮어쓰기 시도. <code>LLM07</code> 시스템 프롬프트 유출.
+    </div>
+  </div>
+
+  <div class="term-card" id="context-window">
+    <div class="name">Context Window <span class="ko">컨텍스트 윈도우</span></div>
+    <div class="one-line">LLM 이 한 번에 처리하는 토큰 범위 (예: 128K, 1M)</div>
+    <div class="detail">
+      이 윈도우 안에는 시스템 프롬프트 / 사용자 입력 / RAG 문서 / 대화 이력이 <strong>구분 없이 한 스트림</strong> 으로 들어감 — 인젝션의 구조적 원인.
+    </div>
+  </div>
+
+  <div class="term-card" id="token">
+    <div class="name">Token <span class="ko">토큰 / Tokenization</span></div>
+    <div class="one-line">텍스트를 LLM 이 처리 가능한 단위(서브워드)로 잘게 나눈 조각</div>
+    <div class="detail">
+      영어 1 단어 ≈ 1.3 토큰 · 한국어 1 글자 ≈ 1.5–3 토큰. 비용·길이 제한·Rate Limit 의 기본 단위.
+    </div>
+  </div>
+
+  <div class="term-card" id="embedding">
+    <div class="name">Embedding <span class="ko">임베딩</span></div>
+    <div class="one-line">텍스트·이미지를 의미를 보존하는 고차원 벡터(예: 768·1024 차원) 로 변환</div>
+    <div class="detail">
+      벡터 간 코사인 유사도 = 의미 유사도. RAG 검색 / 분류 / 클러스터링의 기반. <strong>역추출 공격</strong> 으로 원문 재구성 가능 (Jina 데모).
+    </div>
+  </div>
+
+  <div class="term-card" id="rag">
+    <div class="name">RAG <span class="ko">Retrieval-Augmented Generation · 검색 증강 생성</span></div>
+    <div class="one-line">사용자 질문으로 외부 지식베이스를 검색한 결과를 LLM 컨텍스트에 주입하는 패턴</div>
+    <div class="detail">
+      구조: 질의 → 임베딩 → 벡터DB 검색 → 결과를 프롬프트에 결합 → LLM 응답. 새 공격 표면: 문서 오염 · 임베딩 역추출 · 권한 우회 (<code>LLM08</code>).
+    </div>
+  </div>
+
+  <div class="term-card" id="hallucination">
+    <div class="name">Hallucination <span class="ko">환각</span></div>
+    <div class="one-line">LLM 이 사실이 아닌 내용을 자신있게 생성하는 현상 (<code>LLM09</code>)</div>
+    <div class="detail">
+      "틀렸다는 걸 AI 자신도 모름". 사례: Mata v. Avianca (허위 판례 6건), Air Canada 챗봇 환불 정책 허위 안내. <strong>인간 검증이 유일한 답</strong>.
+    </div>
+  </div>
+
+  <div class="term-card" id="fine-tuning">
+    <div class="name">Fine-tuning / RLHF <span class="ko">미세조정 / 인간 피드백 강화학습</span></div>
+    <div class="one-line">사전학습 모델을 도메인·작업·정렬을 위해 추가 학습하는 단계</div>
+    <div class="detail">
+      <code>SFT</code> Supervised Fine-Tuning · <code>RLHF</code> Reinforcement Learning from Human Feedback · <code>DPO</code> Direct Preference Optimization. 이 단계의 데이터 오염 = <code>T01</code>.
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════ 공격 기법 ═══════════ -->
+<div class="group-head" id="g-attack">
+  <h2>💥 공격 기법</h2>
+  <span class="count">9</span>
+  <span class="line"></span>
+</div>
+<div class="glossary">
+
+  <div class="term-card" id="prompt-injection">
+    <div class="name">Prompt Injection <span class="ko">프롬프트 인젝션</span></div>
+    <div class="one-line">LLM 입력에 악성 지시를 끼워넣어 시스템 프롬프트를 우회·덮어쓰는 공격 (<code>LLM01</code>)</div>
+    <div class="detail">
+      <strong>Direct</strong>: 사용자가 직접 입력 ("이전 지시 무시해…") · <strong>Indirect</strong>: 외부 문서·이메일·웹에 숨김 → LLM 이 처리할 때 발동 (EchoLeak).
+    </div>
+  </div>
+
+  <div class="term-card" id="jailbreak">
+    <div class="name">Jailbreak <span class="ko">탈옥</span></div>
+    <div class="one-line">LLM 의 안전 가드레일을 우회해 금지된 응답을 끌어내는 기법</div>
+    <div class="detail">
+      역할극 ("너는 DAN 이야…") · 가설법 ("만약…") · 인코딩 (base64·ROT13) · 언어 전환 등. Gandalf 챌린지의 핵심 학습 주제.
+    </div>
+  </div>
+
+  <div class="term-card" id="dan">
+    <div class="name">DAN <span class="ko">Do Anything Now</span></div>
+    <div class="one-line">"규칙 없는 AI" 페르소나를 부여해 안전장치를 우회하는 대표적 jailbreak 패턴</div>
+    <div class="detail">
+      변종 15+ 종 (v6.0–11.0, STAN, DUDE, AntiDAN, Developer Mode 등). Garak <code>dan</code> 프로브가 자동 테스트.
+    </div>
+  </div>
+
+  <div class="term-card" id="zero-click">
+    <div class="name">Zero-click <span class="ko">사용자 행동 없는 공격</span></div>
+    <div class="one-line">피해자가 클릭·입력·실행 등 어떤 행동도 하지 않아도 발생하는 공격</div>
+    <div class="detail">
+      교육으로 막을 수 없음 — 시스템 방어 필수. 사례: Pegasus (스파이웨어) · <strong>EchoLeak</strong> (MS 365 Copilot, 2025).
+    </div>
+  </div>
+
+  <div class="term-card" id="data-poisoning">
+    <div class="name">Data Poisoning <span class="ko">데이터 오염</span></div>
+    <div class="one-line">학습 데이터에 의도적으로 악성 샘플을 섞어 모델 행동을 조작 (<code>T01</code>)</div>
+    <div class="detail">
+      사례: Microsoft Tay (2016) — 24시간 만에 혐오 콘텐츠 생성. RAG 에선 벡터DB 에 오염 문서 삽입 (<code>LLM04</code>).
+    </div>
+  </div>
+
+  <div class="term-card" id="backdoor">
+    <div class="name">Model Backdoor <span class="ko">모델 백도어</span></div>
+    <div class="one-line">특정 트리거(단어·패턴) 입력 시에만 악성 동작하는 모델 (<code>T03</code>)</div>
+    <div class="detail">
+      평상시엔 정상 동작 → 트리거에서만 발동. <strong>정기 검사로 탐지 불가</strong>. 공급망 공격 (<code>T14</code>) 과 결합 — Hugging Face 악성 모델 100+ 건.
+    </div>
+  </div>
+
+  <div class="term-card" id="adversarial">
+    <div class="name">Adversarial Example <span class="ko">적대적 예제 / 회피 공격</span></div>
+    <div class="one-line">사람 눈엔 정상이지만 AI 가 잘못 분류하도록 미세 변형한 입력 (<code>T09</code>)</div>
+    <div class="detail">
+      이미지: 픽셀 노이즈로 표지판 오인식. LLM: invisible Unicode·동음이의어·zalgo 텍스트 삽입.
+    </div>
+  </div>
+
+  <div class="term-card" id="embedding-inversion">
+    <div class="name">Embedding Inversion <span class="ko">임베딩 역추출</span></div>
+    <div class="one-line">벡터값에서 원본 텍스트를 재구성 — 암호화 없는 벡터DB 의 치명적 약점</div>
+    <div class="detail">
+      Jina AI 가 공개 데모 운영. RAG 환경에서 벡터DB 유출 시 <strong>저장된 모든 문서가 사실상 평문 노출</strong> 과 동일.
+    </div>
+  </div>
+
+  <div class="term-card" id="second-order">
+    <div class="name">Second-order Injection <span class="ko">2차 인젝션</span></div>
+    <div class="one-line">RAG 응답이 다른 시스템 입력이 될 때 발동하는 진화형 인젝션</div>
+    <div class="detail">
+      흐름: 오염 문서 → RAG 응답에 <code>[CMD: ...]</code> 토큰 포함 → 후속 워크플로우/스크립트가 토큰을 명령으로 해석. <strong>출력도 입력만큼 검증</strong> 이 답.
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════ 방어·도구 ═══════════ -->
+<div class="group-head" id="g-defense">
+  <h2>🛡️ 방어 · 도구</h2>
+  <span class="count">6</span>
+  <span class="line"></span>
+</div>
+<div class="glossary">
+
+  <div class="term-card" id="guardrail">
+    <div class="name">Guardrail <span class="ko">가드레일</span></div>
+    <div class="one-line">LLM 입출력 단에 배치되어 위험한 입력 차단 / 위험한 출력 필터링하는 보호 레이어</div>
+    <div class="detail">
+      입력: 인젝션 패턴·PII·금지 토픽 탐지 · 출력: 민감정보·환각·정책 위반 차단. 슬롯3 방어 4 레이어의 ①·②.
+    </div>
+  </div>
+
+  <div class="term-card" id="red-team">
+    <div class="name">Red Teaming <span class="ko">레드 팀 / 공격적 보안 평가</span></div>
+    <div class="one-line">방어자 입장에서 실제 공격을 시뮬레이션해 시스템 약점을 능동적으로 발견</div>
+    <div class="detail">
+      LLM 에선 자동화 도구로 페이로드 수천 개 생성·실행 — Garak (NVIDIA), promptfoo redteam, Lakera. 슬롯4·5 실습 핵심.
+    </div>
+  </div>
+
+  <div class="term-card" id="rate-limit">
+    <div class="name">Rate Limit <span class="ko">요청 제한</span></div>
+    <div class="one-line">시간당 요청 수·토큰 수를 제한해 남용·DoS·비용 폭주를 방지 (<code>LLM10</code>)</div>
+    <div class="detail">
+      Prompt Flooding · Sponge Attack (GPU 연산 폭주) 대응. 사용자별·IP별·키별 분리 적용.
+    </div>
+  </div>
+
+  <div class="term-card" id="rbac">
+    <div class="name">RBAC <span class="ko">Role-Based Access Control · 역할 기반 접근통제</span></div>
+    <div class="one-line">사용자 역할(개발자·운영자·이용자)에 따라 자원·도구 접근 권한을 분리</div>
+    <div class="detail">
+      LLM 시대 핵심: <strong>Agent 도구 권한 최소화</strong>. CVE-2025-53773 같은 "AI 가 자기 권한 올림" 패턴 차단의 출발점.
+    </div>
+  </div>
+
+  <div class="term-card" id="garak">
+    <div class="name">Garak <span class="ko">NVIDIA · LLM 취약점 스캐너</span></div>
+    <div class="one-line">37+ 프로브로 jailbreak·인젝션·환각·인코딩 우회 등을 자동 시뮬레이션 (오픈소스)</div>
+    <div class="detail">
+      LiteLLM 어댑터로 OpenAI · Gemini · 로컬 모델 모두 동일 명령. v0.14.1+ HTML 리포트 자동 생성. 슬롯4 Lab 1 의 메인 도구.
+    </div>
+  </div>
+
+  <div class="term-card" id="llm-guard">
+    <div class="name">LLM Guard / Lakera Guard <span class="ko">운영 시 실시간 게이트</span></div>
+    <div class="one-line">배포된 LLM 앞단에 두는 미들웨어 — 입력 스캐너 + 출력 필터</div>
+    <div class="detail">
+      Protect AI <code>LLM Guard</code> (15+21 스캐너, self-host) · <code>Lakera Guard</code> (Gandalf 챌린지 제작사, SaaS) · NVIDIA <code>NeMo Guardrails</code> · Meta <code>Llama Guard</code>.
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════ 프레임워크·정책 ═══════════ -->
+<div class="group-head" id="g-policy">
+  <h2>📋 프레임워크 · 정책</h2>
+  <span class="count">3</span>
+  <span class="line"></span>
+</div>
+<div class="glossary">
+
+  <div class="term-card" id="owasp">
+    <div class="name">OWASP LLM Top 10 <span class="ko">2025 개정판</span></div>
+    <div class="one-line">개발자 관점의 LLM 애플리케이션 10대 취약점 — 구현 결함 분류</div>
+    <div class="detail">
+      LLM01 인젝션 · LLM02 민감정보 · LLM03 공급망 · LLM04 오염 · LLM05 출력 미검증 · LLM06 과도 권한 · LLM07 프롬프트 유출 · LLM08 벡터/임베딩 · LLM09 환각 · LLM10 무제한 리소스.
+    </div>
+  </div>
+
+  <div class="term-card" id="nis-t">
+    <div class="name">NIS T01–T15 <span class="ko">국정원 AI 보안 위협 분류</span></div>
+    <div class="one-line">4 레이어 (입력 / 학습데이터·모델 / 인프라·운영 / 공급망) 의 15개 위협 + M01–M30 대책</div>
+    <div class="detail">
+      예: T07 민감정보 입력·유출 · T08 프롬프트 인젝션 · T01 학습데이터 오염 · T12 모니터링 부재 · T14 공급망. <strong>법적·정책 기반 — "무엇이 위협인가"</strong>.
+    </div>
+  </div>
+
+  <div class="term-card" id="kisa">
+    <div class="name">KISA 안내서 <span class="ko">한국인터넷진흥원</span></div>
+    <div class="one-line">두 안내서로 구분: ① AI 보안 (2026.03) — Security for AI / ② 생성형 AI 개인정보 (2025.08) — Privacy in AI</div>
+    <div class="detail">
+      <strong>역할 기반 가이드 — "누가 무엇을 해야 하는가"</strong>. 3대 역할 (개발자 · 제공자 · 이용자). NIS 가 "What" 이라면 KISA 는 "Who/How".
+    </div>
+  </div>
 
 </div>
 
 <div class="growing-note">
-  <strong>📝 이 자료는 계속 확장됩니다</strong><br>
-  강의에 새로운 용어·사고 사례·개념이 등장할 때마다 해당 카테고리에 추가됩니다.<br>
-  최근 추가: <strong>RCE</strong> · <strong>CVSS</strong> · <strong>Prompt Injection</strong> · <strong>Zero-click</strong> (2026-05-11)
+  <strong>📝 이 용어집은 계속 확장됩니다</strong><br>
+  강의·실습에 새로운 용어가 등장할 때마다 추가됩니다.<br>
+  현재 <strong>30개 용어</strong> · 마지막 갱신 2026-05-12
 </div>
-
-<section style="margin-top: 28px">
-  <h3 class="title" style="color: var(--text)">📚 이 참고자료의 사용법</h3>
-  <ul style="margin-top: 8px">
-    <li><strong>강의 중</strong> — 모르는 용어가 나오면 <a href="terms.html">📖 보안 용어</a> 페이지에서 검색</li>
-    <li><strong>강의 후</strong> — 실제 사고 흐름을 다시 보고 싶다면 <a href="incidents.html">🚨 사고 사례</a></li>
-    <li><strong>심화 학습</strong> — 강의에서 한 줄로 지나간 개념의 자세한 설명은 <a href="concepts.html">🔬 심화 개념</a></li>
-    <li><strong>실무 적용</strong> — 회사·기관 정책 수립 시 <a href="policy.html">📜 정책 자료</a> 참조</li>
-  </ul>
-</section>
 
 </main>
 
 <footer>
-  <div class="quote">"보안이 없으면, AI 도 없습니다."</div>
-  <p style="margin-top:10px">참고자료 · 강의 중 등장한 용어/사례/개념/정책을 카테고리별로</p>
+  <div class="quote">"용어가 정확하면, 방어도 정확합니다."</div>
+  <p style="margin-top:10px">📖 ws02 보안 용어집 · 생성형 AI 보안 워크숍 2회차</p>
 </footer>
 
 <script>
