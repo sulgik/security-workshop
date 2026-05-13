@@ -419,40 +419,6 @@
       </div>
     </div>
 
-    <!-- ── 시작 전 준비 ── -->
-    <div class="setup-card">
-      <div class="setup-header">
-        <h3>시작 전 준비 — API 키 등록</h3>
-        <p>강사가 배포하는 Gemini API 키를 Colab Secrets에 등록합니다 · <a href="setup.html" style="color:#C7D2FE">사전 준비 가이드 열기 →</a></p>
-      </div>
-      <div style="padding:20px 28px 8px">
-        <div class="warning-bar" style="margin-bottom:20px">
-          <span class="icon">⚠</span>
-          <div>실습에는 <strong>합성(가상) 데이터만</strong> 사용하세요. 실제 이름·전화번호·군사정보·개인정보는 절대 입력 금지입니다.</div>
-        </div>
-      </div>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">1</div>
-          <h4>Google 계정으로 Colab 로그인</h4>
-          <p>Gmail 계정으로 <a href="https://colab.research.google.com" target="_blank">colab.research.google.com</a> 에 로그인합니다.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <h4>Colab Secrets에 API 키 등록</h4>
-          <p>왼쪽 사이드바 🔑 아이콘 → <strong>+ 새 보안 비밀 추가</strong><br>
-          강사가 배포한 키를 아래 이름으로 정확히 입력하세요.</p>
-          <div class="code-inline">GEMINI_API_KEY</div>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <h4>Drive에 사본 저장</h4>
-          <p>노트북 열자마자 <strong>파일 → Drive에 사본 저장</strong>을 클릭하세요.</p>
-          <div class="code-inline">파일 → Drive에 사본 저장</div>
-        </div>
-      </div>
-    </div>
-
     <!-- ── 슬롯3 강의 + 실습 ── -->
     <div class="card">
       <div class="card-header">
@@ -497,6 +463,63 @@
         <a class="btn" href="https://gandalf.lakera.ai" target="_blank" rel="noopener">
           🗡️ Gandalf 열기
         </a>
+      </div>
+    </div>
+
+    <!-- ── 시작 전 준비 (Lab 시작 전) ── -->
+    <div class="setup-card">
+      <div class="setup-header">
+        <h3>🔑 Lab 시작 전 준비 — Gemini API 키 등록</h3>
+        <p>아래 구글 문서에서 키를 받아 Colab Secrets에 등록 + 노트북 접근 토글 ON · <a href="setup.html" style="color:#C7D2FE">사전 준비 가이드 열기 →</a></p>
+      </div>
+      <div style="padding:20px 28px 8px">
+        <div class="warning-bar" style="margin-bottom:20px; background:#EFF6FF; border-color:#BFDBFE; color:#1E40AF">
+          <span class="icon">🔑</span>
+          <div>
+            <strong>API 키 받기 :</strong>
+            <a href="https://docs.google.com/document/d/10vW_R9x5nSh4L2Hu26UgD3rdUz4BdjJZCbkPcbkSdyI/edit?usp=sharing" target="_blank" rel="noopener" style="color:#1E40AF; text-decoration:underline; font-weight:700">
+              구글 문서 열기 →
+            </a><br>
+            <span style="font-size:12.5px">문서 상단에 있는 Gemini API 키를 복사하세요. 외부 공유 금지.</span>
+          </div>
+        </div>
+        <div class="warning-bar" style="margin-bottom:20px">
+          <span class="icon">⚠</span>
+          <div>실습에는 <strong>합성(가상) 데이터만</strong> 사용하세요. 실제 이름·전화번호·군사정보·개인정보는 절대 입력 금지입니다.</div>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h4>Colab 로그인 + 노트북 열기</h4>
+          <p>Gmail 계정으로 <a href="https://colab.research.google.com" target="_blank">colab.research.google.com</a> 에 로그인 후, 아래 Lab의 Colab 버튼으로 노트북을 엽니다.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h4>Drive에 사본 저장</h4>
+          <p>노트북 열자마자 상단 메뉴에서 <strong>파일 → Drive에 사본 저장</strong>을 클릭하세요. (원본은 읽기 전용)</p>
+          <div class="code-inline">파일 → Drive에 사본 저장</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h4>Colab Secrets에 API 키 등록</h4>
+          <p>왼쪽 사이드바 <strong>🔑 (열쇠) 아이콘</strong> 클릭 → <strong>+ 새 보안 비밀 추가</strong></p>
+          <p style="margin-top:6px"><strong>이름</strong> (대소문자 정확히):</p>
+          <div class="code-inline">GEMINI_API_KEY</div>
+          <p style="margin-top:6px"><strong>값</strong>: 위 구글 문서에서 복사한 키를 붙여넣기 (앞뒤 공백 X)</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h4>⚡ 노트북 접근 토글 ON</h4>
+          <p>가장 중요! 등록한 시크릿 옆의 <strong>「노트북 액세스」 토글을 ON</strong> 으로 켜야 코드에서 키를 읽을 수 있습니다. (기본값은 OFF)</p>
+          <div class="code-inline">노트북 액세스 : ⚪ OFF  →  🟢 ON</div>
+          <p style="margin-top:6px; color:var(--warn)">⚠ 토글이 꺼져 있으면 <code>SecretNotFoundError</code> 또는 <code>None</code> 이 반환됩니다.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <h4>동작 확인</h4>
+          <p>노트북 첫 셀을 실행해 <code>userdata.get('GEMINI_API_KEY')</code> 가 정상적으로 키를 반환하는지 확인합니다. 첫 실행 시 <strong>「액세스 허용」</strong> 팝업이 뜨면 승인하세요.</p>
+        </div>
       </div>
     </div>
 
